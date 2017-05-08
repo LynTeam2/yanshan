@@ -38,7 +38,7 @@ create table t_system_config (
   id bigint(20) not null auto_increment,
   name varchar(32) not null comment'字段名',
   value varchar(64) not null comment'值',
-  desc varchar(64) not null comment'描述',
+  remark varchar(64) not null comment'描述',
   createTime TIMESTAMP comment'创建时间',
   primary key(id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'系统配置表';
