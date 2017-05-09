@@ -37,6 +37,7 @@ spring:
         maxOpenPreparedStatements: 20
         #启动执行sql
         schema: classpath:init.sql
+        data: classpath:update.sql
         sql-script-encoding: utf-8
     thymeleaf:
         # Enable template caching.

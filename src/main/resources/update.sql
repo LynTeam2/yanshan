@@ -1,0 +1,1 @@
+insert into t_attr(name) values('插入成功');
