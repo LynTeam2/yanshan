@@ -1,9 +1,11 @@
+drop table if exists t_role;
 create table t_role (
   id bigint(20) not null auto_increment,
   name varchar(32) not null comment'角色名称',
   createTime TIMESTAMP comment'创建时间',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'角色表';
+drop table if exists t_permission;
 create table t_permission (
   id bigint(20) not null auto_increment,
   name varchar(32) not null comment'权限名称',
@@ -14,6 +16,7 @@ create table t_permission (
   createTime TIMESTAMP comment'创建时间',
   PRIMARY KEY (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'权限表';
+drop table if exists t_role_permission;
 create table t_role_permission (
   id bigint(20) not null auto_increment,
   roleId bigint(20) not null comment'角色id',
@@ -21,6 +24,7 @@ create table t_role_permission (
   createTime TIMESTAMP comment'创建时间',
   PRIMARY KEY (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'角色权限对应表';
+drop table if exists t_user;
 create table t_user (
   id bigint(20) not null auto_increment,
   name varchar(32) not null comment'用户名称',
@@ -34,6 +38,7 @@ create table t_user (
   phone varchar(32) comment'联系方式',
   primary key(id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'角色权限对应表';
+drop table if exists t_system_config;
 create table t_system_config (
   id bigint(20) not null auto_increment,
   name varchar(32) not null comment'字段名',
@@ -42,6 +47,7 @@ create table t_system_config (
   createTime TIMESTAMP comment'创建时间',
   primary key(id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'系统配置表';
+drop table if exists t_member;
 create table t_member (
   id bigint(20) not null auto_increment,
   name varchar(32) not null comment'会员名称',
@@ -57,6 +63,7 @@ create table t_member (
   memberFlag tinyint(4) comment'是否开启会员 0为开启 1已开启',
   primary key(id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'会员表';
+drop table if exists t_member_address;
 create table t_member_address (
   id bigint(20) not null auto_increment,
   provinceCode varchar(32) comment'省行政编码',
@@ -70,6 +77,7 @@ create table t_member_address (
   createTime TIMESTAMP comment'创建时间',
   primary key(id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'地址表';
+drop table if exists t_order;
 create table t_order (
   id bigint(20) not null auto_increment,
   seq varchar(32) not null comment'订单编号',
@@ -82,6 +90,7 @@ create table t_order (
   remark text comment'备注',
   primary key(id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'订单表';
+drop table if exists t_order_detail;
 create table t_order_detail (
   id bigint(20) not null auto_increment,
   orderId bigint(20) not null comment'订单id',
@@ -90,6 +99,7 @@ create table t_order_detail (
   receiverPhone varchar(32) comment'联系方式',
   primary key(id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'订单明细表';
+drop table if exists t_order_history;
 create table t_order_history (
   id bigint(20) not null auto_increment,
   orderId bigint(20) not null comment'订单id',
@@ -99,6 +109,7 @@ create table t_order_history (
   operatorName varchar(32) comment'操作人名字',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'订单历史记录表';
+drop table if exists t_order_product;
 create table t_order_product(
   id bigint(20) not null AUTO_INCREMENT,
   orderId bigint(20) not null comment'订单id',
@@ -109,6 +120,7 @@ create table t_order_product(
   primary key (id),
   unique key (orderId,productId)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'订单商品表';
+drop table if exists t_product;
 create table t_product (
   id bigint(20) not null auto_increment,
   name varchar(32) comment'商品名称',
@@ -117,11 +129,13 @@ create table t_product (
   createTime timestamp comment'创建时间',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'商品表';
+drop table if exists t_attr;
 create table t_attr (
   id bigint(20) not null auto_increment,
   name varchar(32) not null comment'属性名',
   primary key(id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'属性表';
+drop table if exists t_product_attr;
 create table t_product_attr (
   id bigint(20) not null auto_increment,
   productId bigint(20) not null comment'商品id',
@@ -129,6 +143,7 @@ create table t_product_attr (
   PRIMARY KEY (id),
   unique key (productId, attrId)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'商品属性对应表';
+drop table if exists t_withdra_history;
 create table t_withdra_history (
   id bigint(20) not null auto_increment,
   memberId bigint(20) not null comment'用户id',
@@ -140,6 +155,7 @@ create table t_withdra_history (
   state tinyint(4) comment'提现状态',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'提现记录表';
+drop table if exists t_funds_detail;
 create table t_funds_detail (
   id bigint(20) not null auto_increment,
   memberId bigint(20) not null comment'用户id',
@@ -150,12 +166,14 @@ create table t_funds_detail (
   createTime TIMESTAMP comment'创建时间',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'资金明细表';
+drop table if exists t_keywords;
 create table t_keywords (
   id bigint(20) not null auto_increment,
   keyword varchar(32) not null comment'关键词',
   createTime TIMESTAMP comment'创建时间',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'关键词表';
+drop table if exists t_banner;
 create table t_banner (
   id bigint(20) not null auto_increment,
   title varchar(32) comment'标题',

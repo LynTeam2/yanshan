@@ -1,6 +1,6 @@
 # Server settings (ServerProperties)
 server:
-  port: 8080
+  port: 8081
   address: 127.0.0.1
   sessionTimeout: 30
   contextPath: /
@@ -11,7 +11,8 @@ server:
     protocolHeader: x-forwarded-proto
     remoteIpHeader: x-forwarded-for
     basedir:
-    backgroundProcessorDelay: 30 # secs
+    backgroundProcessorDelay: 30
+  use-forward-headers: true
 spring:
     datasource:
         name: base
@@ -34,6 +35,9 @@ spring:
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
+        #启动执行sql
+        schema: classpath:init.sql
+        sql-script-encoding: utf-8
     thymeleaf:
         # Enable template caching.
         cache: false
