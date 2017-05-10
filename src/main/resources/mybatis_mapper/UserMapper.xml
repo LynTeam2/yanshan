@@ -13,4 +13,8 @@
   <insert id="insert">
     insert user(name) values(#{user.name})
   </insert>
+
+  <select id="selectList" resultType="com.xingkong.lyn.model.User">
+    select * from user
+  </select>
 </mapper>

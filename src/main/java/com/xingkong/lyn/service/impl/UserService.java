@@ -3,14 +3,18 @@ package com.xingkong.lyn.service.impl;
 import com.xingkong.lyn.mapper.UserMapper;
 import com.xingkong.lyn.model.User;
 import com.xingkong.lyn.service.IUser;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by lyn on 2017/4/28.
  */
 @Service("userService")
+@CacheConfig(cacheNames = "user")
 public class UserService implements IUser{
 
     @Resource
@@ -21,5 +25,11 @@ public class UserService implements IUser{
         User user = new User();
         user.setName(name);
         return userMapper.insert(user) > 0;
+    }
+
+    @Override
+    @Cacheable
+    public List<User> findAll() {
+        return userMapper.selectList();
     }
 }

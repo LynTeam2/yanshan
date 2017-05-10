@@ -4,6 +4,7 @@ package com.xingkong.lyn.controller;
 import com.xingkong.lyn.service.IUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,5 +33,11 @@ public class IndexController {
     @ResponseBody
     public Object add(String name){
         return userService.addUser(name);
+    }
+
+    @RequestMapping("/user/findall")
+    @ResponseBody
+    public Object findAll(){
+        return userService.findAll();
     }
 }

@@ -60,7 +60,19 @@ spring:
         suffix: .html
         # Order of the template resolver in the chain. spring.thymeleaf.view-names= # Comma-separated list of view names that can be resolved.
         template-resolver-order:
+    redis:
+        host: 127.0.0.1
+        port: 6379
+        password:
+        timeout: 5000
+        pool:
+            max-idle: 20
+            min-idle: 1
+            max-active: 20
+            max-wait: -1
+        database: 0
 mybatis:
     mapperLocations: classpath:mybatis_mapper/*.xml
     typeAliasesPackage: classpath:model
     sqlImpl: log4j2
+
