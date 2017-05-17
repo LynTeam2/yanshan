@@ -2,6 +2,7 @@ package com.xingkong.lyn.service;
 
 
 import com.xingkong.lyn.model.User;
+import com.xingkong.lyn.model.UserInfo;
 
 import java.util.List;
 

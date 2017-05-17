@@ -1,6 +1,8 @@
 package com.xingkong.lyn.shiro;
 
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
@@ -38,7 +40,18 @@ public class ShiroConfiguration {
         //必须设置SecurityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
-        //拦截器
+
+        // 拦截器.
+        //rest：比如/admins/user/**=rest[user],根据请求的方法，相当于/admins/user/**=perms[user：method] ,其中method为post，get，delete等。
+        //port：比如/admins/user/**=port[8081],当请求的url的端口不是8081是跳转到schemal：//serverName：8081?queryString,其中schmal是协议http或https等，serverName是你访问的host,8081是url配置里port的端口，queryString是你访问的url里的？后面的参数。
+        //perms：比如/admins/user/**=perms[user：add：*],perms参数可以写多个，多个时必须加上引号，并且参数之间用逗号分割，比如/admins/user/**=perms["user：add：*,user：modify：*"]，当有多个参数时必须每个参数都通过才通过，想当于isPermitedAll()方法。
+        //roles：比如/admins/user/**=roles[admin],参数可以写多个，多个时必须加上引号，并且参数之间用逗号分割，当有多个参数时，比如/admins/user/**=roles["admin,guest"],每个参数通过才算通过，相当于hasAllRoles()方法。//要实现or的效果看http://zgzty.blog.163.com/blog/static/83831226201302983358670/
+        //anon：比如/admins/**=anon 没有参数，表示可以匿名使用。
+        //authc：比如/admins/user/**=authc表示需要认证才能使用，没有参数
+        //authcBasic：比如/admins/user/**=authcBasic没有参数表示httpBasic认证
+        //ssl：比如/admins/user/**=ssl没有参数，表示安全的url请求，协议为https
+        //user：比如/admins/user/**=user没有参数表示必须存在用户，当登入操作时不做检查
+
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<>();
 
         //配置退出过滤器，其中具体的退出代码Shiro已经实现
@@ -46,7 +59,7 @@ public class ShiroConfiguration {
 
         //<!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
-        filterChainDefinitionMap.put("/**","anon");
+        filterChainDefinitionMap.put("/**","authc");
 
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
         shiroFilterFactoryBean.setLoginUrl("/login");
@@ -64,6 +77,34 @@ public class ShiroConfiguration {
     @Bean
     public SecurityManager securityManager(){
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        securityManager.setRealm(myShiroRealm());
         return securityManager;
+    }
+
+    @Bean
+    public MyShiroRealm myShiroRealm(){
+        MyShiroRealm myShiroRealm = new MyShiroRealm();
+        myShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        return myShiroRealm;
+    }
+
+    @Bean
+    public HashedCredentialsMatcher hashedCredentialsMatcher(){
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法
+        hashedCredentialsMatcher.setHashIterations(2);
+
+        return hashedCredentialsMatcher;
+    }
+
+    /**
+     * 开启shiro aop注解支持
+     */
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new
+                AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
     }
 }

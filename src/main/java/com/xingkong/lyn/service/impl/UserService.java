@@ -1,11 +1,14 @@
 package com.xingkong.lyn.service.impl;
 
+import com.xingkong.lyn.dao.UserInfoDao;
 import com.xingkong.lyn.mapper.UserMapper;
 import com.xingkong.lyn.model.User;
+import com.xingkong.lyn.model.UserInfo;
 import com.xingkong.lyn.service.IUser;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -18,7 +21,7 @@ import java.util.List;
 public class UserService implements IUser{
 
     @Resource
-    private UserMapper userMapper;
+    private UserMapper userMapper;;
 
     @Override
     public boolean addUser(String name) {
