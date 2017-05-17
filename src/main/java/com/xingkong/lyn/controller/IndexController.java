@@ -71,7 +71,7 @@ public class IndexController {
         }
         map.put("msg", msg);
         // 此方法不处理登录成功,由shiro进行处理.
-        return "/login";
+        return "login";
     }
 
     @RequestMapping("/user/add")
