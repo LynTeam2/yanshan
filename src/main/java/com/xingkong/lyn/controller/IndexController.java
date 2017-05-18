@@ -2,6 +2,7 @@ package com.xingkong.lyn.controller;
 
 
 import com.xingkong.lyn.service.IUser;
+import com.xingkong.lyn.service.IUserInfo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -33,6 +34,9 @@ public class IndexController {
 
     @Resource
     private IUser userService;
+
+    @Resource
+    private IUserInfo userInfoService;
 
     @RequestMapping("/index")
     public String index(ModelMap modelMap){
@@ -85,6 +89,6 @@ public class IndexController {
     @RequiresPermissions("userinfo:view")
     @ResponseBody
     public Object findAll(){
-        return userService.findAll();
+        return userInfoService.findByUsername("admin");
     }
 }

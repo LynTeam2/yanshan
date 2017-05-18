@@ -1,7 +1,6 @@
 package com.xingkong.lyn.model;
 
 import lombok.Data;
-import sun.jvm.hotspot.tools.SysPropsDumper;
 
 import javax.persistence.*;
 import java.io.Serializable;
