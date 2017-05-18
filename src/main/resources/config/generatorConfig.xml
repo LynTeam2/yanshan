@@ -99,7 +99,7 @@
                 注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
              -->
         <!-- sql占位符，表示所有的表 % -->
-        <table tableName="t_member">
+        <table tableName="sys_permission_init">
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
         </table>
     </context>

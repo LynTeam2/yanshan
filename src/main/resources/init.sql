@@ -183,6 +183,14 @@ create table if not exists t_banner (
   createTime timestamp comment'创建时间',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'焦点图表';
+create table if not exists sys_permission_init (
+  id bigint(20) not null auto_increment,
+  url varchar(64) comment'链接',
+  permission_init varchar(32) comment'shiro权限',
+  sort int comment'排序',
+  createTime timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'shiro权限表';
 # create table t_data_dict (
 #
 # );
