@@ -39,4 +39,10 @@ public class UserController {
     public Object update(UserInfo userInfo){
         return userInfoService.findAll();
     }
+
+    @RequestMapping("/user/detail")
+    @RequiresPermissions("userinfo:detail")
+    public Object detail(Long id){
+        return userInfoService.findById(id);
+    }
 }

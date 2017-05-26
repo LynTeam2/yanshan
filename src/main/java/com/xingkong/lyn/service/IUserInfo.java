@@ -14,4 +14,5 @@ public interface IUserInfo {
     boolean addUser(UserInfo userInfo);
     boolean deleteUser(Long id);
     boolean updateUser(UserInfo userInfo);
+    UserInfo findById(Long id);
 }

@@ -57,4 +57,9 @@ public class UserInfoService implements IUserInfo {
         }
         return true;
     }
+
+    @Override
+    public UserInfo findById(Long id) {
+        return userInfoDao.findOne(id);
+    }
 }
