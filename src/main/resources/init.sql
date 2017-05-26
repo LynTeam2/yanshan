@@ -21,35 +21,29 @@ create table if not exists sys_permission (
   id bigint(20) not null auto_increment,
   available tinyint not null comment'是否可用,如果不可用将不会添加给用户，0不可用 1可用',
   name varchar(32) not null comment'权限名称',
-  parentId bigint(20) not null comment'父权限id',
-  parentIds varchar(64) comment'父权限编号列表',
+  parent_id bigint(20) not null comment'父权限id',
+  parent_ids varchar(64) comment'父权限编号列表',
   permission varchar(64) not null comment'权限字符串,menu例子：role:*，button例子：role:create,role:update,role:delete,role:view',
-  resourceType varchar(32) not null comment'资源类型',
+  resource_type varchar(32) not null comment'资源类型',
   url varchar(64) not null comment'资源路径',
   primary key(id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'角色权限对应表';
 # drop table if exists sys_user_role;
-# create table if not exists sys_user_role (
-#   userId bigint(20) not null comment'用户id',
-#   roleId bigint(20) not null comment'角色id',
-#   unique key(userId, roleId),
-#   foreign key(userId) references sys_user(id),
-#   foreign key(roleId) references sys_role(id)
-# )engine=InnoDB DEFAULT CHARSET = utf8 comment'用户角色对应表';
+create table if not exists sys_user_role (
+  user_id bigint(20) not null comment'用户id',
+  role_id bigint(20) not null comment'角色id'
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'用户角色对应表';
 # drop table if exists sys_role_permission;
-# create table if not exists sys_role_permission (
-#   roleId bigint(20) not null comment'角色id',
-#   permissionId bigint(20) not null comment'权限id',
-#   unique key(roleId, permissionId),
-#   foreign key(roleId) references sys_role(id),
-#   foreign key(permissionId) references sys_permission(id)
-# )engine=InnoDB DEFAULT CHARSET = utf8 comment'角色权限对应表';
+create table if not exists sys_role_permission (
+  role_id bigint(20) not null comment'角色id',
+  permission_id bigint(20) not null comment'权限id'
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'角色权限对应表';
 # drop table if exists sys_config;
 # create table if not exists sys_config (
 #   id bigint(20) not null auto_increment,
 #   name varchar(32) not null comment'字段名',
 #   value varchar(64) not null comment'值',
-#   remark varchar(64) not null comment'描述',
+#   description varchar(64) not null comment'描述',
 #   createTime TIMESTAMP comment'创建时间',
 #   primary key(id)
 # )engine=InnoDB DEFAULT CHARSET = utf8 comment'系统配置表';
@@ -193,7 +187,7 @@ create table if not exists sys_permission_init (
   url varchar(64) comment'链接',
   permission_init varchar(32) comment'shiro权限',
   sort int comment'排序',
-  createTime timestamp comment'创建时间',
+  create_time timestamp comment'创建时间',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'shiro权限表';
 # # create table t_data_dict (

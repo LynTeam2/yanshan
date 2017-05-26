@@ -27,7 +27,7 @@ public class IndexController {
     private Logger logger = LoggerFactory.getLogger(IndexController.class);
 
     @Resource
-    private IUserInfo userService;
+    private IUserInfo userInfoService;
 
     @RequestMapping("/index")
     public String index(ModelMap modelMap){
@@ -73,13 +73,13 @@ public class IndexController {
     @RequiresPermissions("userinfo:add")
     @ResponseBody
     public Object add(UserInfo userInfo){
-        return userService.addUser(userInfo);
+        return userInfoService.addUser(userInfo);
     }
 
     @RequestMapping("/user/findall")
     @RequiresPermissions("userinfo:view")
     @ResponseBody
     public Object findAll(){
-        return userService.findAll();
+        return userInfoService.findAll();
     }
 }

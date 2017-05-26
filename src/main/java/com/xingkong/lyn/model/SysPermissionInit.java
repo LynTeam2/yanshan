@@ -15,7 +15,7 @@ public class SysPermissionInit implements Serializable{
 
     @Id
     @GeneratedValue
-    private Long id;
+    private long id;
 
     private String url;
 
@@ -23,5 +23,5 @@ public class SysPermissionInit implements Serializable{
 
     private Integer sort;
 
-    private Date createtime;
+    private Date createTime;
 }

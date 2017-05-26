@@ -30,7 +30,7 @@ public class UserInfo implements Serializable{
     private byte state;//用户状态，0：创建未认证 1：正常状态 2：用户被锁定
 
     @ManyToMany(fetch=FetchType.EAGER)//立即从数据库中进行加载数据;
-    @JoinTable(name = "SysUserRole", joinColumns = { @JoinColumn(name = "uid") }, inverseJoinColumns ={@JoinColumn(name = "roleId") })
+    @JoinTable(name = "SysUserRole", joinColumns = { @JoinColumn(name = "userId") }, inverseJoinColumns ={@JoinColumn(name = "roleId") })
     private List<SysRole> roleList;// 一个用户具有多个角色
 
     /**
