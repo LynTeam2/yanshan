@@ -1,7 +1,7 @@
 package com.xingkong.lyn.service.impl;
 
-import com.xingkong.lyn.mapper.SysPermissionInitMapper;
 import com.xingkong.lyn.model.SysPermissionInit;
+import com.xingkong.lyn.repository.SysPermissionInitRepository;
 import com.xingkong.lyn.service.ISysPermissionInit;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +15,10 @@ import java.util.List;
 public class SysPermissionInitService implements ISysPermissionInit{
 
     @Resource
-    private SysPermissionInitMapper sysPermissionInitMapper;
+    private SysPermissionInitRepository sysPermissionInitDao;
 
     @Override
     public List<SysPermissionInit> selectAll() {
-        return sysPermissionInitMapper.selectAll();
+        return sysPermissionInitDao.findAll();
     }
 }

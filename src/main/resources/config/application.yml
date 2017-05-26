@@ -78,9 +78,7 @@ spring:
         ddl-auto: update
         naming:
           strategy: org.hibernate.cfg.DefaultNamingStrategy
-
-mybatis:
-    mapperLocations: classpath:mybatis_mapper/*.xml
-    typeAliasesPackage: classpath:model
-    sqlImpl: log4j2
+#mybatis:
+#    mapperLocations: classpath:mybatis_mapper/*.xml
+#    typeAliasesPackage: classpath:model
 

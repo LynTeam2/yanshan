@@ -1,19 +1,14 @@
 package com.xingkong.lyn.controller;
 
 
-import com.xingkong.lyn.service.IUser;
+import com.xingkong.lyn.model.UserInfo;
 import com.xingkong.lyn.service.IUserInfo;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.pam.AuthenticationStrategy;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -33,10 +27,7 @@ public class IndexController {
     private Logger logger = LoggerFactory.getLogger(IndexController.class);
 
     @Resource
-    private IUser userService;
-
-    @Resource
-    private IUserInfo userInfoService;
+    private IUserInfo userService;
 
     @RequestMapping("/index")
     public String index(ModelMap modelMap){
@@ -81,14 +72,14 @@ public class IndexController {
     @RequestMapping("/user/add")
     @RequiresPermissions("userinfo:add")
     @ResponseBody
-    public Object add(String name){
-        return userService.addUser(name);
+    public Object add(UserInfo userInfo){
+        return userService.addUser(userInfo);
     }
 
     @RequestMapping("/user/findall")
     @RequiresPermissions("userinfo:view")
     @ResponseBody
     public Object findAll(){
-        return userInfoService.findByUsername("admin");
+        return userService.findAll();
     }
 }

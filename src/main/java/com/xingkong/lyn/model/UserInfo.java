@@ -1,4 +1,4 @@
-package com.xingkong.lyn.model;
+package com.xingkong.lyn.model;//package com.xingkong.lyn.entity;
 
 import lombok.Data;
 

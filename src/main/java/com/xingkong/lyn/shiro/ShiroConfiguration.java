@@ -1,7 +1,5 @@
 package com.xingkong.lyn.shiro;
 
-import com.xingkong.lyn.model.SysPermissionInit;
-import com.xingkong.lyn.service.ISysPermissionInit;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -17,9 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.Resource;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,8 +35,6 @@ public class ShiroConfiguration {
     @Value("${spring.redis.port}")
     private int port;
 
-    @Resource
-    private ISysPermissionInit sysPermissionInitService;
     /**
      * ShiroFilterFactoryBean 处理拦截资源文件问题。
      * 注意：单独一个ShiroFilterFactoryBean配置是或报错的，以为在

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * Created by lyn on 2017/4/28.
  */
-@SpringBootApplication(scanBasePackages = { "com.xingkong.lyn" })
+@SpringBootApplication
 
 public class StartApp {
     public static void main(String[] args){

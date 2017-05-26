@@ -7,6 +7,7 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
 import org.apache.shiro.web.servlet.AbstractShiroFilter;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,6 +22,7 @@ import java.util.Map;
 @Service
 public class ShiroService implements IShiro{
     @Resource
+    @Lazy
     ShiroFilterFactoryBean shiroFilterFactoryBean;
     @Resource
     ISysPermissionInit sysPermissionInitService;

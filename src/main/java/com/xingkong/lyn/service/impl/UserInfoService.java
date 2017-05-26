@@ -1,6 +1,6 @@
 package com.xingkong.lyn.service.impl;
 
-import com.xingkong.lyn.dao.UserInfoDao;
+import com.xingkong.lyn.repository.UserInfoRepository;
 import com.xingkong.lyn.model.UserInfo;
 import com.xingkong.lyn.service.IUserInfo;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class UserInfoService implements IUserInfo {
     @Resource
-    private UserInfoDao userInfoDao;
+    private UserInfoRepository userInfoDao;
 
     @Override
     public UserInfo findByUsername(String username) {
@@ -26,5 +26,15 @@ public class UserInfoService implements IUserInfo {
     public List<UserInfo> findAll() {
         System.out.println("UserInfoServiceImpl.findAll()");
         return userInfoDao.findAll();
+    }
+
+    @Override
+    public boolean addUser(UserInfo userInfo) {
+        try{
+            userInfoDao.save(userInfo);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 }

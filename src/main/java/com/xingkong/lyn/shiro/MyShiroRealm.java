@@ -3,7 +3,7 @@ package com.xingkong.lyn.shiro;
 import com.xingkong.lyn.model.SysPermission;
 import com.xingkong.lyn.model.SysRole;
 import com.xingkong.lyn.model.UserInfo;
-import com.xingkong.lyn.service.impl.UserInfoService;
+import com.xingkong.lyn.service.IUserInfo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -25,7 +25,7 @@ import java.util.Set;
 public class MyShiroRealm extends AuthorizingRealm{
 
     @Resource
-    private UserInfoService userInfoService;
+    private IUserInfo userInfoService;
 
     /**
      * 认证信息(身份认证)
@@ -103,7 +103,6 @@ public class MyShiroRealm extends AuthorizingRealm{
         System.out.println("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
 
         UserInfo userInfo = (UserInfo)SecurityUtils.getSubject().getPrincipal();
-        Long userId = userInfo.getId();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
         Set<String> roleSet = new HashSet<>();

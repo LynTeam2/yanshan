@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Entity
 @Data
-public class SysPermission implements Serializable{
+public class SysPermission implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id

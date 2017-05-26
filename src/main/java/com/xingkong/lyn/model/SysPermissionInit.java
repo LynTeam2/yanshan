@@ -2,10 +2,19 @@ package com.xingkong.lyn.model;
 
 import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
+@Entity
 @Data
-public class SysPermissionInit {
+public class SysPermissionInit implements Serializable{
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String url;
