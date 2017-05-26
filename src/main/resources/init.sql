@@ -11,9 +11,9 @@ create table if not exists user_info (
 # drop table if exists sys_role;
 create table if not exists sys_role (
   id bigint(20) not null auto_increment,
-  role varchar(32) not null comment'角色标识，唯一',
-  description varchar(128) not null comment'角色描述',
   available tinyint not null comment'是否可用,如果不可用将不会添加给用户，0不可用 1可用',
+  description varchar(128) not null comment'角色描述',
+  role varchar(32) not null comment'角色标识，唯一',
   primary key(id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'用户角色表';
 # drop table if exists sys_permission;
@@ -48,29 +48,21 @@ create table if not exists sys_role_permission (
 #   primary key(id)
 # )engine=InnoDB DEFAULT CHARSET = utf8 comment'系统配置表';
 # drop table if exists sys_address;
-# create table if not exists sys_address (
-#   id bigint(20) not null auto_increment,
-#   provinceCode varchar(32) comment'省行政编码',
-#   cityCode varchar(32) comment'市行政编码',
-#   countyCode varchar(32) comment'区行政编码',
-#   address text comment'详细地址',
-#   contactName varchar(32) comment'联系人',
-#   contactPhone varchar(32) comment'联系地址',
-#   memberId bigint(20) not null comment'会员id',
-#   isMain tinyint(4) comment'是否默认地址 0否 1是',
-#   createTime TIMESTAMP comment'创建时间',
-#   primary key(id)
-# )engine=InnoDB DEFAULT CHARSET = utf8 comment'地址表';
+create table if not exists address (
+  id bigint(20) not null auto_increment,
+  province_code varchar(32) comment'省行政编码',
+  city_code varchar(32) comment'市行政编码',
+  county_code varchar(32) comment'区行政编码',
+  address text comment'详细地址',
+  main tinyint(4) comment'是否默认地址 0否 1是',
+  create_time TIMESTAMP comment'创建时间',
+  primary key(id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'地址表';
 # drop table if exists sys_user_address;
-# create table if not exists sys_user_address (
-#   id bigint(20) not null auto_increment,
-#   userId bigint(20) not null comment'用户id',
-#   addressId bigint(20) not null comment'地址id',
-#   primary key (id),
-#   unique key (userId,addressId),
-#   constraint user_address_uk foreign key(userId) references sys_user(id),
-#   constraint user_address_ak foreign key(addressId) references sys_address(id)
-# )engine=InnoDB DEFAULT CHARSET = utf8 comment'用户地址对应表';
+create table if not exists sys_user_address (
+  user_id bigint(20) not null comment'用户id',
+  address_id bigint(20) not null comment'地址id'
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'用户地址对应表';
 # drop table if exists market_order;
 # create table if not exists market_order (
 #   id bigint(20) not null auto_increment,

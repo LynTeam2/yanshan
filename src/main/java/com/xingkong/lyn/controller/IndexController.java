@@ -1,20 +1,15 @@
 package com.xingkong.lyn.controller;
 
 
-import com.xingkong.lyn.model.UserInfo;
-import com.xingkong.lyn.service.IUserInfo;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
@@ -25,9 +20,6 @@ import java.util.Map;
 public class IndexController {
 
     private Logger logger = LoggerFactory.getLogger(IndexController.class);
-
-    @Resource
-    private IUserInfo userInfoService;
 
     @RequestMapping("/index")
     public String index(ModelMap modelMap){
@@ -69,17 +61,5 @@ public class IndexController {
         return "login";
     }
 
-    @RequestMapping("/user/add")
-    @RequiresPermissions("userinfo:add")
-    @ResponseBody
-    public Object add(UserInfo userInfo){
-        return userInfoService.addUser(userInfo);
-    }
 
-    @RequestMapping("/user/findall")
-    @RequiresPermissions("userinfo:view")
-    @ResponseBody
-    public Object findAll(){
-        return userInfoService.findAll();
-    }
 }

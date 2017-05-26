@@ -107,7 +107,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 
         Set<String> roleSet = new HashSet<>();
         Set<String> permissionSet = new HashSet<>();
-        for(SysRole role : userInfo.getRoleList()){
+        for(SysRole role : userInfo.getRoles()){
             roleSet.add(role.getRole());
             for(SysPermission permission : role.getPermissions()){
                 permissionSet.add(permission.getPermission());

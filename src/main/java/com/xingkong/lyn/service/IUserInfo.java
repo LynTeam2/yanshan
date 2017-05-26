@@ -12,4 +12,6 @@ public interface IUserInfo {
     UserInfo findByUsername(String username);
     List<UserInfo> findAll();
     boolean addUser(UserInfo userInfo);
+    boolean deleteUser(Long id);
+    boolean updateUser(UserInfo userInfo);
 }

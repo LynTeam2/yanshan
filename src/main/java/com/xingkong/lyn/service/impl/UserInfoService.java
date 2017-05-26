@@ -37,4 +37,24 @@ public class UserInfoService implements IUserInfo {
         }
         return true;
     }
+
+    @Override
+    public boolean deleteUser(Long id) {
+        try{
+            userInfoDao.delete(id);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateUser(UserInfo userInfo) {
+        try{
+            userInfoDao.save(userInfo);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
 }
