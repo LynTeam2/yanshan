@@ -31,13 +31,13 @@ public class UserController {
     @RequestMapping("/user/delete")
     @RequiresPermissions("userinfo:delete")
     public Object delete(Long id){
-        return userInfoService.findAll();
+        return userInfoService.deleteUser(id);
     }
 
     @RequestMapping("/user/update")
     @RequiresPermissions("userinfo:update")
     public Object update(UserInfo userInfo){
-        return userInfoService.findAll();
+        return userInfoService.updateUser(userInfo);
     }
 
     @RequestMapping("/user/detail")
