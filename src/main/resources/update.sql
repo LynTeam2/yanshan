@@ -11,4 +11,4 @@ INSERT INTO sys_user_role(user_id, role_id) VALUES (1, 2);
 INSERT INTO sys_permission_init(id, url, permission_init, sort, create_time) VALUES (1,'/logout','logout',1,now());
 INSERT INTO sys_permission_init(id, url, permission_init, sort, create_time) VALUES (2,'/index','user',2,now());
 INSERT INTO sys_permission_init(id, url, permission_init, sort, create_time) VALUES (3,'/','user',3,now());
-INSERT INTO sys_permission_init(id, url, permission_init, sort, create_time) VALUES (4,'/**','anon',4,now());
+#INSERT INTO sys_permission_init(id, url, permission_init, sort, create_time) VALUES (4,'/**','anon',4,now());
