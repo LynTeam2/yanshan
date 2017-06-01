@@ -23,19 +23,40 @@ public class RoleService implements IRole{
 
     @Override
     public boolean addRole(SysRole sysRole) {
-        roleDao.saveAndFlush(sysRole);
+        if(null != sysRole.getId()){
+            return false;
+        }
+        try{
+            roleDao.saveAndFlush(sysRole);
+        }catch (Exception e){
+            return false;
+        }
         return true;
     }
 
     @Override
     public boolean deleteRole(Long id) {
-        roleDao.delete(id);
+        if(null == id){
+            return false;
+        }
+        try{
+            roleDao.delete(id);
+        }catch (Exception e){
+            return false;
+        }
         return true;
     }
 
     @Override
     public boolean updateRole(SysRole sysRole) {
-        roleDao.saveAndFlush(sysRole);
+        if(null == sysRole.getId()){
+            return false;
+        }
+        try{
+            roleDao.saveAndFlush(sysRole);
+        }catch (Exception e){
+            return false;
+        }
         return true;
     }
 
