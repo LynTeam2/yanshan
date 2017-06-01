@@ -30,6 +30,9 @@ public class UserInfoService implements IUserInfo {
 
     @Override
     public boolean addUser(UserInfo userInfo) {
+        if(null != userInfo.getId()){
+            return false;
+        }
         try{
             userInfoDao.save(userInfo);
         }catch (Exception e){
@@ -40,6 +43,9 @@ public class UserInfoService implements IUserInfo {
 
     @Override
     public boolean deleteUser(Long id) {
+        if(null == id){
+            return false;
+        }
         try{
             userInfoDao.delete(id);
         }catch (Exception e){
@@ -50,6 +56,9 @@ public class UserInfoService implements IUserInfo {
 
     @Override
     public boolean updateUser(UserInfo userInfo) {
+        if(null == userInfo.getId()){
+            return false;
+        }
         try{
             userInfoDao.save(userInfo);
         }catch (Exception e){
