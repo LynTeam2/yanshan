@@ -231,11 +231,11 @@ create table if not exists shop_product_attr (
   attr_id bigint(20) comment'属性名id',
   value_id bigint(20) comment'属性值id',
   primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'商品属性值表';
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'商品属性对应表';
 create table if not exists shop_product_attr_search (
   id bigint(20) not null auto_increment,
   product_id bigint(20) comment'产品id',
   attr_ids text comment'商品具有的属性值编号 [1,2,3,4]',
   create_time timestamp comment'创建时间',
   primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'商品属性值表';
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'商品属性全文检索表';
