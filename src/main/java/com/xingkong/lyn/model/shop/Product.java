@@ -31,4 +31,6 @@ public class Product {
     private int sales;
 
     private int comment;
+
+    private byte status;
 }

@@ -1,6 +1,6 @@
-package com.xingkong.lyn.repository;
+package com.xingkong.lyn.repository.shop;
 
-import com.xingkong.lyn.model.Address;
+import com.xingkong.lyn.model.shop.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

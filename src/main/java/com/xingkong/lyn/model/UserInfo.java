@@ -1,5 +1,6 @@
 package com.xingkong.lyn.model;//package com.xingkong.lyn.entity;
 
+import com.xingkong.lyn.model.shop.Address;
 import lombok.Data;
 
 import javax.persistence.*;

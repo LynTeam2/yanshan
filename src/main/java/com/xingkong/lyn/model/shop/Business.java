@@ -1,4 +1,4 @@
-package com.xingkong.lyn.model;
+package com.xingkong.lyn.model.shop;
 
 import lombok.Data;
 
@@ -9,19 +9,25 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * Created by lyn on 2017/5/26.
+ * Created by lyn on 2017/6/5.
  */
 @Entity
 @Data
-@Table(name = "sys_region")
-public class Region implements Serializable{
+@Table(name = "shop_business")
+public class Business implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String code;
+    private Long businesszoneId;
 
     private String name;
+
+    private String address;
+
+    private String contactName;
+
+    private String contactPhone;
 }

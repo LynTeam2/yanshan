@@ -198,6 +198,7 @@ create table if not exists shop_product (
   picture text comment'图片组 json格式',
   sales int(11) comment'销量',
   comment int(11) comment'评论数量',
+  status tinyint(4) comment'是否上架 0:下架 1:上架',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'商城商品表';
 create table if not exists shop_sku (
