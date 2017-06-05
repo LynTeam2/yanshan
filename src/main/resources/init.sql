@@ -5,7 +5,7 @@ create table if not exists user_info (
   name varchar(32) comment'真实姓名',
   password varchar(64) not null comment'密码',
   salt varchar(64) not null comment'盐',
-  state tinyint(4) comment'锁定状态 0 未锁定 1被锁定',
+  status tinyint(4) comment'锁定状态 0 未锁定 1被锁定',
   primary key(id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'用户表';
 # drop table if exists sys_role;
