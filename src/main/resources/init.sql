@@ -239,3 +239,56 @@ create table if not exists shop_product_attr_search (
   create_time timestamp comment'创建时间',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'商品属性全文检索表';
+create table if not exists shop_cart (
+  id bigint(20) not null auto_increment,
+  sku_id bigint(20) comment'商品id',
+  user_id bigint(20) comment'用户id',
+  create_time timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'购物车表';
+create table if not exists shop_order (
+  id bigint(20) not null auto_increment,
+  order_number varchar(32) not null comment'订单编号',
+  user_id bigint(20) comment'用户id',
+  status tinyint(4) comment'订单状态',
+  amount double comment'总价',
+  shipping_status tinyint(4) comment'物流状态',
+  shipping_name varchar(32) comment'物流名称',
+  shipping_fee double comment'物流费用',
+  remark varchar(128) comment'备注',
+  pay_id bigint(20) comment'付款人id',
+  pay_name varchar(32) comment'付款人名称',
+  create_time timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'商城订单表';
+create table if not exists shop_order_sku (
+  id bigint(20) not null auto_increment,
+  order_id bigint(20) comment'订单id',
+  sku_id bigint(20) comment'商品id',
+  sku_name varchar(32) comment'商品名称',
+  sku_quantity int(11) comment'商品数量',
+  sku_price double comment'商品价格',
+  sku_image text comment'商品图片',
+  create_time timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'商城订单明细表';
+create table if not exists shop_address (
+  id bigint(20) not null auto_increment,
+  user_id bigint(20) comment'用户id',
+  consignee varchar(32) comment'收货人',
+  region varchar(32) comment'收货区域',
+  address varchar(64) comment'收货详细地址',
+  zipcode varchar(16) comment'行政区域代码',
+  telephone varchar(32) comment'联系方式',
+  main boolean comment'默认地址',
+  create_time timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'地址表';
+create table if not exists shop_order_address (
+  id bigint(20) not null auto_increment,
+  order_id bigint(20) comment'订单id',
+  address_id bigint(20) comment'地址id',
+  remark varchar(128) comment'备注',
+  create_time timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'订单地址表';
