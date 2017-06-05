@@ -32,5 +32,5 @@ public class Product {
 
     private int comment;
 
-    private byte status;
+    private Byte status;
 }

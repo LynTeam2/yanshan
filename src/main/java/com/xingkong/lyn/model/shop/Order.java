@@ -24,11 +24,11 @@ public class Order implements Serializable{
 
     private String orderNumber;
 
-    private byte status;
+    private Byte status;
 
     private double amount;
 
-    private byte shippingStatus;
+    private Byte shippingStatus;
 
     private String shippingName;
 

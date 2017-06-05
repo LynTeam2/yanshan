@@ -30,4 +30,6 @@ public class Business implements Serializable{
     private String contactName;
 
     private String contactPhone;
+
+    private Byte status;
 }
