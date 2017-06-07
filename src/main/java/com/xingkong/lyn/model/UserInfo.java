@@ -16,7 +16,7 @@ public class UserInfo implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id@GeneratedValue
-    private long id;//用户id
+    private Long id;//用户id
 
     @Column(unique = true)
     private String username;//账号
