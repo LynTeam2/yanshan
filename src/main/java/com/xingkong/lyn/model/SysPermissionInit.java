@@ -15,7 +15,7 @@ public class SysPermissionInit implements Serializable{
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     private String url;
 
