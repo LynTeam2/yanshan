@@ -185,3 +185,41 @@ create table if not exists sys_permission_init (
 # # create table t_data_dict (
 # #
 # # );
+create table if not exists web_banner (
+  id bigint(20) not null auto_increment,
+  url varchar(64) comment'banner图跳转链接地址',
+  position varchar(32) comment'banner图位置',
+  banner varchar(64) comment'banner图引用地址',
+  create_time timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'首页banner图表';
+create table if not exists web_html (
+  id bigint(20) not null auto_increment,
+  page varchar(32) comment'所属页面',
+  html text comment'富文本内容',
+  create_time timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站富本文内容表';
+create table if not exists web_news (
+  id bigint(20) not null auto_increment,
+  title varchar(32) comment'新闻标题',
+  news_time date comment'新闻日期',
+  content text comment'新闻内容',
+  html text comment'新闻富文本内容',
+  create_time timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'新闻表';
+create table if not exists web_catagory (
+  id bigint(20) not null auto_increment,
+  name varchar(64) comment'商品分类名称',
+  parent_id bigint(20) comment'父分类编号',
+  create_time timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'产品类别表';
+create table if not exists web_catagory (
+  id bigint(20) not null auto_increment,
+  name varchar(64) comment'商品分类名称',
+  parent_id bigint(20) comment'父分类编号',
+  create_time timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'产品表';
