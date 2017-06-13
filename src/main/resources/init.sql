@@ -192,8 +192,8 @@ create table if not exists web_banner (
   banner varchar(64) comment'banner图引用地址',
   create_time timestamp comment'创建时间',
   primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'首页banner图表';
-create table if not exists web_html (
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站首页banner图表';
+create table if not exists web_page_html (
   id bigint(20) not null auto_increment,
   page varchar(32) comment'所属页面',
   html text comment'富文本内容',
@@ -208,18 +208,20 @@ create table if not exists web_news (
   html text comment'新闻富文本内容',
   create_time timestamp comment'创建时间',
   primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'新闻表';
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站新闻表';
 create table if not exists web_catagory (
   id bigint(20) not null auto_increment,
   name varchar(64) comment'商品分类名称',
   parent_id bigint(20) comment'父分类编号',
   create_time timestamp comment'创建时间',
   primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'产品类别表';
-create table if not exists web_catagory (
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站产品类别表';
+create table if not exists web_product (
   id bigint(20) not null auto_increment,
-  name varchar(64) comment'商品分类名称',
-  parent_id bigint(20) comment'父分类编号',
+  name varchar(64) comment'商品名称',
+  catagory_id bigint(20) comment'商品分类id',
   create_time timestamp comment'创建时间',
+  picture text comment'图片',
+  html text comment'产品富文本内容',
   primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'产品表';
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站产品表';
