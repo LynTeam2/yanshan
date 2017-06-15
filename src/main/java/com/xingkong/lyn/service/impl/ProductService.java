@@ -30,7 +30,7 @@ public class ProductService implements IProduct{
 
     @Override
     public Page<Product> getProductListByPageable(Long catagoryId, Pageable pageable) {
-        return productDao.findByCatagoryIdAndPageable(catagoryId, pageable);
+        return productDao.findByCatagoryId(catagoryId, pageable);
     }
 
 }

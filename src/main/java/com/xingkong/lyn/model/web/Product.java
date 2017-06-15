@@ -31,6 +31,6 @@ public class Product implements Serializable{
 
     private Byte home;
 
-    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    private Catagory catagory;
+//    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+//    private Catagory catagory;
 }

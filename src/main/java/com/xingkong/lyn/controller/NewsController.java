@@ -24,7 +24,7 @@ public class NewsController {
     private INews newsService;
 
     @RequestMapping(value = "/web/news/list")
-    public Object webNewsList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
+    public Object webNewsList(@PageableDefault(value = 15, sort = { "newsTime" }, direction = Sort.Direction.DESC)
                                       Pageable pageable){
         AjaxResults ajaxResults = new AjaxResults();
         Page<News> news = newsService.getNewsByPageable(pageable);

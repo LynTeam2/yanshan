@@ -203,7 +203,7 @@ create table if not exists web_page_html (
 create table if not exists web_news (
   id bigint(20) not null auto_increment,
   title varchar(32) comment'新闻标题',
-  news_time date comment'新闻日期',
+  news_time datetime comment'新闻日期',
   content text comment'新闻内容',
   html text comment'新闻富文本内容',
   create_time timestamp comment'创建时间',
@@ -219,7 +219,6 @@ create table if not exists web_catagory (
 create table if not exists web_product (
   id bigint(20) not null auto_increment,
   name varchar(64) comment'商品名称',
-  catagory_id bigint(20) comment'商品分类id',
   create_time timestamp comment'创建时间',
   picture text comment'图片',
   html text comment'产品富文本内容',

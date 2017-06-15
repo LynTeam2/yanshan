@@ -4,6 +4,7 @@ import com.xingkong.lyn.model.web.News;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * Created by lyn on 2017/6/13.
  */
 public interface NewsRepository extends JpaRepository<News, Long>{
-    List<News> findTopOrderByNewsTimeDesc(Integer limit);
-    Page<News> findByPageable(Pageable pageable);
+    List<News> findTopById(Integer limit);
+
+    Page<News> findAll(Pageable pageable);
 }

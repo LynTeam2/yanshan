@@ -27,6 +27,7 @@ public class Catagory implements Serializable{
     private Date createTime;
 
     @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)//级联保存、更新、删除、刷新;延迟加载
-    @JoinColumn(name = "catagory_id")
+    @JoinColumn(name = "catagoryId")
     private List<Product> products;
 }
+

@@ -2,10 +2,7 @@ package com.xingkong.lyn.model.web;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -28,7 +25,9 @@ public class News implements Serializable{
 
     private String html;
 
-    private Date newsTime;
+//    @Temporal(TemporalType.DATE)
+//    @Column(name = "news_time")
+//    private Date newsTime;
 
     private Date createTime;
 }

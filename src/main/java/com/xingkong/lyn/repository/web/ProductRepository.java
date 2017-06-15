@@ -11,5 +11,5 @@ import java.util.List;
  * Created by lyn on 2017/6/13.
  */
 public interface ProductRepository extends JpaRepository<Product, Long>{
-    Page<Product> findByCatagoryIdAndPageable(Long catagoryId, Pageable pageable);
+    Page<Product> findByCatagoryId(Long catagoryId, Pageable pageable);
 }

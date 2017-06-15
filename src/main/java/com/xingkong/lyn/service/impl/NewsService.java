@@ -30,11 +30,11 @@ public class NewsService implements INews{
 
     @Override
     public List<News> getIndexNews(Integer limit) {
-        return newsDao.findTopOrderByNewsTimeDesc(limit);
+        return newsDao.findTopById(limit);
     }
 
     @Override
     public Page<News> getNewsByPageable(Pageable pageable) {
-        return newsDao.findByPageable(pageable);
+        return newsDao.findAll(pageable);
     }
 }
