@@ -12,7 +12,5 @@ import java.util.List;
  * Created by lyn on 2017/6/13.
  */
 public interface NewsRepository extends JpaRepository<News, Long>{
-    List<News> findTopById(Integer limit);
-
     Page<News> findAll(Pageable pageable);
 }

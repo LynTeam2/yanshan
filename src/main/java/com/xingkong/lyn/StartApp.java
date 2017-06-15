@@ -13,7 +13,6 @@ import org.springframework.http.converter.HttpMessageConverter;
  * Created by lyn on 2017/4/28.
  */
 @SpringBootApplication
-
 public class StartApp {
     @Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {

@@ -12,6 +12,5 @@ import java.util.List;
 public interface INews {
     List<News> getNewsList();
     News getNews(Long id);
-    List<News> getIndexNews(Integer limit);
     Page<News> getNewsByPageable(Pageable pageable);
 }

@@ -4,10 +4,13 @@ import com.xingkong.lyn.model.web.News;
 import com.xingkong.lyn.repository.web.NewsRepository;
 import com.xingkong.lyn.service.INews;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,11 +29,6 @@ public class NewsService implements INews{
     @Override
     public News getNews(Long id) {
         return newsDao.findOne(id);
-    }
-
-    @Override
-    public List<News> getIndexNews(Integer limit) {
-        return newsDao.findTopById(limit);
     }
 
     @Override

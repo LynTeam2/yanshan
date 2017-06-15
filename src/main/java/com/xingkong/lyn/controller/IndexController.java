@@ -10,6 +10,9 @@ import com.xingkong.lyn.service.INews;
 import com.xingkong.lyn.service.IWebInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,10 +49,16 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/web/index/news", method = RequestMethod.GET)
-    public Object webIndexNews(Integer limit){
+    public AjaxResults webIndexNews(Integer limit){
         AjaxResults ajaxResults = new AjaxResults();
-        List<News> newsList = newsService.getIndexNews(limit);
-        ajaxResults.put("news", newsList);
+        if(null == limit){
+            ajaxResults.put("news", newsService.getNewsList());
+        }else{
+            Sort sort = new Sort(Sort.Direction.DESC, "newsTime");
+            Pageable pageable = new PageRequest(0, limit, sort);
+            ajaxResults.put("news", newsService.getNewsByPageable(pageable));
+        }
+
         return ajaxResults;
     }
 
