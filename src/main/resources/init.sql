@@ -223,5 +223,18 @@ create table if not exists web_product (
   create_time timestamp comment'创建时间',
   picture text comment'图片',
   html text comment'产品富文本内容',
+  home tinyint(4) comment'首页展示',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站产品表';
+create table if not exists web_info (
+  id bigint(20) not null auto_increment,
+  name varchar(64) comment'网站名称',
+  title varchar(64) comment'网站标题',
+  open_time varchar(64) comment'营业(开放)时间',
+  introduction text comment'简介',
+  address varchar(128) comment'地址',
+  phone varchar(64) comment'联系方式',
+  icp varchar(64) comment'icp备案号',
+  map varchar(64) comment'地图图片',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站信息表';

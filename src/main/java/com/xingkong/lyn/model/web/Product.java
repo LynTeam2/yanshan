@@ -2,10 +2,7 @@ package com.xingkong.lyn.model.web;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -31,4 +28,9 @@ public class Product implements Serializable{
     private String picture;
 
     private String html;
+
+    private Byte home;
+
+    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    private Catagory catagory;
 }

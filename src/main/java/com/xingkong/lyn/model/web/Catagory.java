@@ -2,12 +2,10 @@ package com.xingkong.lyn.model.web;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by lyn on 2017/6/13.
@@ -27,4 +25,8 @@ public class Catagory implements Serializable{
     private String name;
 
     private Date createTime;
+
+    @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)//级联保存、更新、删除、刷新;延迟加载
+    @JoinColumn(name = "catagory_id")
+    private List<Product> products;
 }
