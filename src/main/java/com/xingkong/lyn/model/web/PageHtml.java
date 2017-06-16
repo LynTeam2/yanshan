@@ -22,6 +22,8 @@ public class PageHtml implements Serializable{
     @GeneratedValue
     private Long id;
 
+    private String title;
+
     private String page;
 
     private String html;

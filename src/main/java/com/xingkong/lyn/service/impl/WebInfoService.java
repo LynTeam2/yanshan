@@ -19,4 +19,10 @@ public class WebInfoService implements IWebInfo{
     public WebInfo getWebInfo() {
         return webInfoDao.findOne(1L);
     }
+
+    @Override
+    public boolean saveWebInfo(WebInfo webInfo) {
+        webInfoDao.saveAndFlush(webInfo);
+        return true;
+    }
 }

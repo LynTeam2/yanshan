@@ -12,4 +12,5 @@ import java.util.List;
  */
 public interface ProductRepository extends JpaRepository<Product, Long>{
     Page<Product> findByCatagoryId(Long catagoryId, Pageable pageable);
+    int deleteAllByCatagoryId(Long catagoryId);
 }

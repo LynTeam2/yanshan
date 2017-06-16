@@ -35,4 +35,16 @@ public class NewsService implements INews{
     public Page<News> getNewsByPageable(Pageable pageable) {
         return newsDao.findAll(pageable);
     }
+
+    @Override
+    public boolean addNews(News news) {
+        newsDao.saveAndFlush(news);
+        return true;
+    }
+
+    @Override
+    public boolean deleteNews(Long id) {
+        newsDao.delete(id);
+        return true;
+    }
 }

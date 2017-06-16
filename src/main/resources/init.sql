@@ -195,6 +195,7 @@ create table if not exists web_banner (
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站首页banner图表';
 create table if not exists web_page_html (
   id bigint(20) not null auto_increment,
+  title varchar(32) comment'页面标题',
   page varchar(32) comment'所属页面',
   html text comment'富文本内容',
   create_time timestamp comment'创建时间',

@@ -56,7 +56,7 @@ public class IndexController {
         }else{
             Sort sort = new Sort(Sort.Direction.DESC, "newsTime");
             Pageable pageable = new PageRequest(0, limit, sort);
-            ajaxResults.put("news", newsService.getNewsByPageable(pageable));
+            ajaxResults.put("news", newsService.getNewsByPageable(pageable).getContent());
         }
 
         return ajaxResults;

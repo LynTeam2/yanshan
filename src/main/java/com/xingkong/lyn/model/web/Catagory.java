@@ -29,5 +29,13 @@ public class Catagory implements Serializable{
     @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)//级联保存、更新、删除、刷新;延迟加载
     @JoinColumn(name = "catagoryId")
     private List<Product> products;
+
+    @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY, mappedBy = "parent")
+    @OrderBy("id")
+    private List<Catagory> subCatagories;
+
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Catagory parentCatagory;
 }
 

@@ -7,4 +7,5 @@ import com.xingkong.lyn.model.web.WebInfo;
  */
 public interface IWebInfo {
     WebInfo getWebInfo();
+    boolean saveWebInfo(WebInfo webInfo);
 }

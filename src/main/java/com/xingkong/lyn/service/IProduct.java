@@ -15,4 +15,10 @@ public interface IProduct {
     Product getDetail(Long id);
 
     Page<Product> getProductListByPageable(Long catagoryId, Pageable pageable);
+
+    boolean addProduct(Product product);
+
+    boolean updateProduct(Product product);
+
+    boolean deleteProduct(Long id);
 }

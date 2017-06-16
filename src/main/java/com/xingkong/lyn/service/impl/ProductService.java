@@ -33,4 +33,22 @@ public class ProductService implements IProduct{
         return productDao.findByCatagoryId(catagoryId, pageable);
     }
 
+    @Override
+    public boolean addProduct(Product product) {
+        productDao.saveAndFlush(product);
+        return true;
+    }
+
+    @Override
+    public boolean updateProduct(Product product) {
+        productDao.saveAndFlush(product);
+        return true;
+    }
+
+    @Override
+    public boolean deleteProduct(Long id) {
+        productDao.delete(id);
+        return true;
+    }
+
 }
