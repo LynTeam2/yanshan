@@ -3,10 +3,10 @@ package com.xingkong.lyn.controller;
 
 import com.xingkong.lyn.comment.AjaxResults;
 import com.xingkong.lyn.model.web.Banner;
-import com.xingkong.lyn.model.web.News;
 import com.xingkong.lyn.model.web.WebInfo;
 import com.xingkong.lyn.service.IBanner;
 import com.xingkong.lyn.service.INews;
+import com.xingkong.lyn.service.IProduct;
 import com.xingkong.lyn.service.IWebInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,15 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by lyn on 2017/4/24.
+ * @CrossGrigin springboot用于跨域的注解
  */
 @RestController
+//@CrossOrigin
 public class IndexController {
 
     private Logger logger = LoggerFactory.getLogger(IndexController.class);
@@ -39,6 +38,9 @@ public class IndexController {
 
     @Resource
     private IWebInfo webInfoService;
+
+    @Resource
+    private IProduct productService;
 
     @RequestMapping(value = "/web/index/banner", method = RequestMethod.GET)
     public Object webIndexBanner(){
@@ -74,8 +76,13 @@ public class IndexController {
     @RequestMapping(value = "/web/index/product", method = RequestMethod.GET)
     public Object webIndexProduct(Integer limit){
         AjaxResults ajaxResults = new AjaxResults();
-        WebInfo webInfo = webInfoService.getWebInfo();
-        ajaxResults.put("products", webInfo);
+        if(null == limit){
+            ajaxResults.put("products", productService.getProductList());
+        }else{
+            Sort sort = new Sort(Sort.Direction.DESC, "id");
+            Pageable pageable = new PageRequest(0, limit, sort);
+            ajaxResults.put("products", productService.getProductListByPageable(null, pageable));
+        }
         return ajaxResults;
     }
 
@@ -89,16 +96,4 @@ public class IndexController {
         ajaxResults.put("time", webInfo.getOpenTime());
         return ajaxResults;
     }
-
-    @RequestMapping(value = "/web/introduction", method = RequestMethod.GET)
-    public Object webIntroduction(HttpServletRequest request){
-        Map<String,Object> map = new HashMap<>();
-        map.put("code", 0);
-        map.put("msg", "");
-        Map<String,Object> map2 = new HashMap<>();
-        map2.put("introduction", "123");
-        map.put("results", map2);
-        return map;
-    }
-
 }

@@ -21,6 +21,7 @@ public class Product implements Serializable{
 
     private String name;
 
+    @Column(insertable = false, updatable = false)
     private Long catagoryId;
 
     private Date createTime;
@@ -31,6 +32,8 @@ public class Product implements Serializable{
 
     private Byte home;
 
-//    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-//    private Catagory catagory;
+    @ManyToOne
+    @JoinColumn(name = "catagoryId")
+    private Catagory catagory;
 }
+

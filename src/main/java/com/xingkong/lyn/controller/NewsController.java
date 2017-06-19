@@ -44,7 +44,7 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/web/manage/news/list", method = RequestMethod.GET)
-    @RequiresPermissions("news:view")
+//    @RequiresPermissions("news:view")
     public Object webManageNewsList(@PageableDefault(value = 15, sort = { "newsTime" }, direction = Sort.Direction.DESC)
                                         Pageable pageable){
         AjaxResults ajaxResults = new AjaxResults();
@@ -53,8 +53,8 @@ public class NewsController {
         return ajaxResults;
     }
 
-    @RequestMapping(value = "/web/manage/news/list", method = RequestMethod.GET)
-    @RequiresPermissions("news:detail")
+    @RequestMapping(value = "/web/manage/news/detail", method = RequestMethod.GET)
+//    @RequiresPermissions("news:detail")
     public Object webManageNewsDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         News news = newsService.getNews(id);
@@ -63,7 +63,7 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/web/manage/news/add", method = RequestMethod.POST)
-    @RequiresPermissions("news:add")
+//    @RequiresPermissions("news:add")
     public Object webManageNewsAdd(News news){
         AjaxResults ajaxResults = new AjaxResults();
         news.setCreateTime(new Date());
@@ -72,7 +72,7 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/web/manage/news/update", method = RequestMethod.PUT)
-    @RequiresPermissions("news:update")
+//    @RequiresPermissions("news:update")
     public Object webManageNewsUpdate(News news){
         AjaxResults ajaxResults = new AjaxResults();
         news.setCreateTime(new Date());
@@ -81,7 +81,7 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/web/manage/news/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("news:delete")
+//    @RequiresPermissions("news:delete")
     public Object webManageNewsDelete(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         newsService.deleteNews(id);

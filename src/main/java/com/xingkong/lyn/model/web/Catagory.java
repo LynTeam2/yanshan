@@ -30,12 +30,8 @@ public class Catagory implements Serializable{
     @JoinColumn(name = "catagoryId")
     private List<Product> products;
 
-    @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY, mappedBy = "parent")
-    @OrderBy("id")
+    @OneToMany(cascade=CascadeType.ALL)
+    @MapKey(name = "pk")
     private List<Catagory> subCatagories;
-
-    @ManyToOne
-    @JoinColumn(name = "parent_id")
-    private Catagory parentCatagory;
 }
 

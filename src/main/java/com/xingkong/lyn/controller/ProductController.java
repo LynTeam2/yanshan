@@ -57,7 +57,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/catagory/list", method = RequestMethod.GET)
-    @RequiresPermissions("catagory:view")
+//    @RequiresPermissions("catagory:view")
     public Object webManageCatagoryList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                                  Pageable pageable){
         AjaxResults ajaxResults = new AjaxResults();
@@ -67,7 +67,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/catagory/add", method = RequestMethod.POST)
-    @RequiresPermissions("catagory:add")
+//    @RequiresPermissions("catagory:add")
     public Object webManageCatagoryAdd(Catagory catagory){
         AjaxResults ajaxResults = new AjaxResults();
         catagoryService.addCatagory(catagory);
@@ -75,7 +75,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/catagory/update", method = RequestMethod.PUT)
-    @RequiresPermissions("catagory:update")
+//    @RequiresPermissions("catagory:update")
     public Object webManageCatagoryUpdate(Catagory catagory){
         AjaxResults ajaxResults = new AjaxResults();
         catagoryService.updateCatagory(catagory);
@@ -83,7 +83,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/catagory/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("catagory:delete")
+//    @RequiresPermissions("catagory:delete")
     public Object webManageCatagoryDelete(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         catagoryService.deleteCatagory(id);
@@ -91,7 +91,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/list", method = RequestMethod.GET)
-    @RequiresPermissions("product:view")
+//    @RequiresPermissions("product:view")
     public Object webManageProductList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                                        Pageable pageable, Long catagoryId){
         AjaxResults ajaxResults = new AjaxResults();
@@ -101,7 +101,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/detail", method = RequestMethod.GET)
-    @RequiresPermissions("product:detail")
+//    @RequiresPermissions("product:detail")
     public Object webManageProductDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         Product product = productService.getDetail(id);
@@ -110,7 +110,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/add", method = RequestMethod.POST)
-    @RequiresPermissions("product:add")
+//    @RequiresPermissions("product:add")
     public Object webManageProductAdd(Product product){
         AjaxResults ajaxResults = new AjaxResults();
         productService.addProduct(product);
@@ -118,7 +118,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/update", method = RequestMethod.PUT)
-    @RequiresPermissions("product:update")
+//    @RequiresPermissions("product:update")
     public Object webManageProductUpdate(Product product){
         AjaxResults ajaxResults = new AjaxResults();
         productService.updateProduct(product);
@@ -126,7 +126,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("product:delete")
+//    @RequiresPermissions("product:delete")
     public Object webManageProductDelete(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         productService.deleteProduct(id);
