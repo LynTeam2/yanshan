@@ -1,5 +1,6 @@
 package com.xingkong.lyn.controller;
 
+import com.xingkong.lyn.annotation.AdminLog;
 import com.xingkong.lyn.comment.AjaxResults;
 import com.xingkong.lyn.model.web.WebInfo;
 import com.xingkong.lyn.service.IWebInfo;
@@ -30,6 +31,7 @@ public class WebInfoController {
 
     @RequestMapping(value = "/web/manage/webInfo/update", method = RequestMethod.PUT)
 //    @RequiresPermissions("webinfo:update")
+    @AdminLog("网站:修改网站基本信息")
     public Object webManageWebInfoUpdate(WebInfo webInfo){
         AjaxResults ajaxResults = new AjaxResults();
         webInfoService.saveWebInfo(webInfo);

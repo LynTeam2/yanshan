@@ -1,5 +1,6 @@
 package com.xingkong.lyn.controller;
 
+import com.xingkong.lyn.annotation.AdminLog;
 import com.xingkong.lyn.comment.AjaxResults;
 import com.xingkong.lyn.model.web.Catagory;
 import com.xingkong.lyn.model.web.Product;
@@ -68,6 +69,7 @@ public class ProductController {
 
     @RequestMapping(value = "/web/manage/catagory/add", method = RequestMethod.POST)
 //    @RequiresPermissions("catagory:add")
+    @AdminLog(value = "新增类别")
     public Object webManageCatagoryAdd(Catagory catagory){
         AjaxResults ajaxResults = new AjaxResults();
         catagoryService.addCatagory(catagory);
@@ -76,6 +78,7 @@ public class ProductController {
 
     @RequestMapping(value = "/web/manage/catagory/update", method = RequestMethod.PUT)
 //    @RequiresPermissions("catagory:update")
+    @AdminLog(value = "修改类别")
     public Object webManageCatagoryUpdate(Catagory catagory){
         AjaxResults ajaxResults = new AjaxResults();
         catagoryService.updateCatagory(catagory);
@@ -84,6 +87,7 @@ public class ProductController {
 
     @RequestMapping(value = "/web/manage/catagory/delete", method = RequestMethod.DELETE)
 //    @RequiresPermissions("catagory:delete")
+    @AdminLog(value = "删除类别")
     public Object webManageCatagoryDelete(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         catagoryService.deleteCatagory(id);
@@ -111,6 +115,7 @@ public class ProductController {
 
     @RequestMapping(value = "/web/manage/product/add", method = RequestMethod.POST)
 //    @RequiresPermissions("product:add")
+    @AdminLog(value = "网站:新增产品(服务)")
     public Object webManageProductAdd(Product product){
         AjaxResults ajaxResults = new AjaxResults();
         productService.addProduct(product);
@@ -119,6 +124,7 @@ public class ProductController {
 
     @RequestMapping(value = "/web/manage/product/update", method = RequestMethod.PUT)
 //    @RequiresPermissions("product:update")
+    @AdminLog(value = "网站:更新产品(服务)")
     public Object webManageProductUpdate(Product product){
         AjaxResults ajaxResults = new AjaxResults();
         productService.updateProduct(product);
@@ -127,6 +133,7 @@ public class ProductController {
 
     @RequestMapping(value = "/web/manage/product/delete", method = RequestMethod.DELETE)
 //    @RequiresPermissions("product:delete")
+    @AdminLog(value = "网站:删除产品(服务)")
     public Object webManageProductDelete(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         productService.deleteProduct(id);

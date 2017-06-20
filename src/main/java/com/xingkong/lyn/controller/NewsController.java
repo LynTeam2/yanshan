@@ -1,5 +1,6 @@
 package com.xingkong.lyn.controller;
 
+import com.xingkong.lyn.annotation.AdminLog;
 import com.xingkong.lyn.comment.AjaxResults;
 import com.xingkong.lyn.model.web.News;
 import com.xingkong.lyn.service.INews;
@@ -64,6 +65,7 @@ public class NewsController {
 
     @RequestMapping(value = "/web/manage/news/add", method = RequestMethod.POST)
 //    @RequiresPermissions("news:add")
+    @AdminLog(value = "网站:添加新闻")
     public Object webManageNewsAdd(News news){
         AjaxResults ajaxResults = new AjaxResults();
         news.setCreateTime(new Date());
@@ -73,6 +75,7 @@ public class NewsController {
 
     @RequestMapping(value = "/web/manage/news/update", method = RequestMethod.PUT)
 //    @RequiresPermissions("news:update")
+    @AdminLog(value = "网站:修改新闻")
     public Object webManageNewsUpdate(News news){
         AjaxResults ajaxResults = new AjaxResults();
         news.setCreateTime(new Date());
@@ -82,6 +85,7 @@ public class NewsController {
 
     @RequestMapping(value = "/web/manage/news/delete", method = RequestMethod.DELETE)
 //    @RequiresPermissions("news:delete")
+    @AdminLog(value = "网站:删除新闻")
     public Object webManageNewsDelete(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         newsService.deleteNews(id);

@@ -1,5 +1,6 @@
 package com.xingkong.lyn.controller;
 
+import com.xingkong.lyn.annotation.AdminLog;
 import com.xingkong.lyn.comment.AjaxResults;
 import com.xingkong.lyn.model.web.PageHtml;
 import com.xingkong.lyn.service.IPageHtml;
@@ -72,6 +73,7 @@ public class PageController {
 
     @RequestMapping(value = "/web/manage/pagehtml/add", method = RequestMethod.POST)
 //    @RequiresPermissions("pagehtml:add")
+    @AdminLog(value = "网站:添加页面")
     public Object webManageNewsAdd(PageHtml pageHtml){
         AjaxResults ajaxResults = new AjaxResults();
         pageHtmlService.addPageHtml(pageHtml);
@@ -80,6 +82,7 @@ public class PageController {
 
     @RequestMapping(value = "/web/manage/pagehtml/update", method = RequestMethod.PUT)
 //    @RequiresPermissions("pagehtml:update")
+    @AdminLog(value = "网站:修改页面")
     public Object webManageNewsUpdate(PageHtml pageHtml){
         AjaxResults ajaxResults = new AjaxResults();
         pageHtmlService.updatePageHtml(pageHtml);
@@ -88,6 +91,7 @@ public class PageController {
 
     @RequestMapping(value = "/web/manage/pagehtml/delete", method = RequestMethod.DELETE)
 //    @RequiresPermissions("pagehtml:delete")
+    @AdminLog(value = "网站:删除页面")
     public Object webManageNewsDelete(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         pageHtmlService.deletePageHtml(id);
