@@ -60,10 +60,9 @@ public class WebLogAspect {
     @Order(1)
     public void manageLog(AdminLog adminLog)throws Throwable{
         Subject currentUser = SecurityUtils.getSubject();
-        String username = (String)currentUser.getPrincipal();
-        UserInfo userInfo = userInfoService.findByUsername(username);
+        UserInfo userInfo = (UserInfo)currentUser.getPrincipal();
         SysLog sysLog = new SysLog();
-        sysLog.setOperator(username);
+        sysLog.setOperator(userInfo.getUsername());
         sysLog.setOperatorId(userInfo.getId());
         sysLog.setCreateTime(new Date());
         sysLog.setContent(adminLog.value());

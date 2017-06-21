@@ -8,7 +8,8 @@
 # INSERT INTO user_info (id,username,name,password,salt,status) VALUES (1, 'admin', '管理员', 'd3c59d25033dbf980d29554025c23a75', '8d78869f470951332959580424d4bf4f', 0);
 # INSERT INTO sys_user_role(user_id, role_id) VALUES (1, 1);
 # INSERT INTO sys_user_role(user_id, role_id) VALUES (1, 2);
-# INSERT INTO sys_permission_init(id, url, permission_init, sort, create_time) VALUES (1,'/logout','logout',1,now());
-# INSERT INTO sys_permission_init(id, url, permission_init, sort, create_time) VALUES (2,'/index','user',2,now());
-# INSERT INTO sys_permission_init(id, url, permission_init, sort, create_time) VALUES (3,'/','user',3,now());
-# INSERT INTO sys_permission_init(id, url, permission_init, sort, create_time) VALUES (4,'/**','anon',4,now());
+# INSERT INTO sys_permission_init(id, url, permission_init, sort, create_time) VALUES (1,'/logout','logout,kickout',1,now());
+# INSERT INTO sys_permission_init(id, url, permission_init, sort, create_time) VALUES (2,'/index','user,kickout',2,now());
+# INSERT INTO sys_permission_init(id, url, permission_init, sort, create_time) VALUES (3,'/','user,kickout',3,now());
+# INSERT INTO sys_permission_init(id, url, permission_init, sort, create_time) VALUES (4,'/**','anon,kickout',4,now());
+# INSERT INTO sys_permission_init(id, url, permission_init, sort, create_time) VALUES (5,'/kickout','anon',5,now());
