@@ -1,6 +1,7 @@
 package com.xingkong.lyn.shiro.filter;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.alibaba.fastjson.JSON;
+import com.xingkong.lyn.comment.AjaxResults;
 import com.xingkong.lyn.model.UserInfo;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
@@ -10,10 +11,16 @@ import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
@@ -27,9 +34,11 @@ import java.util.Deque;
  */
 public class KickoutSessionControllerFilter extends AccessControlFilter {
 
+    private Logger logger = LoggerFactory.getLogger(KickoutSessionControllerFilter.class);
+
     private String kickoutUrl; //踢出后的地址
     private boolean kickoutAfter = false; //踢出之前登陆的/之后登陆的用户 默认踢出之前的用户
-    private int maxSession = 1; //同一账号最大会话数 默认1
+    private int maxSession = 2; //同一账号最大会话数 默认1
 
     private SessionManager sessionManager;
     private Cache<String, Deque<Serializable>> cache;
@@ -73,14 +82,18 @@ public class KickoutSessionControllerFilter extends AccessControlFilter {
         Serializable sessionId = session.getId();
 
         //读取缓存 没有就存入
-        Deque<Serializable> deque = cache.get(username);
+        Deque<Serializable> deque = cache.get("shiro_redis_session:" + username);
+
+        if(null == deque){
+            deque = new ArrayDeque<>();
+        }
 
         //如果队列里没有此sessionId，且用户没有被踢出; 放入队列
         if (!deque.contains(sessionId) && null == session.getAttribute("kickout")){
             //将sessionId存入队列
             deque.push(sessionId);
             //将用户的sessionId队列缓存
-            cache.put(username, deque);
+            cache.put("shiro_redis_session:" + username, deque);
         }
 
         //如果队列里的sessionId数超过最大会话数，开始踢人
@@ -116,11 +129,33 @@ public class KickoutSessionControllerFilter extends AccessControlFilter {
             } catch (Exception e){
             }
             saveRequest(request);
-            //重定向
-            WebUtils.issueRedirect(request, response, kickoutUrl);
+
+            AjaxResults ajaxResults = new AjaxResults();
+            //判断是否Ajax请求
+            if("XMLHttpRequest".equalsIgnoreCase(((HttpServletRequest) request).getHeader("X-Requested-With"))){
+                ajaxResults.setCode(1);
+                ajaxResults.setMsg("您已经在其他地方登录，请重新登录！");
+                //输出json串
+                out(response, ajaxResults);
+            }else {
+                //重定向
+                WebUtils.issueRedirect(request, response, kickoutUrl);
+            }
             return false;
         }
         return true;
+    }
+
+    private void out(ServletResponse hresponse, AjaxResults ajaxResults)throws IOException{
+        try{
+            hresponse.setCharacterEncoding("UTF-8");
+            PrintWriter out = hresponse.getWriter();
+            out.println(JSON.toJSONString(ajaxResults));
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            logger.error("输出json异常，可以忽视");
+        }
     }
 
 }
