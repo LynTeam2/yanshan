@@ -49,24 +49,24 @@ public class WebLogAspect {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         // 记录下请求内容
-//        logger.info("URL : " + request.getRequestURL().toString());
-//        logger.info("HTTP_METHOD : " + request.getMethod());
-//        logger.info("IP : " + request.getRemoteAddr());
-//        logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+        logger.info("URL : " + request.getRequestURL().toString());
+        logger.info("HTTP_METHOD : " + request.getMethod());
+        logger.info("IP : " + request.getRemoteAddr());
+        logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
         logger.info("ARGS : " + Arrays.toString(joinPoint.getArgs()));
     }
 
     @Before("manageLogPoint(adminLog)")
     @Order(1)
     public void manageLog(AdminLog adminLog)throws Throwable{
-        Subject currentUser = SecurityUtils.getSubject();
-        UserInfo userInfo = (UserInfo)currentUser.getPrincipal();
-        SysLog sysLog = new SysLog();
-        sysLog.setOperator(userInfo.getUsername());
-        sysLog.setOperatorId(userInfo.getId());
-        sysLog.setCreateTime(new Date());
-        sysLog.setContent(adminLog.value());
-        sysLogService.addSysLog(sysLog);
+//        Subject currentUser = SecurityUtils.getSubject();
+//        UserInfo userInfo = (UserInfo)currentUser.getPrincipal();
+//        SysLog sysLog = new SysLog();
+//        sysLog.setOperator(userInfo.getUsername());
+//        sysLog.setOperatorId(userInfo.getId());
+//        sysLog.setCreateTime(new Date());
+//        sysLog.setContent(adminLog.value());
+//        sysLogService.addSysLog(sysLog);
     }
 
 }
