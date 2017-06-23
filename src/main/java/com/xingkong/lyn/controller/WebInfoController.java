@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.persistence.OneToMany;
 
 /**
  * Created by lyn on 2017/6/16.
@@ -21,7 +20,7 @@ public class WebInfoController {
     private IWebInfo webInfoService;
 
     @RequestMapping(value = "/web/manage/webInfo/detail", method = RequestMethod.GET)
-//    @RequiresPermissions("webinfo:detail")
+    @RequiresPermissions("webinfo:detail")
     public Object webManageWebInfoDetail(){
         AjaxResults ajaxResults = new AjaxResults();
         WebInfo webInfo = webInfoService.getWebInfo();
@@ -30,7 +29,7 @@ public class WebInfoController {
     }
 
     @RequestMapping(value = "/web/manage/webInfo/update", method = RequestMethod.PUT)
-//    @RequiresPermissions("webinfo:update")
+    @RequiresPermissions("webinfo:update")
     @AdminLog("网站:修改网站基本信息")
     public Object webManageWebInfoUpdate(WebInfo webInfo){
         AjaxResults ajaxResults = new AjaxResults();
