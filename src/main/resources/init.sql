@@ -182,114 +182,59 @@ create table if not exists sys_permission_init (
   create_time timestamp comment'创建时间',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'shiro权限表';
-create table if not exists shop_catagory (
+# # create table t_data_dict (
+# #
+# # );
+create table if not exists web_banner (
+  id bigint(20) not null auto_increment,
+  url varchar(64) comment'banner图跳转链接地址',
+  position varchar(32) comment'banner图位置',
+  banner varchar(64) comment'banner图引用地址',
+  create_time timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站首页banner图表';
+create table if not exists web_page_html (
+  id bigint(20) not null auto_increment,
+  title varchar(32) comment'页面标题',
+  page varchar(32) comment'所属页面',
+  html text comment'富文本内容',
+  create_time timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站富本文内容表';
+create table if not exists web_news (
+  id bigint(20) not null auto_increment,
+  title varchar(32) comment'新闻标题',
+  news_time datetime comment'新闻日期',
+  content text comment'新闻内容',
+  html text comment'新闻富文本内容',
+  create_time timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站新闻表';
+create table if not exists web_catagory (
   id bigint(20) not null auto_increment,
   name varchar(64) comment'商品分类名称',
   parent_id bigint(20) comment'父分类编号',
   create_time timestamp comment'创建时间',
   primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'商城类别表';
-create table if not exists shop_product (
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站产品类别表';
+create table if not exists web_product (
   id bigint(20) not null auto_increment,
   name varchar(64) comment'商品名称',
-  catagory_id bigint(20) comment'商品分类id',
-  business_id bigint(20) comment'商家id',
   create_time timestamp comment'创建时间',
-  picture text comment'图片组 json格式',
-  sales int(11) comment'销量',
-  comment int(11) comment'评论数量',
-  status tinyint(4) comment'是否上架 0:下架 1:上架',
+  picture text comment'图片',
+  html text comment'产品富文本内容',
+  home tinyint(4) comment'首页展示',
   primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'商城商品表';
-create table if not exists shop_sku (
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站产品表';
+create table if not exists web_info (
   id bigint(20) not null auto_increment,
-  product_id bigint(20) comment'商品id',
-  attr_value text comment'sku属性 例[1:1,2:2]',
-  price double comment'价格',
-  stock int(11) comment'库存',
-  sales int(11) comment'销量',
-  create_time timestamp comment'创建时间',
+  name varchar(64) comment'网站名称',
+  title varchar(64) comment'网站标题',
+  open_time varchar(64) comment'营业(开放)时间',
+  introduction text comment'简介',
+  address varchar(128) comment'地址',
+  phone varchar(64) comment'联系方式',
+  icp varchar(64) comment'icp备案号',
+  map varchar(64) comment'地图图片',
   primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'商品库存表';
-create table if not exists shop_attr (
-  id bigint(20) not null auto_increment,
-  name varchar(64) comment'属性名',
-  catagory_id bigint(20) comment'商品分类id',
-  parent_id bigint(20) comment'父属性id',
-  create_time timestamp comment'创建时间',
-  primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'商品属性名表';
-create table if not exists shop_attr_value (
-  id bigint(20) not null auto_increment,
-  value varchar(64) comment'属性值',
-  attr_id bigint(20) comment'属性名id',
-  create_time timestamp comment'创建时间',
-  primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'商品属性值表';
-create table if not exists shop_product_attr (
-  id bigint(20) not null auto_increment,
-  product_id bigint(20) comment'产品id',
-  attr_id bigint(20) comment'属性名id',
-  value_id bigint(20) comment'属性值id',
-  primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'商品属性对应表';
-create table if not exists shop_product_attr_search (
-  id bigint(20) not null auto_increment,
-  product_id bigint(20) comment'产品id',
-  attr_ids text comment'商品具有的属性值编号 [1,2,3,4]',
-  create_time timestamp comment'创建时间',
-  primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'商品属性全文检索表';
-create table if not exists shop_cart (
-  id bigint(20) not null auto_increment,
-  sku_id bigint(20) comment'商品id',
-  user_id bigint(20) comment'用户id',
-  create_time timestamp comment'创建时间',
-  primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'购物车表';
-create table if not exists shop_order (
-  id bigint(20) not null auto_increment,
-  order_number varchar(32) not null comment'订单编号',
-  user_id bigint(20) comment'用户id',
-  status tinyint(4) comment'订单状态',
-  amount double comment'总价',
-  shipping_status tinyint(4) comment'物流状态',
-  shipping_name varchar(32) comment'物流名称',
-  shipping_fee double comment'物流费用',
-  remark varchar(128) comment'备注',
-  pay_id bigint(20) comment'付款人id',
-  pay_name varchar(32) comment'付款人名称',
-  create_time timestamp comment'创建时间',
-  primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'商城订单表';
-create table if not exists shop_order_sku (
-  id bigint(20) not null auto_increment,
-  order_id bigint(20) comment'订单id',
-  sku_id bigint(20) comment'商品id',
-  sku_name varchar(32) comment'商品名称',
-  sku_quantity int(11) comment'商品数量',
-  sku_price double comment'商品价格',
-  sku_image text comment'商品图片',
-  create_time timestamp comment'创建时间',
-  primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'商城订单明细表';
-create table if not exists shop_address (
-  id bigint(20) not null auto_increment,
-  user_id bigint(20) comment'用户id',
-  consignee varchar(32) comment'收货人',
-  region varchar(32) comment'收货区域',
-  address varchar(64) comment'收货详细地址',
-  zipcode varchar(16) comment'行政区域代码',
-  telephone varchar(32) comment'联系方式',
-  main boolean comment'默认地址',
-  create_time timestamp comment'创建时间',
-  primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'地址表';
-create table if not exists shop_order_address (
-  id bigint(20) not null auto_increment,
-  order_id bigint(20) comment'订单id',
-  address_id bigint(20) comment'地址id',
-  remark varchar(128) comment'备注',
-  create_time timestamp comment'创建时间',
-  primary key (id)
-)engine=InnoDB DEFAULT CHARSET = utf8 comment'订单地址表';
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站信息表';
