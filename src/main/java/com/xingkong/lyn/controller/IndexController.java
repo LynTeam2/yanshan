@@ -24,7 +24,7 @@ public class IndexController {
     @RequestMapping("/index")
     public String index(ModelMap modelMap){
         modelMap.addAttribute("host", "HELLO DOCKER WORLD");
-        return "index";
+        return "test";
     }
 
 //    @RequestMapping(value = "/login", method = RequestMethod.GET)

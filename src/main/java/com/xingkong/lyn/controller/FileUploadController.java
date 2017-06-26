@@ -4,10 +4,7 @@ import com.xingkong.lyn.comment.AjaxResults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +15,7 @@ import java.io.*;
  * Created by lyn on 2017/6/22.
  */
 @RestController
+@CrossOrigin
 public class FileUploadController {
     @Value(value = "${file.upload.path}")
     private String filePath;
