@@ -3,8 +3,6 @@ package com.xingkong.lyn.controller;
 import com.xingkong.lyn.model.UserInfo;
 import com.xingkong.lyn.service.IUserInfo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,9 +13,6 @@ import javax.annotation.Resource;
  */
 @RestController
 public class UserController {
-
-    private Logger logger = LoggerFactory.getLogger(UserController.class);
-    
     @Resource
     private IUserInfo userInfoService;
 
