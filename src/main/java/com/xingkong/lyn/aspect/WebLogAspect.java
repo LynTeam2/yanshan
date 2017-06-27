@@ -59,14 +59,14 @@ public class WebLogAspect {
     @Before("manageLogPoint(adminLog)")
     @Order(1)
     public void manageLog(AdminLog adminLog)throws Throwable{
-//        Subject currentUser = SecurityUtils.getSubject();
-//        UserInfo userInfo = (UserInfo)currentUser.getPrincipal();
-//        SysLog sysLog = new SysLog();
-//        sysLog.setOperator(userInfo.getUsername());
-//        sysLog.setOperatorId(userInfo.getId());
-//        sysLog.setCreateTime(new Date());
-//        sysLog.setContent(adminLog.value());
-//        sysLogService.addSysLog(sysLog);
+        Subject currentUser = SecurityUtils.getSubject();
+        UserInfo userInfo = (UserInfo)currentUser.getPrincipal();
+        SysLog sysLog = new SysLog();
+        sysLog.setOperator(userInfo.getUsername());
+        sysLog.setOperatorId(userInfo.getId());
+        sysLog.setCreateTime(new Date());
+        sysLog.setContent(adminLog.value());
+        sysLogService.addSysLog(sysLog);
     }
 
 }

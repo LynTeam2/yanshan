@@ -1,17 +1,24 @@
 package com.xingkong.lyn.controller;
 
 
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
+import com.xingkong.lyn.comment.AjaxResults;
+import com.xingkong.lyn.model.SysPermission;
+import com.xingkong.lyn.model.SysRole;
+import com.xingkong.lyn.model.UserInfo;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by lyn on 2017/4/24.
@@ -27,6 +34,21 @@ public class IndexController {
         return "test";
     }
 
+    @RequestMapping(value = "/index/manage/leftmenu", method = RequestMethod.POST)
+    @ResponseBody
+    public Object leftMenu(){
+        AjaxResults ajaxResults = new AjaxResults();
+        UserInfo userInfo = (UserInfo) SecurityUtils.getSubject().getPrincipal();
+        //Set<String> roleSet =new HashSet<>();
+        Set<SysPermission> permissionSet = new HashSet<>();
+        for(SysRole role : userInfo.getRoles()){
+            //roleSet.add(role.getRole());
+            permissionSet.addAll(role.getPermissions());
+        }
+        //info.setRoles(roleSet);
+        ajaxResults.put("leftMenu",permissionSet);
+        return ajaxResults;
+    }
 //    @RequestMapping(value = "/login", method = RequestMethod.GET)
 //    public String login(){
 //        return "login";

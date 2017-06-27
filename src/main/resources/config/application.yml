@@ -78,6 +78,9 @@ spring:
         ddl-auto: update
         naming:
           strategy: org.hibernate.cfg.DefaultNamingStrategy
+      properties:
+        hibernate:
+          enable_lazy_load_no_trans: true
 #mybatis:
 #    mapperLocations: classpath:mybatis_mapper/*.xml
 #    typeAliasesPackage: classpath:model
