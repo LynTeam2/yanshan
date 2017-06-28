@@ -16,7 +16,7 @@ public class UserInfo implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id@GeneratedValue
-    private long id;//用户id
+    private Long id;//用户id
 
     @Column(unique = true)
     private String username;//账号
@@ -27,7 +27,7 @@ public class UserInfo implements Serializable{
 
     private String salt;//密码加密的盐
 
-    private byte state;//用户状态，0：创建未认证 1：正常状态 2：用户被锁定
+    private byte status;//用户状态，0：创建未认证 1：正常状态 2：用户被锁定
 
     @ManyToMany(fetch=FetchType.EAGER)//立即从数据库中进行加载数据;
     @JoinTable(name = "SysUserRole", joinColumns = { @JoinColumn(name = "userId") }, inverseJoinColumns ={@JoinColumn(name = "roleId") })
@@ -48,6 +48,6 @@ public class UserInfo implements Serializable{
     @Override
     public String toString() {
         return "UserInfo [uid=" + id + ", username=" + username + ", name=" + name + ", password=" + password
-                + ", salt=" + salt + ", state=" + state + "]";
+                + ", salt=" + salt + ", state=" + status + "]";
     }
 }
