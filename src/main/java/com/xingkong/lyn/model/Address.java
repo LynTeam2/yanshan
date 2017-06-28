@@ -34,4 +34,10 @@ public class Address implements Serializable{
     @ManyToMany(fetch= FetchType.LAZY)//实际调用查询才进行加载数据;
     @JoinTable(name = "SysUserAddress", joinColumns = { @JoinColumn(name = "addressId") }, inverseJoinColumns ={@JoinColumn(name = "userId") })
     private List<UserInfo> userInfos;// 一个地址有多个用户
+
+    @Override
+    public String toString() {
+        return " [aid=" + id + ", provinceCode=" + provinceCode + ", cityCode=" + cityCode + ", countyCode=" + countyCode
+                + ", address=" + address + ", main=" + main + ", createTime" + createTime + "]";
+    }
 }

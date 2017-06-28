@@ -6,7 +6,6 @@ import com.xingkong.lyn.model.SysPermission;
 import com.xingkong.lyn.model.SysRole;
 import com.xingkong.lyn.model.UserInfo;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by lyn on 2017/4/24.
@@ -34,7 +30,7 @@ public class IndexController {
         return "test";
     }
 
-    @RequestMapping(value = "/index/manage/leftmenu", method = RequestMethod.POST)
+    @RequestMapping(value = "/index/manage/leftmenu", method = RequestMethod.GET)
     @ResponseBody
     public Object leftMenu(){
         AjaxResults ajaxResults = new AjaxResults();
@@ -44,7 +40,11 @@ public class IndexController {
         Set<SysPermission> permissionSet = new HashSet<>();
         for(SysRole role : userInfo.getRoles()){
              //roleSet.add(role.getRole());
-            permissionSet.addAll(role.getPermissions());
+            role.setUserInfos(null);
+            for(SysPermission permission : role.getPermissions()){
+                permission.setRoles(null);
+                permissionSet.add(permission);
+            }
         }
         //info.setRoles(roleSet);
         ajaxResults.put("leftMenu",permissionSet);
