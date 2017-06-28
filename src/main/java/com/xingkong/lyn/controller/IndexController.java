@@ -43,7 +43,7 @@ public class IndexController {
         //Set<String> roleSet =new HashSet<>();
         Set<SysPermission> permissionSet = new HashSet<>();
         for(SysRole role : userInfo.getRoles()){
-            //roleSet.add(role.getRole());
+             //roleSet.add(role.getRole());
             permissionSet.addAll(role.getPermissions());
         }
         //info.setRoles(roleSet);
