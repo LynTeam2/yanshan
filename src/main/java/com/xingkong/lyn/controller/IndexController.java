@@ -40,6 +40,7 @@ public class IndexController {
         String exception = (String) request.getAttribute("shiroLoginFailure");
 
         System.out.println("exception=" + exception);
+
         String msg = "";
         if (exception != null) {
             if (UnknownAccountException.class.getName().equals(exception)) {
