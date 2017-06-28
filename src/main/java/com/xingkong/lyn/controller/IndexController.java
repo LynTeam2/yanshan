@@ -38,6 +38,7 @@ public class IndexController {
     @ResponseBody
     public Object leftMenu(){
         AjaxResults ajaxResults = new AjaxResults();
+
         UserInfo userInfo = (UserInfo) SecurityUtils.getSubject().getPrincipal();
         //Set<String> roleSet =new HashSet<>();
         Set<SysPermission> permissionSet = new HashSet<>();
