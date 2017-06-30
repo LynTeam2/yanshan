@@ -30,8 +30,9 @@ public class Catagory implements Serializable{
     @JoinColumn(name = "catagoryId")
     private List<Product> products;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
     @MapKey(name = "pk")
+    @JoinColumn(name = "parentId")
     private List<Catagory> subCatagories;
 }
 
