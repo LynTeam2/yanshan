@@ -28,9 +28,14 @@ public class SysPermission implements Serializable {
     private String parentIds; //父编号列表
     private Boolean available = Boolean.FALSE;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="SysRolePermission",joinColumns={@JoinColumn(name="permissionId")},inverseJoinColumns={@JoinColumn(name="roleId")})
-    private List<SysRole> roles;
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name="SysRolePermission",joinColumns={@JoinColumn(name="permissionId")},inverseJoinColumns={@JoinColumn(name="roleId")})
+//    private List<SysRole> roles;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @MapKey(name = "pk")
+    @JoinColumn(name = "parentId")
+    private List<SysPermission> subPermissions;
 
     @Override
     public String toString() {

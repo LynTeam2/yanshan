@@ -42,12 +42,13 @@ public class IndexController {
              //roleSet.add(role.getRole());
             role.setUserInfos(null);
             for(SysPermission permission : role.getPermissions()){
-                permission.setRoles(null);
-                permissionSet.add(permission);
+                if(null == permission.getParentId()){
+                    permissionSet.add(permission);
+                }
             }
         }
         //info.setRoles(roleSet);
-        ajaxResults.put("leftMenu",permissionSet);
+        ajaxResults.put("leftMenu", permissionSet);
         return ajaxResults;
     }
 //    @RequestMapping(value = "/login", method = RequestMethod.GET)
