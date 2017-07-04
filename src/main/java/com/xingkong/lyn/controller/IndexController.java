@@ -49,6 +49,7 @@ public class IndexController {
             role.setUserInfos(null);
             for(SysPermission permission : role.getPermissions()){
                 if(null == permission.getParentId()){
+                    permission.setRoles(null);
                     permissionSet.add(permission);
                 }
             }
