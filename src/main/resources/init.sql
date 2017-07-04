@@ -21,7 +21,7 @@ create table if not exists sys_permission (
   id bigint(20) not null auto_increment,
   available tinyint not null comment'是否可用,如果不可用将不会添加给用户，0不可用 1可用',
   name varchar(32) not null comment'权限名称',
-  parent_id bigint(20) not null comment'父权限id',
+  parent_id bigint(20) comment'父权限id',
   parent_ids varchar(64) comment'父权限编号列表',
   permission varchar(64) not null comment'权限字符串,menu例子：role:*，button例子：role:create,role:update,role:delete,role:view',
   resource_type varchar(32) not null comment'资源类型',

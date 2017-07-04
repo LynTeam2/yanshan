@@ -1,4 +1,4 @@
-# INSERT INTO sys_permission(id,available,name,parent_id,parent_ids,permission,resource_type,url) VALUES (1, 1, '用户管理', 0, '0/', 'userInfo:view', 'menu', 'userInfo/userList');
+# INSERT INTO sys_permission(id,available,name,parent_id,parent_ids,permission,resource_type,url) VALUES (1, 1, '用户管理', null, '0/', 'userInfo:view', 'menu', 'userInfo/userList');
 # INSERT INTO sys_permission(id,available,name,parent_id,parent_ids,permission,resource_type,url) VALUES (2, 1, '用户添加', 1, '0/1', 'userInfo:add', 'button', 'userInfo/userAdd');
 # INSERT INTO sys_permission(id,available,name,parent_id,parent_ids,permission,resource_type,url) VALUES (3, 1, '用户删除', 1, '0/1', 'userInfo:del', 'button', 'userInfo/userDel');
 # INSERT INTO sys_role(id, available, description, role) VALUES (1, 1, '管理员', 'admin');
