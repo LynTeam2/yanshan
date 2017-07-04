@@ -31,4 +31,9 @@ public class SysPermission implements Serializable {
     @ManyToMany
     @JoinTable(name="SysRolePermission",joinColumns={@JoinColumn(name="permissionId")},inverseJoinColumns={@JoinColumn(name="roleId")})
     private List<SysRole> roles;
+
+//    @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+//    @MapKey(name = "pk")
+//    @JoinColumn(name = "parentId")
+//    private List<SysPermission> subPermissions;
 }
