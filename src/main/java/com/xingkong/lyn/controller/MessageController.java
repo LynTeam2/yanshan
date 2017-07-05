@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -31,9 +32,9 @@ public class MessageController {
 
     //查看列表
     @RequestMapping(value = "/web/manage/message/list", method = RequestMethod.GET)
-    @RequiresPermissions("message:view")
-    @AdminLog(value = "网站:留言列表")
-    public Object webMessagesList(@PageableDefault(value = 15, sort = { "newsTime" }, direction = Sort.Direction.DESC)
+    //@RequiresPermissions("message:view")
+    //@AdminLog(value = "网站:留言列表")
+    public Object webMessagesList(@PageableDefault(value = 15, sort = { "createTime" }, direction = Sort.Direction.DESC)
                                       Pageable pageable){
         AjaxResults ajaxResults = new AjaxResults();
         Page<Message> massages = messageService.getMessageByPageable(pageable);
@@ -43,12 +44,12 @@ public class MessageController {
 
     //查看详情
     @RequestMapping(value = "/web/manage/message/detail", method = RequestMethod.GET)
-    @RequiresPermissions("message:detail")
-    @AdminLog(value = "网站:留言详情")
+    //@RequiresPermissions("message:detail")
+    //@AdminLog(value = "网站:留言详情")
     public Object webMessageDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         Message message = messageService.getMessageById(id);
-        ajaxResults.put("information", message.getContent());
+        ajaxResults.put("information", message);
         return ajaxResults;
     }
 
@@ -64,11 +65,17 @@ public class MessageController {
 
     //删除
     @RequestMapping(value = "/web/manage/message/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("message:delete")
-    @AdminLog(value = "网站:删除留言")
-    public Object webManageNewsDelete(List<Long> ids){
+    //@RequiresPermissions("message:delete")
+    //@AdminLog(value = "网站:删除留言")
+    public Object webManageNewsDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
-        messageService.deleteList(ids);
+        String[] ids = id.split(",");
+        Long[] arr = new Long[ids.length];
+        for(int i=0;i<arr.length;i++){
+            arr[i]=Long.parseLong(ids[i]);
+        }
+        List<Long> idList= Arrays.asList(arr);
+        messageService.deleteList(idList);
         return ajaxResults;
     }
 
