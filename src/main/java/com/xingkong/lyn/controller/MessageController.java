@@ -38,7 +38,7 @@ public class MessageController {
                                       Pageable pageable){
         AjaxResults ajaxResults = new AjaxResults();
         Page<Message> massages = messageService.getMessageByPageable(pageable);
-        ajaxResults.put("messageList", massages.getContent());
+        ajaxResults.put("messageList", massages);
         return ajaxResults;
     }
 

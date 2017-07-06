@@ -26,8 +26,5 @@ public class Message implements Serializable {
     private String content;
     private Date createTime;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "message_time")
-    private Date messageTime;
 
 }
