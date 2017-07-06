@@ -187,6 +187,7 @@ create table if not exists sys_permission_init (
 # # );
 create table if not exists web_banner (
   id bigint(20) not null auto_increment,
+  name varchar(64) comment'图片名称',
   url varchar(64) comment'banner图跳转链接地址',
   position varchar(32) comment'banner图位置',
   banner varchar(64) comment'banner图引用地址',

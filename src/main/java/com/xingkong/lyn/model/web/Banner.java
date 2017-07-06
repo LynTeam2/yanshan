@@ -28,5 +28,7 @@ public class Banner implements Serializable{
 
     private String banner;
 
+    private String name;
+
     private Date createTime;
 }

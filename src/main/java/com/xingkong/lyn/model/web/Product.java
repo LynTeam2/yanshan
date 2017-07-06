@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by lyn on 2017/6/13.
@@ -32,12 +33,14 @@ public class Product implements Serializable{
 
     private String html2;
 
-    private String banners;
-
     private Byte home;
 
     @ManyToOne
     @JoinColumn(name = "catagoryId")
     private Catagory catagory;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "web_product_banner",joinColumns = {@JoinColumn(name = "product_id")},inverseJoinColumns = {@JoinColumn(name = "banner_id")})
+    private List<Banner> banners;
 }
 
