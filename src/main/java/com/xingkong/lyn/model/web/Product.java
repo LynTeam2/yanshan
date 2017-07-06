@@ -26,9 +26,13 @@ public class Product implements Serializable{
 
     private Date createTime;
 
-    private String picture;
+    private String imageUrl;
 
     private String html;
+
+    private String html2;
+
+    private String banners;
 
     private Byte home;
 

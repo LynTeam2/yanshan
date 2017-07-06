@@ -213,6 +213,7 @@ create table if not exists web_news (
 create table if not exists web_catagory (
   id bigint(20) not null auto_increment,
   name varchar(64) comment'商品分类名称',
+  content text comment'分类说明',
   parent_id bigint(20) comment'父分类编号',
   create_time timestamp comment'创建时间',
   primary key (id)
@@ -220,9 +221,12 @@ create table if not exists web_catagory (
 create table if not exists web_product (
   id bigint(20) not null auto_increment,
   name varchar(64) comment'商品名称',
+  title varchar(64) comment'商品标题',
   create_time timestamp comment'创建时间',
-  picture text comment'图片',
+  image_url text comment'图片',
   html text comment'产品富文本内容',
+  html2 text comment'产品富文本内容2',
+  banners text comment'产品banner图',
   home tinyint(4) comment'首页展示',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站产品表';
