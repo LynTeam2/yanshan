@@ -27,7 +27,7 @@ public class Product implements Serializable{
 
     private Date createTime;
 
-    private String imageUrl;
+    private String picture;
 
     private String html;
 
@@ -35,12 +35,14 @@ public class Product implements Serializable{
 
     private Byte home;
 
-    @ManyToOne
+    private Byte recommend;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "catagoryId")
     private Catagory catagory;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "web_product_banner",joinColumns = {@JoinColumn(name = "product_id")},inverseJoinColumns = {@JoinColumn(name = "banner_id")})
-    private List<Banner> banners;
+    @JoinTable(name = "web_product_image",joinColumns = {@JoinColumn(name = "product_id")},inverseJoinColumns = {@JoinColumn(name = "image_id")})
+    private List<Image> images;
 }
 

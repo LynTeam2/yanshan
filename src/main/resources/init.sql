@@ -188,9 +188,9 @@ create table if not exists sys_permission_init (
 create table if not exists web_banner (
   id bigint(20) not null auto_increment,
   name varchar(64) comment'图片名称',
-  url varchar(64) comment'banner图跳转链接地址',
+  link varchar(64) comment'banner图跳转链接地址',
   position varchar(32) comment'banner图位置',
-  banner varchar(64) comment'banner图引用地址',
+  url varchar(64) comment'banner图引用地址',
   create_time timestamp comment'创建时间',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站首页banner图表';
@@ -224,7 +224,7 @@ create table if not exists web_product (
   name varchar(64) comment'商品名称',
   title varchar(64) comment'商品标题',
   create_time timestamp comment'创建时间',
-  image_url text comment'图片',
+  picture text comment'图片',
   html text comment'产品富文本内容',
   html2 text comment'产品富文本内容2',
   banners text comment'产品banner图',
@@ -243,3 +243,12 @@ create table if not exists web_info (
   map varchar(64) comment'地图图片',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站信息表';
+create table if not exists web_image (
+  id bigint(20) not null auto_increment,
+  name varchar(64) comment'图片名称',
+  link varchar(64) comment'banner图跳转链接地址',
+  position varchar(32) comment'banner图位置',
+  address varchar(64) comment'banner图引用地址',
+  create_time timestamp comment'创建时间',
+  primary key (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站图片表';
