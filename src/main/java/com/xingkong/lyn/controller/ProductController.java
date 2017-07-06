@@ -3,30 +3,36 @@ package com.xingkong.lyn.controller;
 import com.xingkong.lyn.annotation.AdminLog;
 import com.xingkong.lyn.comment.AjaxResults;
 import com.xingkong.lyn.model.web.Catagory;
+import com.xingkong.lyn.model.web.Image;
 import com.xingkong.lyn.model.web.Product;
 import com.xingkong.lyn.service.ICatagory;
 import com.xingkong.lyn.service.IProduct;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.*;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by lyn on 2017/6/14.
  */
 @RestController
+@CrossOrigin
 public class ProductController {
     private Logger logger = LoggerFactory.getLogger(ProductController.class);
 
+    @Value(value = "${file.upload.path}")
+    private String filePath;
     @Resource
     private IProduct productService;
     @Resource
@@ -138,5 +144,41 @@ public class ProductController {
         AjaxResults ajaxResults = new AjaxResults();
         productService.deleteProduct(id);
         return ajaxResults;
+    }
+
+    @RequestMapping(value = "/web/manage/product/image/upload", method = RequestMethod.POST)
+    public Object webManageProductImageUpload(@RequestParam("file")MultipartFile file){
+        AjaxResults ajaxResults = new AjaxResults();
+        if(!file.isEmpty()){
+            try{
+                BufferedOutputStream out = new BufferedOutputStream(
+                        new FileOutputStream(new File(filePath+File.separator+file.getOriginalFilename())));
+                out.write(file.getBytes());
+                out.flush();
+                out.close();
+                Image image = new Image();
+                image.setAddress(file.getOriginalFilename());
+                image.setCreateTime(new Date());
+                image.setName(file.getOriginalFilename());
+                image = productService.addImage(image);
+                ajaxResults.put("id", image.getId());
+                ajaxResults.put("name", image.getName());
+            }catch (FileNotFoundException e){
+                logger.error("上传图片失败", e);
+                ajaxResults.setCode(1);
+                ajaxResults.setMsg("上传图片失败:图片未能找到");
+                return ajaxResults;
+            }catch (IOException e){
+                logger.error("上传图片失败", e);
+                ajaxResults.setCode(1);
+                ajaxResults.setMsg("上传图片失败:图片传输异常");
+                return ajaxResults;
+            }
+            return ajaxResults;
+        }else{
+            ajaxResults.setCode(1);
+            ajaxResults.setMsg("上传图片失败:图片为空");
+            return ajaxResults;
+        }
     }
 }

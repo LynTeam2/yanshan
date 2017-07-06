@@ -1,6 +1,8 @@
 package com.xingkong.lyn.service.impl;
 
+import com.xingkong.lyn.model.web.Image;
 import com.xingkong.lyn.model.web.Product;
+import com.xingkong.lyn.repository.web.ImageRepository;
 import com.xingkong.lyn.repository.web.ProductRepository;
 import com.xingkong.lyn.service.IProduct;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,8 @@ import java.util.List;
 public class ProductService implements IProduct{
     @Resource
     private ProductRepository productDao;
+    @Resource
+    private ImageRepository imageDao;
 
     @Override
     public List<Product> getProductList() {
@@ -49,6 +53,11 @@ public class ProductService implements IProduct{
     public boolean deleteProduct(Long id) {
         productDao.delete(id);
         return true;
+    }
+
+    @Override
+    public Image addImage(Image image) {
+        return imageDao.save(image);
     }
 
 }

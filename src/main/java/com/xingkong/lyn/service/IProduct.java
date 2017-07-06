@@ -1,5 +1,6 @@
 package com.xingkong.lyn.service;
 
+import com.xingkong.lyn.model.web.Image;
 import com.xingkong.lyn.model.web.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,4 +22,6 @@ public interface IProduct {
     boolean updateProduct(Product product);
 
     boolean deleteProduct(Long id);
+
+    Image addImage(Image image);
 }
