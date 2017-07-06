@@ -27,7 +27,12 @@ public class SysRole implements Serializable{
     private List<SysPermission> permissions;
 
     // 用户 - 角色关系定义;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="SysUserRole",joinColumns={@JoinColumn(name="roleId")},inverseJoinColumns={@JoinColumn(name="userId")})
     private List<UserInfo> userInfos;// 一个角色对应多个用户
+
+    @Override
+    public String toString() {
+        return "SysRole [rid=" + id + ", role=" + role + ", description=" + description + ", available=" + available + "]";
+    }
 }
