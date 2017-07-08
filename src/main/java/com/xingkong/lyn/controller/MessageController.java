@@ -23,6 +23,7 @@ import java.util.List;
 /**
  * Created by Bug Man on 2017-07-05.
  */
+
 @RestController
 public class MessageController {
     private Logger logger = LoggerFactory.getLogger(MessageController.class);
