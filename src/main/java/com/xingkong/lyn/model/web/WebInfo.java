@@ -32,6 +32,8 @@ public class WebInfo implements Serializable{
 
     private String phone;
 
+    private String email;
+
     private String openTime;
 
     private String map;

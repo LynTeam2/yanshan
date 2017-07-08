@@ -4,6 +4,8 @@ import com.xingkong.lyn.annotation.AdminLog;
 import com.xingkong.lyn.comment.AjaxResults;
 import com.xingkong.lyn.model.web.Message;
 import com.xingkong.lyn.service.impl.MessageService;
+import com.xingkong.lyn.util.OtherUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,12 +72,8 @@ public class MessageController {
     //@AdminLog(value = "网站:删除留言")
     public Object webManageNewsDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
-        String[] ids = id.split(",");
-        Long[] arr = new Long[ids.length];
-        for(int i=0;i<arr.length;i++){
-            arr[i]=Long.parseLong(ids[i]);
-        }
-        List<Long> idList= Arrays.asList(arr);
+        Long[] ids = StringUtils.isBlank(id)? null : OtherUtil.parseStringtoLong(id);
+        List<Long> idList= Arrays.asList(ids);
         messageService.deleteList(idList);
         return ajaxResults;
     }

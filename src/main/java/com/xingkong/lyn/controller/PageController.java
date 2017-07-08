@@ -4,6 +4,8 @@ import com.xingkong.lyn.annotation.AdminLog;
 import com.xingkong.lyn.comment.AjaxResults;
 import com.xingkong.lyn.model.web.PageHtml;
 import com.xingkong.lyn.service.IPageHtml;
+import com.xingkong.lyn.util.OtherUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by lyn on 2017/6/14.
@@ -31,7 +35,7 @@ public class PageController {
     public Object webIntroduction(){
         AjaxResults ajaxResults = new AjaxResults();
         PageHtml pageHtml = pageHtmlService.getPageHtml("introduction");
-        ajaxResults.put("introduction", pageHtml.getHtml());
+//        ajaxResults.put("introduction", pageHtml.getHtml());
         return ajaxResults;
     }
 
@@ -39,7 +43,7 @@ public class PageController {
     public Object webContactUs(){
         AjaxResults ajaxResults = new AjaxResults();
         PageHtml pageHtml = pageHtmlService.getPageHtml("contactUs");
-        ajaxResults.put("contactUs", pageHtml.getHtml());
+//        ajaxResults.put("contactUs", pageHtml.getHtml());
         return ajaxResults;
     }
 
@@ -47,7 +51,7 @@ public class PageController {
     public Object webJoinUs(){
         AjaxResults ajaxResults = new AjaxResults();
         PageHtml pageHtml = pageHtmlService.getPageHtml("introduction");
-        ajaxResults.put("joinUs", pageHtml.getHtml());
+//        ajaxResults.put("joinUs", pageHtml.getHtml());
         return ajaxResults;
     }
 
@@ -91,9 +95,11 @@ public class PageController {
     @RequestMapping(value = "/web/manage/pagehtml/delete", method = RequestMethod.DELETE)
     @RequiresPermissions("pagehtml:delete")
     @AdminLog(value = "网站:删除页面")
-    public Object webManageNewsDelete(Long id){
+    public Object webManageNewsDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
-        pageHtmlService.deletePageHtml(id);
+        Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
+        List<Long> ids = Arrays.asList(arr);
+        pageHtmlService.deletePageHtml(ids);
         return ajaxResults;
     }
 }

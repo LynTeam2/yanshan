@@ -21,7 +21,7 @@ public interface IProduct {
 
     boolean updateProduct(Product product);
 
-    boolean deleteProduct(Long id);
+    boolean deleteProduct(List<Long> id);
 
     Image addImage(Image image);
 }

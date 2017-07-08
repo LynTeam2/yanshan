@@ -2,12 +2,14 @@ package com.xingkong.lyn.service.impl;
 
 import com.xingkong.lyn.model.web.Image;
 import com.xingkong.lyn.model.web.Product;
+import com.xingkong.lyn.repository.web.HtmlRepository;
 import com.xingkong.lyn.repository.web.ImageRepository;
 import com.xingkong.lyn.repository.web.ProductRepository;
 import com.xingkong.lyn.service.IProduct;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,6 +23,8 @@ public class ProductService implements IProduct{
     private ProductRepository productDao;
     @Resource
     private ImageRepository imageDao;
+    @Resource
+    private HtmlRepository htmlDao;
 
     @Override
     public List<Product> getProductList() {
@@ -38,20 +42,23 @@ public class ProductService implements IProduct{
     }
 
     @Override
+    @Transactional
     public boolean addProduct(Product product) {
-        productDao.saveAndFlush(product);
+        productDao.save(product);
         return true;
     }
 
     @Override
+    @Transactional
     public boolean updateProduct(Product product) {
-        productDao.saveAndFlush(product);
+        productDao.save(product);
         return true;
     }
 
     @Override
-    public boolean deleteProduct(Long id) {
-        productDao.delete(id);
+    @Transactional
+    public boolean deleteProduct(List<Long> id) {
+        productDao.deleteInBatch(productDao.findAll(id));
         return true;
     }
 

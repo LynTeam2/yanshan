@@ -7,6 +7,8 @@ import com.xingkong.lyn.model.web.Image;
 import com.xingkong.lyn.model.web.Product;
 import com.xingkong.lyn.service.ICatagory;
 import com.xingkong.lyn.service.IProduct;
+import com.xingkong.lyn.util.OtherUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +21,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.persistence.OneToMany;
 import java.io.*;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -51,7 +55,7 @@ public class ProductController {
     public Object webProductDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         Product product = productService.getDetail(id);
-        ajaxResults.put("product", product.getHtml());
+//        ajaxResults.put("product", product.getHtml());
         return ajaxResults;
     }
 
@@ -94,9 +98,11 @@ public class ProductController {
     @RequestMapping(value = "/web/manage/catagory/delete", method = RequestMethod.DELETE)
     @RequiresPermissions("catagory:delete")
     @AdminLog(value = "删除类别")
-    public Object webManageCatagoryDelete(Long id){
+    public Object webManageCatagoryDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
-        catagoryService.deleteCatagory(id);
+        Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
+        List<Long> ids = Arrays.asList(arr);
+        catagoryService.deleteCatagory(ids);
         return ajaxResults;
     }
 
@@ -140,9 +146,11 @@ public class ProductController {
     @RequestMapping(value = "/web/manage/product/delete", method = RequestMethod.DELETE)
     @RequiresPermissions("product:delete")
     @AdminLog(value = "网站:删除产品(服务)")
-    public Object webManageProductDelete(Long id){
+    public Object webManageProductDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
-        productService.deleteProduct(id);
+        Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
+        List<Long> ids = Arrays.asList(arr);
+        productService.deleteProduct(ids);
         return ajaxResults;
     }
 

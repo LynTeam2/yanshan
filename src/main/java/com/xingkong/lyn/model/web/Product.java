@@ -27,22 +27,20 @@ public class Product implements Serializable{
 
     private Date createTime;
 
-    private String picture;
+    private Byte homeFlag;
 
-    private String html;
-
-    private String html2;
-
-    private Byte home;
-
-    private Byte recommend;
+    private Byte recommendFlag;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "catagoryId")
     private Catagory catagory;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "web_product_image",joinColumns = {@JoinColumn(name = "product_id")},inverseJoinColumns = {@JoinColumn(name = "image_id")})
     private List<Image> images;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "web_product_html",joinColumns = {@JoinColumn(name = "product_id")},inverseJoinColumns = {@JoinColumn(name = "html_id")})
+    private List<Html> htmls;
 }
 

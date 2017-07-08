@@ -6,8 +6,10 @@ import com.xingkong.lyn.service.IPageHtml;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by lyn on 2017/6/13.
@@ -45,8 +47,9 @@ public class PageHtmlService implements IPageHtml{
     }
 
     @Override
-    public boolean deletePageHtml(Long id) {
-        pageHtmlDao.delete(id);
+    @Transactional
+    public boolean deletePageHtml(List<Long> id) {
+        pageHtmlDao.deleteInBatch(pageHtmlDao.findAll(id));
         return true;
     }
 }

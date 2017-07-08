@@ -28,11 +28,11 @@ public class Catagory implements Serializable{
 
     private Date createTime;
 
-    @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)//级联保存、更新、删除、刷新;延迟加载
+    @OneToMany(fetch=FetchType.LAZY)//级联保存、更新、删除、刷新;延迟加载
     @JoinColumn(name = "catagoryId")
     private List<Product> products;
 
-    @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.EAGER)
     @MapKey(name = "pk")
     @JoinColumn(name = "parentId")
     private List<Catagory> subCatagories;

@@ -25,6 +25,4 @@ public class Message implements Serializable {
     private String tel;
     private String content;
     private Date createTime;
-
-
 }

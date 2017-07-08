@@ -14,5 +14,4 @@ import java.io.Serializable;
 @Table(name = "web_image")
 public class Image extends BaseImage implements Serializable {
     private static final long serialVersionUID = 1L;
-
 }

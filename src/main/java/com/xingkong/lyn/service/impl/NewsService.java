@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -43,8 +44,9 @@ public class NewsService implements INews{
     }
 
     @Override
-    public boolean deleteNews(Long id) {
-        newsDao.delete(id);
+    @Transactional
+    public boolean deleteNews(List<Long> id) {
+        newsDao.deleteInBatch(newsDao.findAll(id));
         return true;
     }
 }

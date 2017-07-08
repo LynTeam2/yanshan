@@ -4,6 +4,10 @@ import com.xingkong.lyn.annotation.AdminLog;
 import com.xingkong.lyn.comment.AjaxResults;
 import com.xingkong.lyn.model.web.News;
 import com.xingkong.lyn.service.INews;
+import com.xingkong.lyn.util.OtherUtil;
+import org.apache.commons.collections.ListUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -15,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by lyn on 2017/6/14.
@@ -40,7 +46,7 @@ public class NewsController {
     public Object webNewsDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         News news = newsService.getNews(id);
-        ajaxResults.put("information", news.getHtml());
+//        ajaxResults.put("information", news.getHtml());
         return ajaxResults;
     }
 
@@ -86,9 +92,11 @@ public class NewsController {
     @RequestMapping(value = "/web/manage/news/delete", method = RequestMethod.DELETE)
     @RequiresPermissions("news:delete")
     @AdminLog(value = "网站:删除新闻")
-    public Object webManageNewsDelete(Long id){
+    public Object webManageNewsDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
-        newsService.deleteNews(id);
+        Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
+        List<Long> ids = Arrays.asList(arr);
+        newsService.deleteNews(ids);
         return ajaxResults;
     }
 }

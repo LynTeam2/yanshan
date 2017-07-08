@@ -15,5 +15,5 @@ public interface ICatagory {
     Page<Catagory> getCatagoryTree(Pageable pageable);
     boolean addCatagory(Catagory catagory);
     boolean updateCatagory(Catagory catagory);
-    boolean deleteCatagory(Long id);
+    boolean deleteCatagory(List<Long> id);
 }
