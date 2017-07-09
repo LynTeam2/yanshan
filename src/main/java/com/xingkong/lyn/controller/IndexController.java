@@ -74,7 +74,7 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/web/index/product", method = RequestMethod.GET)
-    public Object webIndexProduct(Integer limit){
+    public Object webIndexProduct(Integer limit, Byte homeFlag, Byte recommendFlag){
         AjaxResults ajaxResults = new AjaxResults();
         if(null == limit){
             ajaxResults.put("products", productService.getProductList());
