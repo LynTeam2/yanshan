@@ -26,11 +26,11 @@ public class PageHtml implements Serializable{
 
     private Date createTime;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "web_page_html", joinColumns = {@JoinColumn(name = "page_id")},inverseJoinColumns = {@JoinColumn(name = "html_id")})
     private List<Html> htmls;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "web_page_image", joinColumns = {@JoinColumn(name = "page_id")},inverseJoinColumns = {@JoinColumn(name = "html_id")})
     private List<Image> images;
 
