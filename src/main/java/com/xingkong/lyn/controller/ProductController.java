@@ -68,7 +68,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/catagory/list", method = RequestMethod.GET)
-    @RequiresPermissions("catagory:view")
+    //@RequiresPermissions("catagory:view")
     public Object webManageCatagoryList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                                  Pageable pageable){
         AjaxResults ajaxResults = new AjaxResults();
@@ -78,7 +78,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/catagory/add", method = RequestMethod.POST)
-    @RequiresPermissions("catagory:add")
+    //@RequiresPermissions("catagory:add")
     @AdminLog(value = "新增类别")
     public Object webManageCatagoryAdd(Catagory catagory){
         AjaxResults ajaxResults = new AjaxResults();
@@ -87,7 +87,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/catagory/update", method = RequestMethod.PUT)
-    @RequiresPermissions("catagory:update")
+    //@RequiresPermissions("catagory:update")
     @AdminLog(value = "修改类别")
     public Object webManageCatagoryUpdate(Catagory catagory){
         AjaxResults ajaxResults = new AjaxResults();
@@ -96,7 +96,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/catagory/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("catagory:delete")
+    //@RequiresPermissions("catagory:delete")
     @AdminLog(value = "删除类别")
     public Object webManageCatagoryDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
@@ -107,7 +107,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/list", method = RequestMethod.GET)
-    @RequiresPermissions("product:view")
+    //@RequiresPermissions("product:view")
     public Object webManageProductList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                                        Pageable pageable, Long catagoryId){
         AjaxResults ajaxResults = new AjaxResults();
@@ -117,7 +117,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/detail", method = RequestMethod.GET)
-    @RequiresPermissions("product:detail")
+    //@RequiresPermissions("product:detail")
     public Object webManageProductDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         Product product = productService.getDetail(id);
@@ -126,7 +126,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/add", method = RequestMethod.POST)
-    @RequiresPermissions("product:add")
+    //@RequiresPermissions("product:add")
     @AdminLog(value = "网站:新增产品(服务)")
     public Object webManageProductAdd(Product product){
         AjaxResults ajaxResults = new AjaxResults();
@@ -135,7 +135,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/update", method = RequestMethod.PUT)
-    @RequiresPermissions("product:update")
+    //@RequiresPermissions("product:update")
     @AdminLog(value = "网站:更新产品(服务)")
     public Object webManageProductUpdate(Product product){
         AjaxResults ajaxResults = new AjaxResults();
@@ -144,7 +144,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("product:delete")
+    //@RequiresPermissions("product:delete")
     @AdminLog(value = "网站:删除产品(服务)")
     public Object webManageProductDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
