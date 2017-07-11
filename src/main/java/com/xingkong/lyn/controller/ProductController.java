@@ -107,7 +107,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/list", method = RequestMethod.GET)
-    @RequiresPermissions("product:view")
+//    @RequiresPermissions("product:view")
     public Object webManageProductList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                                        Pageable pageable, Long catagoryId){
         AjaxResults ajaxResults = new AjaxResults();
@@ -117,7 +117,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/detail", method = RequestMethod.GET)
-    @RequiresPermissions("product:detail")
+//    @RequiresPermissions("product:detail")
     public Object webManageProductDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         Product product = productService.getDetail(id);
@@ -126,26 +126,26 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/add", method = RequestMethod.POST)
-    @RequiresPermissions("product:add")
-    @AdminLog(value = "网站:新增产品(服务)")
-    public Object webManageProductAdd(Product product){
+//    @RequiresPermissions("product:add")
+//    @AdminLog(value = "网站:新增产品(服务)")
+    public Object webManageProductAdd(@RequestBody Product product){
         AjaxResults ajaxResults = new AjaxResults();
         productService.addProduct(product);
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/product/update", method = RequestMethod.PUT)
-    @RequiresPermissions("product:update")
-    @AdminLog(value = "网站:更新产品(服务)")
-    public Object webManageProductUpdate(Product product){
+//    @RequiresPermissions("product:update")
+//    @AdminLog(value = "网站:更新产品(服务)")
+    public Object webManageProductUpdate(@RequestBody Product product){
         AjaxResults ajaxResults = new AjaxResults();
         productService.updateProduct(product);
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/product/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("product:delete")
-    @AdminLog(value = "网站:删除产品(服务)")
+//    @RequiresPermissions("product:delete")
+//    @AdminLog(value = "网站:删除产品(服务)")
     public Object webManageProductDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);

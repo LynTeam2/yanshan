@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -72,7 +73,7 @@ public class NewsController {
     @RequestMapping(value = "/web/manage/news/add", method = RequestMethod.POST)
     @RequiresPermissions("news:add")
     @AdminLog(value = "网站:添加新闻")
-    public Object webManageNewsAdd(News news){
+    public Object webManageNewsAdd(@RequestBody News news){
         AjaxResults ajaxResults = new AjaxResults();
         news.setCreateTime(new Date());
         newsService.addNews(news);
@@ -82,7 +83,7 @@ public class NewsController {
     @RequestMapping(value = "/web/manage/news/update", method = RequestMethod.PUT)
     @RequiresPermissions("news:update")
     @AdminLog(value = "网站:修改新闻")
-    public Object webManageNewsUpdate(News news){
+    public Object webManageNewsUpdate(@RequestBody News news){
         AjaxResults ajaxResults = new AjaxResults();
         news.setCreateTime(new Date());
         newsService.addNews(news);

@@ -31,7 +31,6 @@ public class PageHtml implements Serializable{
     private List<Html> htmls;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "web_page_image", joinColumns = {@JoinColumn(name = "page_id")},inverseJoinColumns = {@JoinColumn(name = "html_id")})
+    @JoinTable(name = "web_page_image", joinColumns = {@JoinColumn(name = "page_id")},inverseJoinColumns = {@JoinColumn(name = "image_id")})
     private List<Image> images;
-
 }
