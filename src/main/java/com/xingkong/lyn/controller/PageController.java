@@ -2,6 +2,8 @@ package com.xingkong.lyn.controller;
 
 import com.xingkong.lyn.annotation.AdminLog;
 import com.xingkong.lyn.comment.AjaxResults;
+import com.xingkong.lyn.model.web.Html;
+import com.xingkong.lyn.model.web.Image;
 import com.xingkong.lyn.model.web.PageHtml;
 import com.xingkong.lyn.service.IPageHtml;
 import com.xingkong.lyn.util.OtherUtil;
@@ -52,6 +54,18 @@ public class PageController {
         AjaxResults ajaxResults = new AjaxResults();
         PageHtml pageHtml = pageHtmlService.getPageHtml("introduction");
 //        ajaxResults.put("joinUs", pageHtml.getHtml());
+        return ajaxResults;
+    }
+
+    @RequestMapping(value = "/web/page", method = RequestMethod.GET)
+    public Object page(String page){
+        AjaxResults ajaxResults = new AjaxResults();
+        PageHtml pageHtml = pageHtmlService.getPageHtml(page);
+        List<Html> htmls = pageHtml.getHtmls();
+        pageHtml.setHtmls(htmls);
+        List<Image> images = pageHtml.getImages();
+        pageHtml.setImages(images);
+        ajaxResults.put("pagehtml", pageHtml);
         return ajaxResults;
     }
 

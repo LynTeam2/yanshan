@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,7 +59,7 @@ public class MessageController {
 
     //新增
     @RequestMapping(value = "/web/message/add", method = RequestMethod.POST)
-    public Object webManageNewsAdd(Message message){
+    public Object webManageNewsAdd(@RequestBody Message message){
         AjaxResults ajaxResults = new AjaxResults();
         message.setCreateTime(new Date());
         messageService.addMessage(message);

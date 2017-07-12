@@ -23,7 +23,7 @@ public class SimpleCORSFilter  implements Filter {
         resp.setHeader("Access-Control-Allow-Origin", "*");
         resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         resp.setHeader("Access-Control-Max-Age", "3600");
-        resp.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+        resp.setHeader("Access-Control-Allow-Headers", "x-requested-with, content-type");
         chain.doFilter(request, resp);
     }
 
