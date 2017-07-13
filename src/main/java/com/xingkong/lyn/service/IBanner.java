@@ -10,4 +10,6 @@ import java.util.List;
 public interface IBanner {
     List<Banner> findAll();
     List<Banner> findByPosition(String position);
+    Boolean deleteList(List<Long> ids);
+    Boolean addBanner(Banner banner);
 }

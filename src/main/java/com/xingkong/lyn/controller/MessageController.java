@@ -59,7 +59,7 @@ public class MessageController {
 
     //新增
     @RequestMapping(value = "/web/message/add", method = RequestMethod.POST)
-    public Object webManageNewsAdd(@RequestBody Message message){
+    public Object webManageMessAdd(Message message){
         AjaxResults ajaxResults = new AjaxResults();
         message.setCreateTime(new Date());
         messageService.addMessage(message);

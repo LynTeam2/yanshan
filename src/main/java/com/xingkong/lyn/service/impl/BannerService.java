@@ -25,4 +25,16 @@ public class BannerService implements IBanner{
     public List<Banner> findByPosition(String position) {
         return bannerDao.findByPosition(position);
     }
+
+    @Override
+    public Boolean deleteList(List<Long> ids) {
+        bannerDao.deleteInBatch(bannerDao.findAll(ids));
+        return true;
+    }
+
+    @Override
+    public Boolean addBanner(Banner banner) {
+        bannerDao.saveAndFlush(banner);
+        return true;
+    }
 }

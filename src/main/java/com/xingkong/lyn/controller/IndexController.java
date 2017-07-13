@@ -8,6 +8,8 @@ import com.xingkong.lyn.service.IBanner;
 import com.xingkong.lyn.service.INews;
 import com.xingkong.lyn.service.IProduct;
 import com.xingkong.lyn.service.IWebInfo;
+import com.xingkong.lyn.util.OtherUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,6 +53,24 @@ public class IndexController {
         ajaxResults.put("banners",banners);
         return ajaxResults;
     }
+
+    @RequestMapping(value = "/web/manage/banner/delete",method = RequestMethod.DELETE)
+    public Object webManageNewsDelete(String id){
+        AjaxResults ajaxResults = new AjaxResults();
+        Long[] ids = StringUtils.isBlank(id)? null : OtherUtil.parseStringtoLong(id);
+        List<Long> idList= Arrays.asList(ids);
+        bannerService.deleteList(idList);
+        return ajaxResults;
+    }
+
+    @RequestMapping(value = "/web/manage/banner/add",method = RequestMethod.POST)
+    public Object webManageMessAdd(Banner banner){
+        AjaxResults ajaxResults = new AjaxResults();
+        banner.setCreateTime(new Date());
+        bannerService.addBanner(banner);
+        return ajaxResults;
+    }
+
 
     @RequestMapping(value = "/web/index/news", method = RequestMethod.GET)
     public AjaxResults webIndexNews(Integer limit){

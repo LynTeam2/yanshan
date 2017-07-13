@@ -20,7 +20,8 @@ public class Product implements Serializable{
     @GeneratedValue
     private Long id;
 
-    private String name;
+    @Column(name="name")
+    private String proName;
 
     @Column(insertable = false, updatable = false)
     private Long catagoryId;

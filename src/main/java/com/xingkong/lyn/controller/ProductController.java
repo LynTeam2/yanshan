@@ -55,7 +55,7 @@ public class ProductController {
     public Object webProductDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         Product product = productService.getDetail(id);
-//        ajaxResults.put("product", product.getHtml());
+        ajaxResults.put("product", product);
         return ajaxResults;
     }
 
@@ -127,9 +127,10 @@ public class ProductController {
 
     @RequestMapping(value = "/web/manage/product/add", method = RequestMethod.POST)
     //@RequiresPermissions("product:add")
-    @AdminLog(value = "网站:新增产品(服务)")
-    public Object webManageProductAdd(Product product){
+    //@AdminLog(value = "网站:新增产品(服务)")
+    public Object webManageProductAdd(@RequestBody Product product){
         AjaxResults ajaxResults = new AjaxResults();
+        product.setCreateTime(new Date());
         productService.addProduct(product);
         return ajaxResults;
     }
