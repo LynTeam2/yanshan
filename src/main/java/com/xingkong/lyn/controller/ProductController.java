@@ -168,10 +168,10 @@ public class ProductController {
                 Image image = new Image();
                 image.setAddress(file.getOriginalFilename());
                 image.setCreateTime(new Date());
-                image.setName(file.getOriginalFilename());
+                image.setImgName(file.getOriginalFilename());
                 image = productService.addImage(image);
                 ajaxResults.put("id", image.getId());
-                ajaxResults.put("name", image.getName());
+                ajaxResults.put("name", image.getImgName());
             }catch (FileNotFoundException e){
                 logger.error("上传图片失败", e);
                 ajaxResults.setCode(1);
