@@ -17,4 +17,5 @@ import java.util.Date;
 @Table(name = "web_banner")
 public class Banner extends BaseImage implements Serializable {
     private static final long serialVersionUID = 1L;
+
 }

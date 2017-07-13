@@ -187,7 +187,7 @@ create table if not exists sys_permission_init (
 # # );
 create table if not exists web_banner (
   id bigint(20) not null auto_increment,
-  name varchar(64) comment'图片名称',
+  img_name varchar(64) comment'图片名称',
   link varchar(64) comment'banner图跳转链接地址',
   position varchar(32) comment'banner图位置',
   url varchar(64) comment'banner图引用地址',
@@ -241,7 +241,7 @@ create table if not exists web_info (
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站信息表';
 create table if not exists web_image (
   id bigint(20) not null auto_increment,
-  name varchar(64) comment'图片名称',
+  img_name varchar(64) comment'图片名称',
   link varchar(64) comment'banner图跳转链接地址',
   position varchar(32) comment'banner图位置',
   address varchar(64) comment'banner图引用地址',

@@ -23,7 +23,7 @@ public abstract class BaseImage {
 
     private String address;
 
-    private String name;
+    private String imgName;
 
     private Date createTime;
 }
