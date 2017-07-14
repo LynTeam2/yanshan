@@ -1,6 +1,8 @@
 package com.xingkong.lyn.controller;
 
 import com.xingkong.lyn.comment.AjaxResults;
+import com.xingkong.lyn.model.UserInfo;
+import com.xingkong.lyn.model.manage.LoginVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -8,6 +10,7 @@ import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +23,17 @@ public class LoginController {
     private Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Object login(String username, String password, String vcode, Boolean rememberMe, Model model){
+    public Object login(@RequestBody LoginVo loginVo){
         AjaxResults ajaxResults = new AjaxResults();
-        if(StringUtils.isBlank(vcode)){
-            ajaxResults.setCode(1);
-            ajaxResults.setMsg("验证码不能为空");
-            return ajaxResults;
-        }
+        String username = loginVo.getUsername();
+        String password = loginVo.getPassword();
+        String vcode = loginVo.getVcode();
+        Boolean rememberMe = loginVo.getRememberMe();
+//        if(StringUtils.isBlank(vcode)){
+//            ajaxResults.setCode(1);
+//            ajaxResults.setMsg("验证码不能为空");
+//            return ajaxResults;
+//        }
 //        Session session = SecurityUtils.getSubject().getSession();
         //转换成小写字母
 //        vcode = vcode.toLowerCase();
