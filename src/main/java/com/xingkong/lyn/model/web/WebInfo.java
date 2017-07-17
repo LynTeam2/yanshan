@@ -3,10 +3,7 @@ package com.xingkong.lyn.model.web;
 import lombok.Data;
 
 import javax.annotation.Resource;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -24,7 +21,8 @@ public class WebInfo implements Serializable{
 
     private String title;
 
-    private String name;
+    @Column(name = "name")
+    private String unitName;
 
     private String introduction;
 
@@ -33,6 +31,10 @@ public class WebInfo implements Serializable{
     private String phone;
 
     private String email;
+
+    private String fax;
+
+    private String url;
 
     private String openTime;
 

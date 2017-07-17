@@ -16,4 +16,5 @@ public interface IPageHtml {
     boolean addPageHtml(PageHtml pageHtml);
     boolean updatePageHtml(PageHtml pageHtml);
     boolean deletePageHtml(List<Long> id);
+    List<PageHtml> getPageHtmlList(List<String> pages);
 }

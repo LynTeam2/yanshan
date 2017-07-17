@@ -22,9 +22,12 @@ public class Catagory implements Serializable{
 
     private Long parentId;
 
-    private String name;
+    @Column(name = "name")
+    private String catagoryName;
 
     private String content;
+
+    private String icon;
 
     private Date createTime;
 

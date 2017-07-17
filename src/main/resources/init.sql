@@ -214,6 +214,7 @@ create table if not exists web_catagory (
   name varchar(64) comment'商品分类名称',
   content text comment'分类说明',
   parent_id bigint(20) comment'父分类编号',
+  icon text comment'图片地址',
   create_time timestamp comment'创建时间',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站产品类别表';
@@ -223,7 +224,7 @@ create table if not exists web_product (
   title varchar(64) comment'商品标题',
   create_time timestamp comment'创建时间',
   home_flag tinyint(4) comment'首页展示',
-  recomment_flag tinyint(4) comment'推荐0不推荐 1推荐',
+  recommend_flag tinyint(4) comment'推荐0不推荐 1推荐',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站产品表';
 create table if not exists web_info (
@@ -235,6 +236,8 @@ create table if not exists web_info (
   address varchar(128) comment'地址',
   phone varchar(64) comment'联系方式',
   email varchar(64) comment'邮箱',
+  fax varchar(64) comment'传真',
+  url varchar(64) comment'网址',
   icp varchar(64) comment'icp备案号',
   map varchar(64) comment'地图图片',
   primary key (id)

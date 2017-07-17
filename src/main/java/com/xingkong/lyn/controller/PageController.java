@@ -60,12 +60,14 @@ public class PageController {
     @RequestMapping(value = "/web/page", method = RequestMethod.GET)
     public Object page(String page){
         AjaxResults ajaxResults = new AjaxResults();
-        PageHtml pageHtml = pageHtmlService.getPageHtml(page);
-        List<Html> htmls = pageHtml.getHtmls();
-        pageHtml.setHtmls(htmls);
-        List<Image> images = pageHtml.getImages();
-        pageHtml.setImages(images);
-        ajaxResults.put("pagehtml", pageHtml);
+        String[] arr = StringUtils.isBlank(page)?null :page.split(",");
+        List<String> pages = Arrays.asList(arr);
+        List<PageHtml> pageHtmls = pageHtmlService.getPageHtmlList(pages);
+//        List<Html> htmls = pageHtml.getHtmls();
+//        pageHtml.setHtmls(htmls);
+//        List<Image> images = pageHtml.getImages();
+//        pageHtml.setImages(images);
+        ajaxResults.put("pagehtmls", pageHtmls);
         return ajaxResults;
     }
 

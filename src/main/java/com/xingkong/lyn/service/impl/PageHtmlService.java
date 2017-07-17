@@ -52,4 +52,9 @@ public class PageHtmlService implements IPageHtml{
         pageHtmlDao.deleteInBatch(pageHtmlDao.findAll(id));
         return true;
     }
+
+    @Override
+    public List<PageHtml> getPageHtmlList(List<String> pages) {
+        return pageHtmlDao.findByPage(pages);
+    }
 }

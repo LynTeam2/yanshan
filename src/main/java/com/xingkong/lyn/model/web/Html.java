@@ -21,7 +21,7 @@ public class Html implements Serializable{
     @GeneratedValue
     private Long id;
 
-    private String html;
+    private String html = "";
 
     private String position;
 }

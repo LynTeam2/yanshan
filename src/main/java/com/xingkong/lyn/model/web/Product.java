@@ -26,6 +26,8 @@ public class Product implements Serializable{
     @Column(insertable = false, updatable = false)
     private Long catagoryId;
 
+    private String title;
+
     private Date createTime;
 
     private Byte homeFlag;
