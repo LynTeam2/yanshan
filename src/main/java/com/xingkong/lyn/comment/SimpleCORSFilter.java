@@ -1,7 +1,5 @@
 package com.xingkong.lyn.comment;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
