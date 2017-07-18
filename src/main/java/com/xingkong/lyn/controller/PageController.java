@@ -72,7 +72,7 @@ public class PageController {
     }
 
     @RequestMapping(value = "/web/manage/pagehtml/list", method = RequestMethod.GET)
-    @RequiresPermissions("pagehtml:view")
+//    @RequiresPermissions("pagehtml:view")
     public Object webManageNewsList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                                   Pageable pageable){
         AjaxResults ajaxResults = new AjaxResults();
@@ -82,7 +82,7 @@ public class PageController {
     }
 
     @RequestMapping(value = "/web/manage/pagehtml/detail", method = RequestMethod.GET)
-    @RequiresPermissions("pagehtml:detail")
+//    @RequiresPermissions("pagehtml:detail")
     public Object webManageNewsDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         PageHtml pageHtml = pageHtmlService.getPageHtml(id);
@@ -91,8 +91,8 @@ public class PageController {
     }
 
     @RequestMapping(value = "/web/manage/pagehtml/add", method = RequestMethod.POST)
-    @RequiresPermissions("pagehtml:add")
-    @AdminLog(value = "网站:添加页面")
+//    @RequiresPermissions("pagehtml:add")
+//    @AdminLog(value = "网站:添加页面")
     public Object webManageNewsAdd(PageHtml pageHtml){
         AjaxResults ajaxResults = new AjaxResults();
         pageHtmlService.addPageHtml(pageHtml);
@@ -100,8 +100,8 @@ public class PageController {
     }
 
     @RequestMapping(value = "/web/manage/pagehtml/update", method = RequestMethod.PUT)
-    @RequiresPermissions("pagehtml:update")
-    @AdminLog(value = "网站:修改页面")
+//    @RequiresPermissions("pagehtml:update")
+//    @AdminLog(value = "网站:修改页面")
     public Object webManageNewsUpdate(PageHtml pageHtml){
         AjaxResults ajaxResults = new AjaxResults();
         pageHtmlService.updatePageHtml(pageHtml);
@@ -109,8 +109,8 @@ public class PageController {
     }
 
     @RequestMapping(value = "/web/manage/pagehtml/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("pagehtml:delete")
-    @AdminLog(value = "网站:删除页面")
+//    @RequiresPermissions("pagehtml:delete")
+//    @AdminLog(value = "网站:删除页面")
     public Object webManageNewsDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);

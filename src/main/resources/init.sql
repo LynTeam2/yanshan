@@ -278,3 +278,7 @@ create table if not exists web_news_image (
   news_id bigint(20) not null comment'新闻id',
   image_id bigint(20) not null comment'图片id'
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站新闻图片对照表';
+create table if not exists web_catagory_product (
+  catagory_id bigint(20) not null comment'类别id',
+  product_id bigint(20) not null comment'产品id'
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站类别产品对照表';

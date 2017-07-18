@@ -23,9 +23,6 @@ public class Product implements Serializable{
     @Column(name="name")
     private String proName;
 
-    @Column(insertable = false, updatable = false)
-    private Long catagoryId;
-
     private String title;
 
     private Date createTime;
@@ -34,9 +31,9 @@ public class Product implements Serializable{
 
     private Byte recommendFlag;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "catagoryId")
-    private Catagory catagory;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "web_catagory_product",joinColumns = {@JoinColumn(name = "product_id")},inverseJoinColumns = {@JoinColumn(name = "catagory_id")})
+    private List<Catagory> catagories;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "web_product_image",joinColumns = {@JoinColumn(name = "product_id")},inverseJoinColumns = {@JoinColumn(name = "image_id")})

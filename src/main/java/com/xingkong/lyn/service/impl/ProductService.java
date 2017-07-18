@@ -1,12 +1,15 @@
 package com.xingkong.lyn.service.impl;
 
+import com.xingkong.lyn.model.web.Catagory;
 import com.xingkong.lyn.model.web.Image;
 import com.xingkong.lyn.model.web.Product;
+import com.xingkong.lyn.repository.web.CatagoryRepository;
 import com.xingkong.lyn.repository.web.HtmlRepository;
 import com.xingkong.lyn.repository.web.ImageRepository;
 import com.xingkong.lyn.repository.web.ProductRepository;
 import com.xingkong.lyn.service.IProduct;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +28,8 @@ public class ProductService implements IProduct{
     private ImageRepository imageDao;
     @Resource
     private HtmlRepository htmlDao;
+    @Resource
+    private CatagoryRepository catagoryDao;
 
     @Override
     public List<Product> getProductList() {
@@ -38,7 +43,14 @@ public class ProductService implements IProduct{
 
     @Override
     public Page<Product> getProductListByPageable(Long catagoryId, Pageable pageable) {
-        return productDao.findByCatagoryId(catagoryId, pageable);
+        Page<Product> products = null;
+        if(null == catagoryId){
+            products = productDao.findAll(pageable);
+        }else {
+            Catagory catagory = catagoryDao.findOne(catagoryId);
+            products = new PageImpl<Product>(catagory.getProducts());
+        }
+        return products;
     }
 
     @Override

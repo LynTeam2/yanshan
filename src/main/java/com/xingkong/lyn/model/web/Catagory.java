@@ -31,8 +31,8 @@ public class Catagory implements Serializable{
 
     private Date createTime;
 
-    @OneToMany(fetch=FetchType.LAZY)//级联保存、更新、删除、刷新;延迟加载
-    @JoinColumn(name = "catagoryId")
+    @ManyToMany(fetch=FetchType.LAZY)//级联保存、更新、删除、刷新;延迟加载
+    @JoinTable(name = "web_catagory_product",joinColumns = {@JoinColumn(name = "catagory_id")},inverseJoinColumns = {@JoinColumn(name = "product_id")})
     private List<Product> products;
 
     @OneToMany(fetch=FetchType.EAGER)

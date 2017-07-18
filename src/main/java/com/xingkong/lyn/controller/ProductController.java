@@ -127,8 +127,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/add", method = RequestMethod.POST)
-    @RequiresPermissions("product:add")
-    @AdminLog(value = "网站:新增产品(服务)")
+//    @RequiresPermissions("product:add")
+//    @AdminLog(value = "网站:新增产品(服务)")
     public Object webManageProductAdd(@RequestBody Product product){
         AjaxResults ajaxResults = new AjaxResults();
         product.setCreateTime(new Date());
@@ -137,8 +137,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/update", method = RequestMethod.PUT)
-    @RequiresPermissions("product:update")
-    @AdminLog(value = "网站:更新产品(服务)")
+//    @RequiresPermissions("product:update")
+//    @AdminLog(value = "网站:更新产品(服务)")
     public Object webManageProductUpdate(Product product){
         AjaxResults ajaxResults = new AjaxResults();
         productService.updateProduct(product);
@@ -146,8 +146,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("product:delete")
-    @AdminLog(value = "网站:删除产品(服务)")
+//    @RequiresPermissions("product:delete")
+//    @AdminLog(value = "网站:删除产品(服务)")
     public Object webManageProductDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
