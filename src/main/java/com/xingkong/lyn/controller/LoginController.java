@@ -48,7 +48,7 @@ public class LoginController {
             UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
             SecurityUtils.getSubject().login(token);
         } catch (Exception e){
-            ajaxResults.setCode(1);
+            ajaxResults.setCode(0);
             ajaxResults.setMsg("验证失败："+e.getMessage());
         }
         return ajaxResults;
