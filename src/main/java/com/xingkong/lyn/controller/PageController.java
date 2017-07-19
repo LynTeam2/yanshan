@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -107,7 +108,7 @@ public class PageController {
     @RequestMapping(value = "/web/manage/pagehtml/add", method = RequestMethod.POST)
 //    @RequiresPermissions("pagehtml:add")
 //    @AdminLog(value = "网站:添加页面")
-    public Object webManageNewsAdd(PageHtml pageHtml){
+    public Object webManageNewsAdd(@RequestBody PageHtml pageHtml){
         AjaxResults ajaxResults = new AjaxResults();
         pageHtmlService.addPageHtml(pageHtml);
         return ajaxResults;
@@ -116,7 +117,7 @@ public class PageController {
     @RequestMapping(value = "/web/manage/pagehtml/update", method = RequestMethod.PUT)
 //    @RequiresPermissions("pagehtml:update")
 //    @AdminLog(value = "网站:修改页面")
-    public Object webManageNewsUpdate(PageHtml pageHtml){
+    public Object webManageNewsUpdate(@RequestBody PageHtml pageHtml){
         AjaxResults ajaxResults = new AjaxResults();
         pageHtmlService.updatePageHtml(pageHtml);
         return ajaxResults;

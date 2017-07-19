@@ -175,18 +175,18 @@ public class ProductController {
                 ajaxResults.put("name", image.getImgName());
             }catch (FileNotFoundException e){
                 logger.error("上传图片失败", e);
-                ajaxResults.setCode(1);
+                ajaxResults.setCode(0);
                 ajaxResults.setMsg("上传图片失败:图片未能找到");
                 return ajaxResults;
             }catch (IOException e){
                 logger.error("上传图片失败", e);
-                ajaxResults.setCode(1);
+                ajaxResults.setCode(0);
                 ajaxResults.setMsg("上传图片失败:图片传输异常");
                 return ajaxResults;
             }
             return ajaxResults;
         }else{
-            ajaxResults.setCode(1);
+            ajaxResults.setCode(0);
             ajaxResults.setMsg("上传图片失败:图片为空");
             return ajaxResults;
         }

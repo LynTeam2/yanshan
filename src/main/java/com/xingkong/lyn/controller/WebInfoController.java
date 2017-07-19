@@ -5,6 +5,7 @@ import com.xingkong.lyn.comment.AjaxResults;
 import com.xingkong.lyn.model.web.WebInfo;
 import com.xingkong.lyn.service.IWebInfo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +32,7 @@ public class WebInfoController {
     @RequestMapping(value = "/web/manage/webInfo/update", method = RequestMethod.PUT)
 //    @RequiresPermissions("webinfo:update")
 //    @AdminLog("网站:修改网站基本信息")
-    public Object webManageWebInfoUpdate(WebInfo webInfo){
+    public Object webManageWebInfoUpdate(@RequestBody WebInfo webInfo){
         AjaxResults ajaxResults = new AjaxResults();
         webInfoService.saveWebInfo(webInfo);
         return ajaxResults;

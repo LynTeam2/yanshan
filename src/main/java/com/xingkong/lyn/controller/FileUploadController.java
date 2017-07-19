@@ -40,18 +40,18 @@ public class FileUploadController {
 //                os.close();
             }catch (FileNotFoundException e){
                 logger.error("上传文件失败", e);
-                ajaxResults.setCode(1);
+                ajaxResults.setCode(0);
                 ajaxResults.setMsg("上传文件失败:文件未能找到");
                 return ajaxResults;
             }catch (IOException e){
                 logger.error("上传文件失败", e);
-                ajaxResults.setCode(1);
+                ajaxResults.setCode(0);
                 ajaxResults.setMsg("上传文件失败:文件传输异常");
                 return ajaxResults;
             }
             return ajaxResults;
         }else{
-            ajaxResults.setCode(1);
+            ajaxResults.setCode(0);
             ajaxResults.setMsg("上传文件失败:文件为空");
             return ajaxResults;
         }
