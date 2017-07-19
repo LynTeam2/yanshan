@@ -68,7 +68,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/catagory/list", method = RequestMethod.GET)
-    @RequiresPermissions("catagory:view")
+//    @RequiresPermissions("catagory:view")
     public Object webManageCatagoryList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                                  Pageable pageable){
         AjaxResults ajaxResults = new AjaxResults();

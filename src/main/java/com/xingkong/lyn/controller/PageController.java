@@ -71,6 +71,20 @@ public class PageController {
         return ajaxResults;
     }
 
+    @RequestMapping(value = "/web/manage/page", method = RequestMethod.GET)
+    public Object managePage(String page){
+        AjaxResults ajaxResults = new AjaxResults();
+        String[] arr = StringUtils.isBlank(page)?null :page.split(",");
+        List<String> pages = Arrays.asList(arr);
+        List<PageHtml> pageHtmls = pageHtmlService.getPageHtmlList(pages);
+//        List<Html> htmls = pageHtml.getHtmls();
+//        pageHtml.setHtmls(htmls);
+//        List<Image> images = pageHtml.getImages();
+//        pageHtml.setImages(images);
+        ajaxResults.put("pagehtmls", pageHtmls);
+        return ajaxResults;
+    }
+
     @RequestMapping(value = "/web/manage/pagehtml/list", method = RequestMethod.GET)
 //    @RequiresPermissions("pagehtml:view")
     public Object webManageNewsList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
