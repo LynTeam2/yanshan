@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.Date;
 
 /**
  * Created by lyn on 2017/6/22.
@@ -20,19 +21,26 @@ public class FileUploadController {
     @Value(value = "${file.upload.path}")
     private String filePath;
 
+    private String parentPath = "uploadFile";
+
     private Logger logger = LoggerFactory.getLogger(FileUploadController.class);
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public Object uploadFile(@RequestParam("file")MultipartFile file, HttpServletRequest request, HttpServletResponse response){
         AjaxResults ajaxResults = new AjaxResults();
+        File parent = new File(filePath+File.separator+parentPath);
+        parent.mkdir();
+        Date date = new Date();
+        Long time = date.getTime();
+        String fileName = time.toString()+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
         if(!file.isEmpty()){
             try{
                 BufferedOutputStream out = new BufferedOutputStream(
-                        new FileOutputStream(new File(filePath+File.separator+file.getOriginalFilename())));
+                        new FileOutputStream(new File(filePath+File.separator+fileName)));
                 out.write(file.getBytes());
                 out.flush();
                 out.close();
-                ajaxResults.put("path", file.getOriginalFilename());
+                ajaxResults.put("path", parentPath+fileName);
 //                response.setContentType("image/png");
 //                OutputStream os = response.getOutputStream();
 //                os.write(file.getBytes());
