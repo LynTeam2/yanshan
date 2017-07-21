@@ -46,14 +46,23 @@ public class ProductController {
     public Object webProductList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                              Pageable pageable, Long catagoryId){
         AjaxResults ajaxResults = new AjaxResults();
-        Page<Product> products = productService.getProductListByPageable(catagoryId, pageable);
-        ajaxResults.put("products", products.getContent());
+        if(null != catagoryId){
+            Catagory catagory = catagoryService.getCatagory(catagoryId);
+            ajaxResults.put("products", catagory.getProducts());
+        }else{
+            Page<Product> products = productService.getProductListByPageable(catagoryId, pageable);
+            ajaxResults.put("products", products.getContent());
+        }
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/product/detail", method = RequestMethod.GET)
     public Object webProductDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
+        if(null == id){
+            ajaxResults.setCode(0);
+            return ajaxResults;
+        }
         Product product = productService.getDetail(id);
         ajaxResults.put("product", product);
         return ajaxResults;
@@ -78,26 +87,26 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/catagory/add", method = RequestMethod.POST)
-    @RequiresPermissions("catagory:add")
-    @AdminLog(value = "新增类别")
-    public Object webManageCatagoryAdd(Catagory catagory){
+//    @RequiresPermissions("catagory:add")
+//    @AdminLog(value = "新增类别")
+    public Object webManageCatagoryAdd(@RequestBody Catagory catagory){
         AjaxResults ajaxResults = new AjaxResults();
         catagoryService.addCatagory(catagory);
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/catagory/update", method = RequestMethod.PUT)
-    @RequiresPermissions("catagory:update")
-    @AdminLog(value = "修改类别")
-    public Object webManageCatagoryUpdate(Catagory catagory){
+//    @RequiresPermissions("catagory:update")
+//    @AdminLog(value = "修改类别")
+    public Object webManageCatagoryUpdate(@RequestBody Catagory catagory){
         AjaxResults ajaxResults = new AjaxResults();
         catagoryService.updateCatagory(catagory);
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/catagory/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("catagory:delete")
-    @AdminLog(value = "删除类别")
+//    @RequiresPermissions("catagory:delete")
+//    @AdminLog(value = "删除类别")
     public Object webManageCatagoryDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
@@ -107,8 +116,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/list", method = RequestMethod.GET)
-    @RequiresPermissions("product:view")
-    @AdminLog(value = "查看产品列表")
+//    @RequiresPermissions("product:view")
+//    @AdminLog(value = "查看产品列表")
     public Object webManageProductList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                                        Pageable pageable, Long catagoryId){
         AjaxResults ajaxResults = new AjaxResults();
@@ -139,7 +148,7 @@ public class ProductController {
     @RequestMapping(value = "/web/manage/product/update", method = RequestMethod.PUT)
 //    @RequiresPermissions("product:update")
 //    @AdminLog(value = "网站:更新产品(服务)")
-    public Object webManageProductUpdate(Product product){
+    public Object webManageProductUpdate(@RequestBody Product product){
         AjaxResults ajaxResults = new AjaxResults();
         productService.updateProduct(product);
         return ajaxResults;

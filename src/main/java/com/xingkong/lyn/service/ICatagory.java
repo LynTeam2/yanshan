@@ -16,4 +16,5 @@ public interface ICatagory {
     boolean addCatagory(Catagory catagory);
     boolean updateCatagory(Catagory catagory);
     boolean deleteCatagory(List<Long> id);
+    Catagory getCatagory(Long id);
 }

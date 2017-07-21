@@ -41,3 +41,6 @@
 # INSERT INTO sys_role_permission(role_id, permission_id) VALUES (1, 5);
 # INSERT INTO sys_role_permission(role_id, permission_id) VALUES (1, 6);
 # INSERT INTO web_info (id,name,title,open_time,introduction,address,phone,email,fax,url,icp,map)VALUES (1,"一尚红文化创意有限公司","一心一意 尚德尚品","","{'公司类别':'杭州一尚红文化创意有限公司是一家专业为企业、产品、活动提供品牌营销、公关策划及全方位服务的文化创意产业实体。','公司宗旨':'公司自2009年成立以来，一直秉承“一心一意、尚德尚品”的服务宗旨，始终坚持以品质求生存，以创新求发展，以服务为根本的经营理念，致力于企业品牌设计、营销策划、广告宣传、商业路演及大型活动策划，全力帮助客户聚焦品牌价值,创造卓越品牌。','公司展望':'目前，一尚红的客户遍及多个行业，已为诸多知名的企业及机构提供品牌咨询、设计服务和制作执行，涵盖金融、通讯、互联网、房地产、旅游、酒店、餐饮、服饰、传媒、娱乐、教育等行业，其中西博会、G20峰会会务服务，智能机器人全球峰会等诸多成功案例。完善的服务和卓越的品质普获客户的认同。'}","浙江省杭州市拱墅区金通国际大厦1-1幢2单元1405室","86-0571-86016510","86-0571-86016510","291677644@qq.com","www.ysh33.com","","");
+# INSERT INTO web_catagory(id,name,content,parent_id,icon,create_time)values(1,'服务项目','',null,null,now());
+# INSERT INTO web_catagory(id,name,content,parent_id,icon,create_time)values(2,'会议资源','',null,null,now());
+# INSERT INTO web_catagory(id,name,content,parent_id,icon,create_time)values(3,'类别2','',1,null,now());

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -77,6 +78,17 @@ public class ProductService implements IProduct{
     @Override
     public Image addImage(Image image) {
         return imageDao.save(image);
+    }
+
+    @Override
+    public List<Product> getIndexProducts(Byte homeFlag, Byte recommendFlag) {
+        List<Product> list = new ArrayList<>();
+        if(null != homeFlag){
+            list = productDao.findByHomeFlag(homeFlag);
+        }else{
+            list = productDao.findByRecommendFlag(recommendFlag);
+        }
+        return list;
     }
 
 }

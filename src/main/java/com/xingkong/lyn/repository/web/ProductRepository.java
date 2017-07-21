@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface ProductRepository extends JpaRepository<Product, Long>{
     Page<Product> findAll(Pageable pageable);
+    List<Product> findByHomeFlag(Byte homeFlag);
+    List<Product> findByRecommendFlag(Byte recommendFlag);
 }

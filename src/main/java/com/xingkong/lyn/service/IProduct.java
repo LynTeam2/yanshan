@@ -24,4 +24,6 @@ public interface IProduct {
     boolean deleteProduct(List<Long> id);
 
     Image addImage(Image image);
+
+    List<Product> getIndexProducts(Byte homeFlag, Byte recommendFlag);
 }

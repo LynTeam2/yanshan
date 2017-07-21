@@ -98,12 +98,10 @@ public class IndexController {
     @RequestMapping(value = "/web/index/product", method = RequestMethod.GET)
     public Object webIndexProduct(Integer limit, Byte homeFlag, Byte recommendFlag){
         AjaxResults ajaxResults = new AjaxResults();
-        if(null == limit){
+        if(null == homeFlag && null == recommendFlag){
             ajaxResults.put("products", productService.getProductList());
         }else{
-            Sort sort = new Sort(Sort.Direction.DESC, "id");
-            Pageable pageable = new PageRequest(0, limit, sort);
-            ajaxResults.put("products", productService.getProductListByPageable(null, pageable));
+            ajaxResults.put("products", productService.getIndexProducts(homeFlag, recommendFlag));
         }
         return ajaxResults;
     }

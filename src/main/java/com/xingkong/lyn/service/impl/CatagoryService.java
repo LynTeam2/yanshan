@@ -55,4 +55,9 @@ public class CatagoryService implements ICatagory{
         catagoryDao.deleteInBatch(catagoryDao.findAll(id));
         return true;
     }
+
+    @Override
+    public Catagory getCatagory(Long id) {
+        return catagoryDao.findOne(id);
+    }
 }
