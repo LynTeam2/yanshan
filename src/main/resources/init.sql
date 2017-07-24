@@ -288,5 +288,6 @@ create table if not exists web_staff (
   photo text comment'职员照片',
   job varchar(32) comment'岗位',
   introdution varchar(256) comment'介绍',
-  create_time timestamp comment'创建时间'
+  create_time timestamp comment'创建时间',
+  PRIMARY KEY (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站职员表';

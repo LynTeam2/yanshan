@@ -41,7 +41,7 @@ public class StaffController {
         return ajaxResults;
     }
 
-    @RequestMapping(value = "/web/manage/staff/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/web/manage/staff/add", method = RequestMethod.POST)
     @RequiresPermissions("staff:add")
     public Object webManageStaffAdd(@RequestBody Staff staff){
         AjaxResults ajaxResults = new AjaxResults();
@@ -55,7 +55,7 @@ public class StaffController {
         return ajaxResults;
     }
 
-    @RequestMapping(value = "/web/manage/staff/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/web/manage/staff/update", method = RequestMethod.PUT)
     @RequiresPermissions("staff:update")
     public Object webManageStaffUpdate(@RequestBody Staff staff){
         AjaxResults ajaxResults = new AjaxResults();
@@ -68,13 +68,22 @@ public class StaffController {
         return ajaxResults;
     }
 
-    @RequestMapping(value = "/web/manage/staff/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/web/manage/staff/delete", method = RequestMethod.DELETE)
     @RequiresPermissions("staff:delete")
     public Object webManageStaffDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
         List<Long> ids = Arrays.asList(arr);
         staffService.deleteStaff(ids);
+        return ajaxResults;
+    }
+
+    @RequestMapping(value = "/web/manage/staff/detail", method = RequestMethod.GET)
+    @RequiresPermissions("staff:detail")
+    public Object webManageStaffDetail(Long id){
+        AjaxResults ajaxResults = new AjaxResults();
+        Staff staff = staffService.getStaff(id);
+        ajaxResults.put("staff", staff);
         return ajaxResults;
     }
 }
