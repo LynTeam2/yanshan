@@ -215,6 +215,7 @@ create table if not exists web_catagory (
   content text comment'分类说明',
   parent_id bigint(20) comment'父分类编号',
   icon text comment'图片地址',
+  icon_name varchar(32) comment '图片名称',
   create_time timestamp comment'创建时间',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站产品类别表';
@@ -285,7 +286,8 @@ create table if not exists web_catagory_product (
 create table if not exists web_staff (
   id bigint(20) not null auto_increment,
   name varchar(32) comment '职员名称',
-  photo text comment'职员照片',
+  photo varchar(32) comment'职员照片',
+  phone_name text comment'图片名称',
   job varchar(32) comment'岗位',
   introdution varchar(256) comment'介绍',
   create_time timestamp comment'创建时间',

@@ -33,7 +33,7 @@ public class StaffController {
     }
 
     @RequestMapping(value = "/web/manage/staff/list", method = RequestMethod.GET)
-    @RequiresPermissions("staff:view")
+//    @RequiresPermissions("staff:view")
     public Object webManageStaffList(){
         AjaxResults ajaxResults = new AjaxResults();
         List<Staff> staffs = staffService.getStaffs();
@@ -42,7 +42,7 @@ public class StaffController {
     }
 
     @RequestMapping(value = "/web/manage/staff/add", method = RequestMethod.POST)
-    @RequiresPermissions("staff:add")
+//    @RequiresPermissions("staff:add")
     public Object webManageStaffAdd(@RequestBody Staff staff){
         AjaxResults ajaxResults = new AjaxResults();
         if(null != staff.getId()){
@@ -56,7 +56,7 @@ public class StaffController {
     }
 
     @RequestMapping(value = "/web/manage/staff/update", method = RequestMethod.PUT)
-    @RequiresPermissions("staff:update")
+//    @RequiresPermissions("staff:update")
     public Object webManageStaffUpdate(@RequestBody Staff staff){
         AjaxResults ajaxResults = new AjaxResults();
         if(null == staff.getId()){
@@ -69,7 +69,7 @@ public class StaffController {
     }
 
     @RequestMapping(value = "/web/manage/staff/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("staff:delete")
+//    @RequiresPermissions("staff:delete")
     public Object webManageStaffDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
@@ -79,7 +79,7 @@ public class StaffController {
     }
 
     @RequestMapping(value = "/web/manage/staff/detail", method = RequestMethod.GET)
-    @RequiresPermissions("staff:detail")
+//    @RequiresPermissions("staff:detail")
     public Object webManageStaffDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         Staff staff = staffService.getStaff(id);

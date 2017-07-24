@@ -28,6 +28,8 @@ public class Staff implements Serializable{
 
     private String photo;
 
+    private String photoName;
+
     private String phone;
 
     private Date createTime;

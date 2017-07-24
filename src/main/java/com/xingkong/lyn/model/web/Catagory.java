@@ -29,6 +29,8 @@ public class Catagory implements Serializable{
 
     private String icon;
 
+    private String iconName;
+
     private Date createTime;
 
     @ManyToMany(fetch=FetchType.LAZY)//级联保存、更新、删除、刷新;延迟加载
