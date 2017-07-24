@@ -34,7 +34,12 @@ public class WebInfoController {
 //    @AdminLog("网站:修改网站基本信息")
     public Object webManageWebInfoUpdate(@RequestBody WebInfo webInfo){
         AjaxResults ajaxResults = new AjaxResults();
-        webInfoService.saveWebInfo(webInfo);
+        if(null == webInfo){
+            ajaxResults.setCode(0);
+            ajaxResults.setMsg("参数错误");
+        }else{
+            webInfoService.saveWebInfo(webInfo);
+        }
         return ajaxResults;
     }
 

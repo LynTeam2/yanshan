@@ -282,3 +282,11 @@ create table if not exists web_catagory_product (
   catagory_id bigint(20) not null comment'类别id',
   product_id bigint(20) not null comment'产品id'
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站类别产品对照表';
+create table if not exists web_staff (
+  id bigint(20) not null auto_increment,
+  name varchar(32) comment '职员名称',
+  photo text comment'职员照片',
+  job varchar(32) comment'岗位',
+  introdution varchar(256) comment'介绍',
+  create_time timestamp comment'创建时间'
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站职员表';

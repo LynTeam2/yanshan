@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -64,30 +65,23 @@ public class PageController {
         String[] arr = StringUtils.isBlank(page)?null :page.split(",");
         List<String> pages = Arrays.asList(arr);
         List<PageHtml> pageHtmls = pageHtmlService.getPageHtmlList(pages);
-//        List<Html> htmls = pageHtml.getHtmls();
-//        pageHtml.setHtmls(htmls);
-//        List<Image> images = pageHtml.getImages();
-//        pageHtml.setImages(images);
         ajaxResults.put("pagehtmls", pageHtmls);
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/page", method = RequestMethod.GET)
+    @RequiresPermissions("pagehtml:detail")
     public Object managePage(String page){
         AjaxResults ajaxResults = new AjaxResults();
         String[] arr = StringUtils.isBlank(page)?null :page.split(",");
         List<String> pages = Arrays.asList(arr);
         List<PageHtml> pageHtmls = pageHtmlService.getPageHtmlList(pages);
-//        List<Html> htmls = pageHtml.getHtmls();
-//        pageHtml.setHtmls(htmls);
-//        List<Image> images = pageHtml.getImages();
-//        pageHtml.setImages(images);
         ajaxResults.put("pagehtmls", pageHtmls);
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/pagehtml/list", method = RequestMethod.GET)
-//    @RequiresPermissions("pagehtml:view")
+    @RequiresPermissions("pagehtml:view")
     public Object webManageNewsList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                                   Pageable pageable){
         AjaxResults ajaxResults = new AjaxResults();
@@ -97,7 +91,7 @@ public class PageController {
     }
 
     @RequestMapping(value = "/web/manage/pagehtml/detail", method = RequestMethod.GET)
-//    @RequiresPermissions("pagehtml:detail")
+    @RequiresPermissions("pagehtml:detail")
     public Object webManageNewsDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         PageHtml pageHtml = pageHtmlService.getPageHtml(id);
@@ -106,26 +100,38 @@ public class PageController {
     }
 
     @RequestMapping(value = "/web/manage/pagehtml/add", method = RequestMethod.POST)
-//    @RequiresPermissions("pagehtml:add")
-//    @AdminLog(value = "网站:添加页面")
+    @RequiresPermissions("pagehtml:add")
+    @AdminLog(value = "网站:添加页面")
     public Object webManageNewsAdd(@RequestBody PageHtml pageHtml){
         AjaxResults ajaxResults = new AjaxResults();
-        pageHtmlService.addPageHtml(pageHtml);
+        if(null != pageHtml.getId()){
+            ajaxResults.setCode(0);
+            ajaxResults.setMsg("参数错误");
+        }else{
+            pageHtml.setCreateTime(new Date());
+            pageHtmlService.addPageHtml(pageHtml);
+        }
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/pagehtml/update", method = RequestMethod.PUT)
-//    @RequiresPermissions("pagehtml:update")
-//    @AdminLog(value = "网站:修改页面")
+    @RequiresPermissions("pagehtml:update")
+    @AdminLog(value = "网站:修改页面")
     public Object webManageNewsUpdate(@RequestBody PageHtml pageHtml){
         AjaxResults ajaxResults = new AjaxResults();
-        pageHtmlService.updatePageHtml(pageHtml);
+        if(null == pageHtml.getId()){
+            ajaxResults.setCode(0);
+            ajaxResults.setMsg("参数错误");
+        }else{
+            pageHtml.setCreateTime(new Date());
+            pageHtmlService.updatePageHtml(pageHtml);
+        }
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/pagehtml/delete", method = RequestMethod.DELETE)
-//    @RequiresPermissions("pagehtml:delete")
-//    @AdminLog(value = "网站:删除页面")
+    @RequiresPermissions("pagehtml:delete")
+    @AdminLog(value = "网站:删除页面")
     public Object webManageNewsDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);

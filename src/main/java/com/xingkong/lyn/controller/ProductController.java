@@ -77,7 +77,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/catagory/list", method = RequestMethod.GET)
-//    @RequiresPermissions("catagory:view")
+    @RequiresPermissions("catagory:view")
     public Object webManageCatagoryList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                                  Pageable pageable){
         AjaxResults ajaxResults = new AjaxResults();
@@ -87,26 +87,37 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/catagory/add", method = RequestMethod.POST)
-//    @RequiresPermissions("catagory:add")
-//    @AdminLog(value = "新增类别")
+    @RequiresPermissions("catagory:add")
+    @AdminLog(value = "新增类别")
     public Object webManageCatagoryAdd(@RequestBody Catagory catagory){
         AjaxResults ajaxResults = new AjaxResults();
-        catagoryService.addCatagory(catagory);
+        if(null != catagory.getId()){
+            ajaxResults.setCode(0);
+            ajaxResults.setMsg("参数错误");
+        }else{
+            catagory.setCreateTime(new Date());
+            catagoryService.addCatagory(catagory);
+        }
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/catagory/update", method = RequestMethod.PUT)
-//    @RequiresPermissions("catagory:update")
-//    @AdminLog(value = "修改类别")
+    @RequiresPermissions("catagory:update")
+    @AdminLog(value = "修改类别")
     public Object webManageCatagoryUpdate(@RequestBody Catagory catagory){
         AjaxResults ajaxResults = new AjaxResults();
-        catagoryService.updateCatagory(catagory);
+        if(null == catagory.getId()){
+            ajaxResults.setCode(0);
+            ajaxResults.setMsg("参数错误");
+        }else{
+            catagoryService.updateCatagory(catagory);
+        }
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/catagory/delete", method = RequestMethod.DELETE)
-//    @RequiresPermissions("catagory:delete")
-//    @AdminLog(value = "删除类别")
+    @RequiresPermissions("catagory:delete")
+    @AdminLog(value = "删除类别")
     public Object webManageCatagoryDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
@@ -116,8 +127,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/list", method = RequestMethod.GET)
-//    @RequiresPermissions("product:view")
-//    @AdminLog(value = "查看产品列表")
+    @RequiresPermissions("product:view")
+    @AdminLog(value = "查看产品列表")
     public Object webManageProductList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                                        Pageable pageable, Long catagoryId){
         AjaxResults ajaxResults = new AjaxResults();
@@ -127,7 +138,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/detail", method = RequestMethod.GET)
-//    @RequiresPermissions("product:detail")
+    @RequiresPermissions("product:detail")
     public Object webManageProductDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         Product product = productService.getDetail(id);
@@ -136,18 +147,23 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/add", method = RequestMethod.POST)
-//    @RequiresPermissions("product:add")
-//    @AdminLog(value = "网站:新增产品(服务)")
+    @RequiresPermissions("product:add")
+    @AdminLog(value = "网站:新增产品(服务)")
     public Object webManageProductAdd(@RequestBody Product product){
         AjaxResults ajaxResults = new AjaxResults();
-        product.setCreateTime(new Date());
-        productService.addProduct(product);
+        if(null != product.getId()){
+            ajaxResults.setCode(0);
+            ajaxResults.setMsg("参数错误");
+        }else {
+            product.setCreateTime(new Date());
+            productService.addProduct(product);
+        }
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/product/update", method = RequestMethod.PUT)
-//    @RequiresPermissions("product:update")
-//    @AdminLog(value = "网站:更新产品(服务)")
+    @RequiresPermissions("product:update")
+    @AdminLog(value = "网站:更新产品(服务)")
     public Object webManageProductUpdate(@RequestBody Product product){
         AjaxResults ajaxResults = new AjaxResults();
         productService.updateProduct(product);
@@ -155,8 +171,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/delete", method = RequestMethod.DELETE)
-//    @RequiresPermissions("product:delete")
-//    @AdminLog(value = "网站:删除产品(服务)")
+    @RequiresPermissions("product:delete")
+    @AdminLog(value = "网站:删除产品(服务)")
     public Object webManageProductDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
@@ -165,39 +181,39 @@ public class ProductController {
         return ajaxResults;
     }
 
-    @RequestMapping(value = "/web/manage/product/image/upload", method = RequestMethod.POST)
-    public Object webManageProductImageUpload(@RequestParam("file")MultipartFile file){
-        AjaxResults ajaxResults = new AjaxResults();
-        if(!file.isEmpty()){
-            try{
-                BufferedOutputStream out = new BufferedOutputStream(
-                        new FileOutputStream(new File(filePath+File.separator+file.getOriginalFilename())));
-                out.write(file.getBytes());
-                out.flush();
-                out.close();
-                Image image = new Image();
-                image.setAddress(file.getOriginalFilename());
-                image.setCreateTime(new Date());
-                image.setImgName(file.getOriginalFilename());
-                image = productService.addImage(image);
-                ajaxResults.put("id", image.getId());
-                ajaxResults.put("name", image.getImgName());
-            }catch (FileNotFoundException e){
-                logger.error("上传图片失败", e);
-                ajaxResults.setCode(0);
-                ajaxResults.setMsg("上传图片失败:图片未能找到");
-                return ajaxResults;
-            }catch (IOException e){
-                logger.error("上传图片失败", e);
-                ajaxResults.setCode(0);
-                ajaxResults.setMsg("上传图片失败:图片传输异常");
-                return ajaxResults;
-            }
-            return ajaxResults;
-        }else{
-            ajaxResults.setCode(0);
-            ajaxResults.setMsg("上传图片失败:图片为空");
-            return ajaxResults;
-        }
-    }
+//    @RequestMapping(value = "/web/manage/product/image/upload", method = RequestMethod.POST)
+//    public Object webManageProductImageUpload(@RequestParam("file")MultipartFile file){
+//        AjaxResults ajaxResults = new AjaxResults();
+//        if(!file.isEmpty()){
+//            try{
+//                BufferedOutputStream out = new BufferedOutputStream(
+//                        new FileOutputStream(new File(filePath+File.separator+file.getOriginalFilename())));
+//                out.write(file.getBytes());
+//                out.flush();
+//                out.close();
+//                Image image = new Image();
+//                image.setAddress(file.getOriginalFilename());
+//                image.setCreateTime(new Date());
+//                image.setImgName(file.getOriginalFilename());
+//                image = productService.addImage(image);
+//                ajaxResults.put("id", image.getId());
+//                ajaxResults.put("name", image.getImgName());
+//            }catch (FileNotFoundException e){
+//                logger.error("上传图片失败", e);
+//                ajaxResults.setCode(0);
+//                ajaxResults.setMsg("上传图片失败:图片未能找到");
+//                return ajaxResults;
+//            }catch (IOException e){
+//                logger.error("上传图片失败", e);
+//                ajaxResults.setCode(0);
+//                ajaxResults.setMsg("上传图片失败:图片传输异常");
+//                return ajaxResults;
+//            }
+//            return ajaxResults;
+//        }else{
+//            ajaxResults.setCode(0);
+//            ajaxResults.setMsg("上传图片失败:图片为空");
+//            return ajaxResults;
+//        }
+//    }
 }

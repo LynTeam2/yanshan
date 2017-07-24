@@ -52,7 +52,7 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/web/manage/news/list", method = RequestMethod.GET)
-//    @RequiresPermissions("news:view")
+    @RequiresPermissions("news:view")
     public Object webManageNewsList(@PageableDefault(value = 15, sort = { "newsTime" }, direction = Sort.Direction.DESC)
                                         Pageable pageable){
         AjaxResults ajaxResults = new AjaxResults();
@@ -62,7 +62,7 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/web/manage/news/detail", method = RequestMethod.GET)
-//    @RequiresPermissions("news:detail")
+    @RequiresPermissions("news:detail")
     public Object webManageNewsDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         News news = newsService.getNews(id);
@@ -71,28 +71,38 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/web/manage/news/add", method = RequestMethod.POST)
-//    @RequiresPermissions("news:add")
-//    @AdminLog(value = "网站:添加新闻")
+    @RequiresPermissions("news:add")
+    @AdminLog(value = "网站:添加新闻")
     public Object webManageNewsAdd(@RequestBody News news){
         AjaxResults ajaxResults = new AjaxResults();
-        news.setCreateTime(new Date());
-        newsService.addNews(news);
+        if(null != news.getId()){
+            ajaxResults.setCode(0);
+            ajaxResults.setMsg("参数错误");
+        }else{
+            news.setCreateTime(new Date());
+            newsService.addNews(news);
+        }
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/news/update", method = RequestMethod.PUT)
-//    @RequiresPermissions("news:update")
-//    @AdminLog(value = "网站:修改新闻")
+    @RequiresPermissions("news:update")
+    @AdminLog(value = "网站:修改新闻")
     public Object webManageNewsUpdate(@RequestBody News news){
         AjaxResults ajaxResults = new AjaxResults();
-        news.setCreateTime(new Date());
-        newsService.addNews(news);
+        if(null == news.getId()){
+            ajaxResults.setCode(0);
+            ajaxResults.setMsg("参数错误");
+        }else{
+            news.setCreateTime(new Date());
+            newsService.addNews(news);
+        }
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/news/delete", method = RequestMethod.DELETE)
-//    @RequiresPermissions("news:delete")
-//    @AdminLog(value = "网站:删除新闻")
+    @RequiresPermissions("news:delete")
+    @AdminLog(value = "网站:删除新闻")
     public Object webManageNewsDelete(String id){
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
