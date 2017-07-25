@@ -71,8 +71,8 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/web/manage/news/add", method = RequestMethod.POST)
-    @RequiresPermissions("news:add")
-    @AdminLog(value = "网站:添加新闻")
+//    @RequiresPermissions("news:add")
+//    @AdminLog(value = "网站:添加新闻")
     public Object webManageNewsAdd(@RequestBody News news){
         AjaxResults ajaxResults = new AjaxResults();
         if(null != news.getId()){

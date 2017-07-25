@@ -127,8 +127,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/web/manage/product/list", method = RequestMethod.GET)
-    @RequiresPermissions("product:view")
-    @AdminLog(value = "查看产品列表")
+//    @RequiresPermissions("product:view")
+//    @AdminLog(value = "查看产品列表")
     public Object webManageProductList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                                        Pageable pageable, Long catagoryId){
         AjaxResults ajaxResults = new AjaxResults();

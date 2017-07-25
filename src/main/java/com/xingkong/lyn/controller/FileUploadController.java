@@ -32,15 +32,15 @@ public class FileUploadController {
         parent.mkdir();
         Date date = new Date();
         Long time = date.getTime();
-        String fileName = time.toString()+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+        String fileName = time.toString()+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         if(!file.isEmpty()){
             try{
                 BufferedOutputStream out = new BufferedOutputStream(
-                        new FileOutputStream(new File(filePath+File.separator+fileName)));
+                        new FileOutputStream(new File(parent.getAbsolutePath()+File.separator+fileName)));
                 out.write(file.getBytes());
                 out.flush();
                 out.close();
-                ajaxResults.put("path", parentPath+fileName);
+                ajaxResults.put("path", parentPath+File.separator+fileName);
 //                response.setContentType("image/png");
 //                OutputStream os = response.getOutputStream();
 //                os.write(file.getBytes());
