@@ -1,5 +1,7 @@
 package com.xingkong.lyn.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.xingkong.lyn.annotation.AdminLog;
 import com.xingkong.lyn.comment.AjaxResults;
 import com.xingkong.lyn.model.web.Catagory;
@@ -79,9 +81,10 @@ public class ProductController {
     @RequestMapping(value = "/web/manage/catagory/list", method = RequestMethod.GET)
 //    @RequiresPermissions("catagory:view")
     public Object webManageCatagoryList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
-                                                 Pageable pageable){
+                                                 Pageable pageable, Long parentId){
         AjaxResults ajaxResults = new AjaxResults();
-        Page<Catagory> catagories = catagoryService.getCatagoryTree(pageable);
+        Page<Catagory> catagories = catagoryService.getCatagoryTree(parentId, pageable);
+        JSON.toJSONString(catagories, SerializerFeature.DisableCircularReferenceDetect);
         ajaxResults.put("catagories", catagories);
         return ajaxResults;
     }

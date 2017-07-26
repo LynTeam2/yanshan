@@ -1,6 +1,8 @@
 package com.xingkong.lyn.repository.web;
 
 import com.xingkong.lyn.model.web.Catagory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -10,4 +12,5 @@ import java.util.List;
  */
 public interface CatagoryRepository extends JpaRepository<Catagory, Long>{
     List<Catagory> findByParentId(Long id);
+    Page<Catagory> findAllByParentId(Long id, Pageable pageable);
 }

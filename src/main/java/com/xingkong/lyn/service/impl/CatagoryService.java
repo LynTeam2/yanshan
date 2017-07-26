@@ -33,8 +33,8 @@ public class CatagoryService implements ICatagory{
     }
 
     @Override
-    public Page<Catagory> getCatagoryTree(Pageable pageable) {
-        return catagoryDao.findAll(pageable);
+    public Page<Catagory> getCatagoryTree(Long parentId, Pageable pageable) {
+        return catagoryDao.findAllByParentId(parentId, pageable);
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.util.List;
 public interface ICatagory {
     List<Catagory> getCatagoryList();
     List<Catagory> getSubCatagory(Long parentId);
-    Page<Catagory> getCatagoryTree(Pageable pageable);
+    Page<Catagory> getCatagoryTree(Long parentId, Pageable pageable);
     boolean addCatagory(Catagory catagory);
     boolean updateCatagory(Catagory catagory);
     boolean deleteCatagory(List<Long> id);
