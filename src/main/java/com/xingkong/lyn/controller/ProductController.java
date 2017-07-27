@@ -28,6 +28,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by lyn on 2017/6/14.
@@ -85,7 +86,7 @@ public class ProductController {
         AjaxResults ajaxResults = new AjaxResults();
         Page<Catagory> catagories = catagoryService.getCatagoryTree(parentId, pageable);
         JSON.toJSONString(catagories, SerializerFeature.DisableCircularReferenceDetect);
-        ajaxResults.put("catagories", catagories);
+        ajaxResults.put("catagorites", catagories);
         return ajaxResults;
     }
 

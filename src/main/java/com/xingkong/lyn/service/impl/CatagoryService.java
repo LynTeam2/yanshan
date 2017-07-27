@@ -52,7 +52,8 @@ public class CatagoryService implements ICatagory{
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean deleteCatagory(List<Long> id) {
-        catagoryDao.deleteInBatch(catagoryDao.findAll(id));
+        List<Catagory> list = catagoryDao.findAll(id);
+        catagoryDao.deleteInBatch(list);
         return true;
     }
 

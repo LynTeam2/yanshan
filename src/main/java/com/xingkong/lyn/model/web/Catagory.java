@@ -37,8 +37,8 @@ public class Catagory implements Serializable{
     @JoinTable(name = "web_catagory_product",joinColumns = {@JoinColumn(name = "catagory_id")},inverseJoinColumns = {@JoinColumn(name = "product_id")})
     private List<Product> products;
 
-    @OneToMany(fetch=FetchType.EAGER)
-    @MapKey(name = "pk")
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+//    @MapKey(name = "id")
     @JoinColumn(name = "parentId")
     private List<Catagory> subCatagories;
 }
