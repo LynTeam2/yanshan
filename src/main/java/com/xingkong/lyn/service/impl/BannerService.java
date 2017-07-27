@@ -4,6 +4,7 @@ import com.xingkong.lyn.model.web.Banner;
 import com.xingkong.lyn.repository.web.BannerRepository;
 import com.xingkong.lyn.service.IBanner;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -35,6 +36,14 @@ public class BannerService implements IBanner{
     @Override
     public Boolean addBanner(Banner banner) {
         bannerDao.saveAndFlush(banner);
+        return true;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean saveBanners(List<Banner> banners) {
+        bannerDao.deleteAllInBatch();
+        bannerDao.save(banners);
         return true;
     }
 }

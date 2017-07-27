@@ -82,7 +82,6 @@ public class IndexController {
             Pageable pageable = new PageRequest(0, limit, sort);
             ajaxResults.put("news", newsService.getNewsByPageable(pageable).getContent());
         }
-
         return ajaxResults;
     }
 
