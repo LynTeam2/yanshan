@@ -31,7 +31,7 @@ public class Category implements Serializable{
     private Date createTime;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "shop_catagory_product", joinColumns = {@JoinColumn(name = "catagory_id")}, inverseJoinColumns = {@JoinColumn(name = "product_id")})
+    @JoinTable(name = "shop_category_product", joinColumns = {@JoinColumn(name = "category_id")}, inverseJoinColumns = {@JoinColumn(name = "product_id")})
     private List<Product> products;
 
     @OneToMany(fetch = FetchType.LAZY)

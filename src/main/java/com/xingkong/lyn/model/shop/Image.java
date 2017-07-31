@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Data
 @Table(name = "shop_image")
 public class Image implements Serializable{
-    private static final long SerialVersionUID = 1l;
+    private static final long SerialVersionUID = 1L;
 
     @Id
     @GeneratedValue

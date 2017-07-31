@@ -21,8 +21,6 @@ public class Product {
 
     private String name;
 
-    private Long catagoryId;
-
     private Long businessId;
 
     private Date createTime;
@@ -37,7 +35,7 @@ public class Product {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "shop_category_product", joinColumns = {@JoinColumn(name = "product_id")}, inverseJoinColumns = {@JoinColumn(name = "category_id")})
-    private List<Category> catagories;
+    private List<Category> categories;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "shop_product_html", joinColumns = {@JoinColumn(name = "product_id")}, inverseJoinColumns = {@JoinColumn(name = "html_id")})

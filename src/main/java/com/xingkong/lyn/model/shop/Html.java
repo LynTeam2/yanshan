@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Data
 @Table(name = "shop_html")
 public class Html implements Serializable{
-    private static final long SerialVersionUID = 1l;
+    private static final long SerialVersionUID = 1L;
 
     @Id
     @GeneratedValue
