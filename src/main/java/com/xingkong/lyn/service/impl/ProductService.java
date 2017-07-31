@@ -1,9 +1,9 @@
 package com.xingkong.lyn.service.impl;
 
-import com.xingkong.lyn.model.web.Catagory;
+import com.xingkong.lyn.model.web.Category;
 import com.xingkong.lyn.model.web.Image;
 import com.xingkong.lyn.model.web.Product;
-import com.xingkong.lyn.repository.web.CatagoryRepository;
+import com.xingkong.lyn.repository.web.CategoryRepository;
 import com.xingkong.lyn.repository.web.HtmlRepository;
 import com.xingkong.lyn.repository.web.ImageRepository;
 import com.xingkong.lyn.repository.web.ProductRepository;
@@ -30,7 +30,7 @@ public class ProductService implements IProduct{
     @Resource
     private HtmlRepository htmlDao;
     @Resource
-    private CatagoryRepository catagoryDao;
+    private CategoryRepository catagoryDao;
 
     @Override
     public List<Product> getProductList() {
@@ -48,7 +48,7 @@ public class ProductService implements IProduct{
         if(null == catagoryId){
             products = productDao.findAll(pageable);
         }else {
-            Catagory catagory = catagoryDao.findOne(catagoryId);
+            Category catagory = catagoryDao.findOne(catagoryId);
             products = new PageImpl<Product>(catagory.getProducts());
         }
         return products;

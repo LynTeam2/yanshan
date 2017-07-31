@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "web_catagory")
-public class Catagory implements Serializable{
+public class Category implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -40,6 +40,6 @@ public class Catagory implements Serializable{
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 //    @MapKey(name = "id")
     @JoinColumn(name = "parentId")
-    private List<Catagory> subCatagories;
+    private List<Category> subCategories;
 }
 

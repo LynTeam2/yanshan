@@ -32,8 +32,8 @@ public class Product implements Serializable{
     private Byte recommendFlag;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "web_catagory_product",joinColumns = {@JoinColumn(name = "product_id")},inverseJoinColumns = {@JoinColumn(name = "catagory_id")})
-    private List<Catagory> catagories;
+    @JoinTable(name = "web_category_product",joinColumns = {@JoinColumn(name = "product_id")},inverseJoinColumns = {@JoinColumn(name = "category_id")})
+    private List<Category> categories;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "web_product_image",joinColumns = {@JoinColumn(name = "product_id")},inverseJoinColumns = {@JoinColumn(name = "image_id")})
