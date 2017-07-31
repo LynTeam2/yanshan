@@ -36,14 +36,14 @@ public class ProductController {
     @Resource
     private IProduct productService;
     @Resource
-    private ICategory catagoryService;
+    private ICategory categoryService;
 
     @RequestMapping(value = "/web/product/list", method = RequestMethod.GET)
     public Object webProductList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                              Pageable pageable, Long categoryId){
         AjaxResults ajaxResults = new AjaxResults();
         if(null != categoryId){
-            Category catagory = catagoryService.getCategory(categoryId);
+            Category catagory = categoryService.getCategory(categoryId);
             ajaxResults.put("products", catagory.getProducts());
         }else{
             Page<Product> products = productService.getProductListByPageable(categoryId, pageable);
@@ -67,8 +67,8 @@ public class ProductController {
     @RequestMapping(value = "/web/product/catagory", method = RequestMethod.GET)
     public Object webProductCatagory(Long parentId){
         AjaxResults ajaxResults = new AjaxResults();
-        List<Category> catagories = catagoryService.getSubCategory(parentId);
-        ajaxResults.put("catagories", catagories);
+        List<Category> catagories = categoryService.getSubCategory(parentId);
+        ajaxResults.put("categories", catagories);
         return ajaxResults;
     }
 
@@ -77,23 +77,23 @@ public class ProductController {
     public Object webManageCatagoryList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                                  Pageable pageable, Long parentId){
         AjaxResults ajaxResults = new AjaxResults();
-        Page<Category> catagories = catagoryService.getCategoryTree(parentId, pageable);
+        Page<Category> catagories = categoryService.getCategoryTree(parentId, pageable);
         JSON.toJSONString(catagories, SerializerFeature.DisableCircularReferenceDetect);
-        ajaxResults.put("catagorites", catagories);
+        ajaxResults.put("categorites", catagories);
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/catagory/add", method = RequestMethod.POST)
 //    @RequiresPermissions("catagory:add")
 //    @AdminLog(value = "新增类别")
-    public Object webManageCatagoryAdd(@RequestBody Category catagory){
+    public Object webManageCatagoryAdd(@RequestBody Category category){
         AjaxResults ajaxResults = new AjaxResults();
-        if(null != catagory.getId()){
+        if(null != category.getId()){
             ajaxResults.setCode(0);
             ajaxResults.setMsg("参数错误");
         }else{
-            catagory.setCreateTime(new Date());
-            catagoryService.addCategory(catagory);
+            category.setCreateTime(new Date());
+            categoryService.addCategory(category);
         }
         return ajaxResults;
     }
@@ -101,13 +101,13 @@ public class ProductController {
     @RequestMapping(value = "/web/manage/catagory/update", method = RequestMethod.PUT)
 //    @RequiresPermissions("catagory:update")
 //    @AdminLog(value = "修改类别")
-    public Object webManageCatagoryUpdate(@RequestBody Category catagory){
+    public Object webManageCatagoryUpdate(@RequestBody Category category){
         AjaxResults ajaxResults = new AjaxResults();
-        if(null == catagory.getId()){
+        if(null == category.getId()){
             ajaxResults.setCode(0);
             ajaxResults.setMsg("参数错误");
         }else{
-            catagoryService.updateCategory(catagory);
+            categoryService.updateCategory(category);
         }
         return ajaxResults;
     }
@@ -119,7 +119,7 @@ public class ProductController {
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
         List<Long> ids = Arrays.asList(arr);
-        catagoryService.deleteCategory(ids);
+        categoryService.deleteCategory(ids);
         return ajaxResults;
     }
 
@@ -127,9 +127,9 @@ public class ProductController {
 //    @RequiresPermissions("product:view")
 //    @AdminLog(value = "查看产品列表")
     public Object webManageProductList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
-                                                       Pageable pageable, Long catagoryId){
+                                                       Pageable pageable, Long categoryId){
         AjaxResults ajaxResults = new AjaxResults();
-        Page<Product> products = productService.getProductListByPageable(catagoryId, pageable);
+        Page<Product> products = productService.getProductListByPageable(categoryId, pageable);
         ajaxResults.put("products", products);
         return ajaxResults;
     }
