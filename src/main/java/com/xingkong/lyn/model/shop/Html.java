@@ -7,24 +7,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
- * Created by lyn on 2017/6/2.
+ * Created by lyn on 2017/7/31.
  */
 @Entity
 @Data
-@Table(name = "shop_catagory")
-public class Catagory implements Serializable{
-    private static final long serialVersionUID = 1L;
+@Table(name = "shop_html")
+public class Html implements Serializable{
+    private static final long SerialVersionUID = 1l;
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String name;
+    private String html;
 
-    private Long parentId;
-
-    private Date createTime;
+    private String position;
 }
