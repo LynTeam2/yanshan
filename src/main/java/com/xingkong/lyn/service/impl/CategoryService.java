@@ -58,7 +58,7 @@ public class CategoryService implements ICategory {
     }
 
     @Override
-    public Category getCatagory(Long id) {
+    public Category getCategory(Long id) {
         return categoryDao.findOne(id);
     }
 }
