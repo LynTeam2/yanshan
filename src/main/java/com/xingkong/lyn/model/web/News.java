@@ -1,5 +1,6 @@
 package com.xingkong.lyn.model.web;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class News implements Serializable{
 
     @Temporal(TemporalType.DATE)
     @Column(name = "news_time")
+    @JSONField(format = "yyyy-MM-dd")
     private Date newsTime;
 
     private Date createTime;
