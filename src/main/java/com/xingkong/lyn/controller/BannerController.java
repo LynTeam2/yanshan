@@ -21,19 +21,27 @@ public class BannerController {
     private IBanner bannerService;
 
     @RequestMapping(value = "/web/manage/banner/save", method = RequestMethod.POST)
-    @RequiresPermissions("banner:save")
+///    @RequiresPermissions("banner:save")
     public Object webManageBannerSave(@RequestBody List<Banner> banners){
         AjaxResults ajaxResults = new AjaxResults();
         bannerService.saveBanners(banners);
         return ajaxResults;
     }
 
-    @RequestMapping(value = "/web/manage/banner/list", method = RequestMethod.POST)
-    @RequiresPermissions("banner:view")
+    @RequestMapping(value = "/web/manage/banner/list", method = RequestMethod.GET)
+///    @RequiresPermissions("banner:view")
     public Object webManageBannerList(){
         AjaxResults ajaxResults = new AjaxResults();
         List<Banner> banners = bannerService.findAll();
         ajaxResults.put("banners", banners);
         return ajaxResults;
     }
+
+//    @RequestMapping(value = "/web/banner/list", method = RequestMethod.GET)
+//    public Object webBannerList(String position){
+//        AjaxResults ajaxResults = new AjaxResults();
+//        List<Banner> banners = bannerService.findByPosition(position);
+//        ajaxResults.put("banners", banners);
+//        return ajaxResults;
+//    }
 }

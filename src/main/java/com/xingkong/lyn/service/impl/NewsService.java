@@ -33,8 +33,8 @@ public class NewsService implements INews{
     }
 
     @Override
-    public Page<News> getNewsByPageable(Pageable pageable) {
-        return newsDao.findAll(pageable);
+    public Page<News> getNewsByType(Byte newsType, Pageable pageable) {
+        return newsDao.getNewsByNewsType(newsType, pageable);
     }
 
     @Override
@@ -48,5 +48,10 @@ public class NewsService implements INews{
     public boolean deleteNews(List<Long> id) {
         newsDao.deleteInBatch(newsDao.findAll(id));
         return true;
+    }
+
+    @Override
+    public Page<News> getNewsList(Pageable pageable) {
+        return newsDao.findAll(pageable);
     }
 }

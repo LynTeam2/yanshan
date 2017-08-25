@@ -12,7 +12,8 @@ import java.util.List;
 public interface INews {
     List<News> getNewsList();
     News getNews(Long id);
-    Page<News> getNewsByPageable(Pageable pageable);
+    Page<News> getNewsByType(Byte newsType, Pageable pageable);
     boolean addNews(News news);
     boolean deleteNews(List<Long> id);
+    Page<News> getNewsList(Pageable pageable);
 }

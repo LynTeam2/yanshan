@@ -47,40 +47,40 @@ public class IndexController {
     private IProduct productService;
 
     @RequestMapping(value = "/web/index/banner", method = RequestMethod.GET)
-    public Object webIndexBanner(){
+    public Object webIndexBanner(String position){
         AjaxResults ajaxResults = new AjaxResults();
-        List<Banner> banners = bannerService.findAll();
+        List<Banner> banners = bannerService.findByPosition(position);
         ajaxResults.put("banners",banners);
         return ajaxResults;
     }
 
-    @RequestMapping(value = "/web/manage/banner/delete",method = RequestMethod.DELETE)
-    public Object webManageNewsDelete(String id){
-        AjaxResults ajaxResults = new AjaxResults();
-        Long[] ids = StringUtils.isBlank(id)? null : OtherUtil.parseStringtoLong(id);
-        List<Long> idList= Arrays.asList(ids);
-        bannerService.deleteList(idList);
-        return ajaxResults;
-    }
-
-    @RequestMapping(value = "/web/manage/banner/add",method = RequestMethod.POST)
-    public Object webManageMessAdd(Banner banner){
-        AjaxResults ajaxResults = new AjaxResults();
-        banner.setCreateTime(new Date());
-        bannerService.addBanner(banner);
-        return ajaxResults;
-    }
+//    @RequestMapping(value = "/web/manage/banner/delete",method = RequestMethod.DELETE)
+//    public Object webManageBannerDelete(String id){
+//        AjaxResults ajaxResults = new AjaxResults();
+//        Long[] ids = StringUtils.isBlank(id)? null : OtherUtil.parseStringtoLong(id);
+//        List<Long> idList= Arrays.asList(ids);
+//        bannerService.deleteList(idList);
+//        return ajaxResults;
+//    }
+//
+//    @RequestMapping(value = "/web/manage/banner/add",method = RequestMethod.POST)
+//    public Object webManageMessAdd(Banner banner){
+//        AjaxResults ajaxResults = new AjaxResults();
+//        banner.setCreateTime(new Date());
+//        bannerService.addBanner(banner);
+//        return ajaxResults;
+//    }
 
 
     @RequestMapping(value = "/web/index/news", method = RequestMethod.GET)
-    public AjaxResults webIndexNews(Integer limit){
+    public AjaxResults webIndexNews(Integer limit, Byte newsType){
         AjaxResults ajaxResults = new AjaxResults();
         if(null == limit){
             ajaxResults.put("news", newsService.getNewsList());
         }else{
             Sort sort = new Sort(Sort.Direction.DESC, "newsTime");
             Pageable pageable = new PageRequest(0, limit, sort);
-            ajaxResults.put("news", newsService.getNewsByPageable(pageable).getContent());
+            ajaxResults.put("news", newsService.getNewsByType(newsType, pageable));
         }
         return ajaxResults;
     }

@@ -36,10 +36,10 @@ public class NewsController {
 
     @RequestMapping(value = "/web/news/list", method = RequestMethod.GET)
     public Object webNewsList(@PageableDefault(value = 15, sort = { "newsTime" }, direction = Sort.Direction.DESC)
-                                      Pageable pageable){
+                                      Pageable pageable, Byte newsType){
         AjaxResults ajaxResults = new AjaxResults();
-        Page<News> news = newsService.getNewsByPageable(pageable);
-        ajaxResults.put("newsList", news.getContent());
+        Page<News> news = newsService.getNewsByType(newsType, pageable);
+        ajaxResults.put("newsList", news);
         return ajaxResults;
     }
 
@@ -47,7 +47,7 @@ public class NewsController {
     public Object webNewsDetail(Long id){
         AjaxResults ajaxResults = new AjaxResults();
         News news = newsService.getNews(id);
-//        ajaxResults.put("information", news.getHtml());
+        ajaxResults.put("news", news);
         return ajaxResults;
     }
 
@@ -56,8 +56,8 @@ public class NewsController {
     public Object webManageNewsList(@PageableDefault(value = 15, sort = { "newsTime" }, direction = Sort.Direction.DESC)
                                         Pageable pageable){
         AjaxResults ajaxResults = new AjaxResults();
-        Page<News> news = newsService.getNewsByPageable(pageable);
-        ajaxResults.put("newsList", news.getContent());
+        Page<News> news = newsService.getNewsList(pageable);
+        ajaxResults.put("newsList", news);
         return ajaxResults;
     }
 

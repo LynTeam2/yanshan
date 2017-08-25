@@ -39,4 +39,7 @@ public class News implements Serializable{
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "web_news_image", joinColumns = {@JoinColumn(name = "news_id")},inverseJoinColumns = {@JoinColumn(name = "image_id")})
     private List<Image> images;
+
+    @Column(name = "type")
+    private Byte newsType = 0;
 }

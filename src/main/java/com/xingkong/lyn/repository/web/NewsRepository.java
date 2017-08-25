@@ -12,4 +12,5 @@ import java.util.List;
  * Created by lyn on 2017/6/13.
  */
 public interface NewsRepository extends JpaRepository<News, Long>{
+    Page<News> getNewsByNewsType(Byte newsType, Pageable pageable);
 }

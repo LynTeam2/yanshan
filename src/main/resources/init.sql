@@ -206,10 +206,11 @@ create table if not exists web_news (
   title varchar(32) comment'新闻标题',
   news_time datetime comment'新闻日期',
   content text comment'新闻内容',
+  type tinyint(4) comment'新闻类别',
   create_time timestamp comment'创建时间',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站新闻表';
-create table if not exists web_catagory (
+create table if not exists web_category (
   id bigint(20) not null auto_increment,
   name varchar(64) comment'商品分类名称',
   content text comment'分类说明',
@@ -226,6 +227,7 @@ create table if not exists web_product (
   create_time timestamp comment'创建时间',
   home_flag tinyint(4) comment'首页展示',
   recommend_flag tinyint(4) comment'推荐0不推荐 1推荐',
+  sequence varchar(64) comment'产品编号',
   primary key (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站产品表';
 create table if not exists web_info (
@@ -279,7 +281,7 @@ create table if not exists web_news_image (
   news_id bigint(20) not null comment'新闻id',
   image_id bigint(20) not null comment'图片id'
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站新闻图片对照表';
-create table if not exists web_catagory_product (
+create table if not exists web_category_product (
   catagory_id bigint(20) not null comment'类别id',
   product_id bigint(20) not null comment'产品id'
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站类别产品对照表';
