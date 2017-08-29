@@ -81,14 +81,12 @@ public class ProductService implements IProduct{
     }
 
     @Override
-    public List<Product> getIndexProducts(Byte homeFlag, Byte recommendFlag) {
-        List<Product> list = new ArrayList<>();
+    public Page<Product> getIndexProducts(Byte homeFlag, Byte recommendFlag, Pageable pageable) {
         if(null != homeFlag){
-            list = productDao.findByHomeFlag(homeFlag);
+            return productDao.findByHomeFlag(homeFlag, pageable);
         }else{
-            list = productDao.findByRecommendFlag(recommendFlag);
+            return productDao.findByRecommendFlag(recommendFlag, pageable);
         }
-        return list;
     }
 
 }

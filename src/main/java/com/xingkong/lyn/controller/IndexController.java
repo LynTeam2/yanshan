@@ -80,7 +80,7 @@ public class IndexController {
         }else{
             Sort sort = new Sort(Sort.Direction.DESC, "newsTime");
             Pageable pageable = new PageRequest(0, limit, sort);
-            ajaxResults.put("news", newsService.getNewsByType(newsType, pageable));
+            ajaxResults.put("news", newsService.getNewsByType(newsType, pageable).getContent());
         }
         return ajaxResults;
     }
@@ -100,7 +100,9 @@ public class IndexController {
         if(null == homeFlag && null == recommendFlag){
             ajaxResults.put("products", productService.getProductList());
         }else{
-            ajaxResults.put("products", productService.getIndexProducts(homeFlag, recommendFlag));
+            Sort sort = new Sort(Sort.Direction.DESC, "createTime");
+            Pageable pageable = new PageRequest(0, limit, sort);
+            ajaxResults.put("products", productService.getIndexProducts(homeFlag, recommendFlag, pageable).getContent());
         }
         return ajaxResults;
     }

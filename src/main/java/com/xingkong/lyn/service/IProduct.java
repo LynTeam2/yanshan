@@ -25,5 +25,5 @@ public interface IProduct {
 
     Image addImage(Image image);
 
-    List<Product> getIndexProducts(Byte homeFlag, Byte recommendFlag);
+    Page<Product> getIndexProducts(Byte homeFlag, Byte recommendFlag, Pageable pageable);
 }
