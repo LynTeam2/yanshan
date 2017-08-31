@@ -27,7 +27,7 @@ public class StudentController {
     private IStudent studentService;
 
     @RequestMapping(value = "/web/manage/student/list", method = RequestMethod.GET)
-    @RequiresPermissions("student:view")
+//    @RequiresPermissions("student:view")
     public Object webManageStudentList(@PageableDefault(value = 15, sort = {"id"}, direction = Sort.Direction.DESC)Pageable pageable) {
         AjaxResults ajaxResults = new AjaxResults();
         ajaxResults.put("students", studentService.getStudentList(pageable));
@@ -35,7 +35,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/web/manage/student/add", method = RequestMethod.POST)
-    @RequiresPermissions("student:add")
+//    @RequiresPermissions("student:add")
     public Object webManageStudentAdd(@RequestBody Student student) {
         AjaxResults ajaxResults = new AjaxResults();
         if (null != student.getId()) {
@@ -48,7 +48,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/web/manage/student/update", method = RequestMethod.PUT)
-    @RequiresPermissions("student:update")
+//    @RequiresPermissions("student:update")
     public Object webManageStudentUpdate(@RequestBody Student student) {
         AjaxResults ajaxResults = new AjaxResults();
         if (null == student.getId()) {
@@ -61,7 +61,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/web/manage/student/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("student:delete")
+//    @RequiresPermissions("student:delete")
     public Object webManageStudentDelete(String id) {
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
@@ -71,7 +71,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/web/manage/student/detail", method = RequestMethod.GET)
-    @RequiresPermissions("student:detail")
+//    @RequiresPermissions("student:detail")
     public Object webManageStudentDetail(Long id) {
         AjaxResults ajaxResults = new AjaxResults();
         ajaxResults.put("student", studentService.getStudent(id));
