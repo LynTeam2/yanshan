@@ -60,10 +60,11 @@ public class ProductController {
         AjaxResults ajaxResults = new AjaxResults();
         if(null == id){
             ajaxResults.setCode(0);
-            return ajaxResults;
+            ajaxResults.setMsg("参数错误");
+        }else{
+            Product product = productService.getDetail(id);
+            ajaxResults.put("product", product);
         }
-        Product product = productService.getDetail(id);
-        ajaxResults.put("product", product);
         return ajaxResults;
     }
 

@@ -295,3 +295,82 @@ create table if not exists web_staff (
   create_time timestamp comment'创建时间',
   PRIMARY KEY (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站职员表';
+create table if not exists web_course (
+  id bigint(20) not null auto_increment,
+  name varchar(32) comment '课程名称',
+  course_status tinyint(4) comment'课程状态',
+  course_type tinyint(4) comment'课程类型',
+  start_time date comment'课程开始时间',
+  end_time date comment'课程结束时间',
+  introdution text comment'介绍',
+  address varchar(64) comment'地址',
+  create_time timestamp comment'创建时间',
+  PRIMARY KEY (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站课程表';
+create table if not exists web_reservation (
+  id bigint(20) not null auto_increment,
+  person_name varchar(32) comment '预约人姓名',
+  person_phone varchar(32) comment'预约人联系方式',
+  person_address varchar(64) comment'预约人地址',
+  reserve_time date comment'预约时间',
+  create_time timestamp comment'创建时间',
+  PRIMARY KEY (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站预约表';
+create table if not exists web_teacher (
+  id bigint(20) not null auto_increment,
+  name varchar(32) comment '教师姓名',
+  teacher_type tinyint(4) comment'教师类型',
+  introduction text comment'简介',
+  label varchar(64) comment'标签',
+  create_time timestamp comment'创建时间',
+  PRIMARY KEY (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站教师表';
+create table if not exists web_student (
+  id bigint(20) not null auto_increment,
+  name varchar(32) comment '学员姓名',
+  phone varchar(32) comment'联系方式',
+  introduction text comment'简介',
+  create_time timestamp comment'创建时间',
+  PRIMARY KEY (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站学员表';
+create table if not exists web_video (
+  id bigint(20) not null auto_increment,
+  name varchar(32) comment '视频名称',
+  video_url varchar(128) comment'视频链接',
+  video_preview varchar(128) comment'视频预览图',
+  homeFlag tinyint(4) comment'是否放在首页',
+  create_time timestamp comment'创建时间',
+  PRIMARY KEY (id)
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站视频表';
+create table if not exists web_course_teacher (
+  course_id bigint(20) not null comment'课程id',
+  teacher_id bigint(20) not null comment'教师id'
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站课程教师对应表';
+create table if not exists web_course_reservation (
+  course_id bigint(20) not null comment'课程id',
+  reservation_id bigint(20) not null comment'预约id'
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站课程预约对应表';
+create table if not exists web_course_image (
+  course_id bigint(20) not null comment'课程id',
+  image_id bigint(20) not null comment'图片id'
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站课程图片对应表';
+create table if not exists web_course_html (
+  course_id bigint(20) not null comment'课程id',
+  html_id bigint(20) not null comment'富文本id'
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站课程富文本对应表';
+create table if not exists web_teacher_image (
+  teacher_id bigint(20) not null comment'课程id',
+  image_id bigint(20) not null comment'图片id'
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站教师图片对应表';
+create table if not exists web_teacher_html (
+  teacher_id bigint(20) not null comment'课程id',
+  html_id bigint(20) not null comment'富文本id'
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站教师富文本对应表';
+create table if not exists web_student_image (
+  student_id bigint(20) not null comment'课程id',
+  image_id bigint(20) not null comment'图片id'
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站学员图片对应表';
+create table if not exists web_student_html (
+  student_id bigint(20) not null comment'课程id',
+  html_id bigint(20) not null comment'富文本id'
+)engine=InnoDB DEFAULT CHARSET = utf8 comment'网站学员富文本对应表';
