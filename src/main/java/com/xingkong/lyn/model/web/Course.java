@@ -45,7 +45,7 @@ public class Course implements Serializable{
     @JoinTable(name = "web_course_teacher",joinColumns = {@JoinColumn(name = "course_id")},inverseJoinColumns = {@JoinColumn(name = "teacher_id")})
     private List<Teacher> teachers;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "web_course_reservation",joinColumns = {@JoinColumn(name = "course_id")},inverseJoinColumns = {@JoinColumn(name = "reservation_id")})
     private List<Reservation> reservations;
 

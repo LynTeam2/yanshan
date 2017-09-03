@@ -27,7 +27,7 @@ public class VideoController {
     private IVideo videoService;
 
     @RequestMapping(value = "/web/manage/video/list", method = RequestMethod.GET)
-    @RequiresPermissions("video:view")
+//    @RequiresPermissions("video:view")
     public Object webManageVideoList(@PageableDefault(value = 15, sort = {"id"}, direction = Sort.Direction.DESC)Pageable pageable) {
         AjaxResults ajaxResults = new AjaxResults();
         ajaxResults.put("videos", videoService.getVideoList(pageable));
@@ -35,7 +35,7 @@ public class VideoController {
     }
 
     @RequestMapping(value = "/web/manage/video/add", method = RequestMethod.POST)
-    @RequiresPermissions("video:add")
+//    @RequiresPermissions("video:add")
     public Object webManageVideoAdd(@RequestBody Video video) {
         AjaxResults ajaxResults = new AjaxResults();
         if (null != video.getId()) {
@@ -48,7 +48,7 @@ public class VideoController {
     }
 
     @RequestMapping(value = "/web/manage/video/update", method = RequestMethod.PUT)
-    @RequiresPermissions("video:update")
+//    @RequiresPermissions("video:update")
     public Object webManageVideoUpdate(@RequestBody Video video) {
         AjaxResults ajaxResults = new AjaxResults();
         if (null == video.getId()) {
@@ -61,7 +61,7 @@ public class VideoController {
     }
 
     @RequestMapping(value = "/web/manage/video/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("video:delete")
+//    @RequiresPermissions("video:delete")
     public Object webManageVideoDelete(String id) {
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
@@ -71,7 +71,7 @@ public class VideoController {
     }
 
     @RequestMapping(value = "/web/manage/video/detail", method = RequestMethod.GET)
-    @RequiresPermissions("video:detail")
+//    @RequiresPermissions("video:detail")
     public Object webManageVideoDetail(Long id) {
         AjaxResults ajaxResults = new AjaxResults();
         ajaxResults.put("video", videoService.getVideo(id));

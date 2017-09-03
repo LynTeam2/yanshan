@@ -33,7 +33,7 @@ public class CourseController {
     private ITeacher teacherService;
 
     @RequestMapping(value = "/web/manage/course/list", method = RequestMethod.GET)
-    @RequiresPermissions("course:view")
+//    @RequiresPermissions("course:view")
     public Object webManageCourseList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                               Pageable pageable) {
         AjaxResults ajaxResults = new AjaxResults();
@@ -43,7 +43,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/web/manage/course/add", method = RequestMethod.POST)
-    @RequiresPermissions("course:add")
+//    @RequiresPermissions("course:add")
     public Object webManageCourseAdd(@RequestBody Course course) {
         AjaxResults ajaxResults = new AjaxResults();
         Long teacherId = course.getTeachers().get(0).getId();
@@ -59,7 +59,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/web/manage/course/update", method = RequestMethod.PUT)
-    @RequiresPermissions("course:update")
+//    @RequiresPermissions("course:update")
     public Object webManageCourseUpdate(@RequestBody Course course) {
         AjaxResults ajaxResults = new AjaxResults();
         Long teacherId = course.getTeachers().get(0).getId();
@@ -75,7 +75,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/web/manage/course/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("course:delete")
+//    @RequiresPermissions("course:delete")
     public Object webManageCourseDelete(String id) {
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
@@ -85,7 +85,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/web/manage/course/detail", method = RequestMethod.GET)
-    @RequiresPermissions("course:detail")
+//    @RequiresPermissions("course:detail")
     public Object webManageCourseDetail(Long id) {
         AjaxResults ajaxResults = new AjaxResults();
         ajaxResults.put("course", courseService.getCourse(id));

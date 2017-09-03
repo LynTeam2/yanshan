@@ -1,11 +1,13 @@
 package com.xingkong.lyn.controller;
 
 import com.xingkong.lyn.comment.AjaxResults;
+import com.xingkong.lyn.model.web.Course;
 import com.xingkong.lyn.model.web.Teacher;
 import com.xingkong.lyn.service.ITeacher;
 import com.xingkong.lyn.util.OtherUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -30,7 +32,14 @@ public class TeacherController {
 //    @RequiresPermissions("teacher:view")
     public Object webManageTeacherList(@PageableDefault(value = 15, sort = {"id"}, direction = Sort.Direction.DESC)Pageable pageable) {
         AjaxResults ajaxResults = new AjaxResults();
-        ajaxResults.put("teachers", teacherService.getTeacherList(pageable));
+        Page<Teacher> teachers = teacherService.getTeacherList(pageable);
+        for(Teacher teacher : teachers) {
+            for(Course course : teacher.getCourses()){
+                course.setTeachers(null);
+                course.setReservations(null);
+            }
+        }
+        ajaxResults.put("teachers", teachers);
         return ajaxResults;
     }
 

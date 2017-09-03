@@ -36,7 +36,7 @@ public class Teacher implements Serializable{
     @JoinTable(name = "web_teacher_html",joinColumns = {@JoinColumn(name = "teacher_id")},inverseJoinColumns = {@JoinColumn(name = "html_id")})
     private List<Html> htmls;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "web_course_teacher",joinColumns = {@JoinColumn(name = "teacher_id")},inverseJoinColumns = {@JoinColumn(name = "course_id")})
     private List<Course> courses;
 }

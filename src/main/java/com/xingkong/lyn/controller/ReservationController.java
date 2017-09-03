@@ -6,6 +6,7 @@ import com.xingkong.lyn.service.IReservation;
 import com.xingkong.lyn.util.OtherUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -27,15 +28,20 @@ public class ReservationController {
     private IReservation reservationService;
 
     @RequestMapping(value = "/web/manage/reservation/list", method = RequestMethod.GET)
-    @RequiresPermissions("reservation:view")
+//    @RequiresPermissions("reservation:view")
     public Object webManageReservationList(@PageableDefault(value = 15, sort = {"id"}, direction = Sort.Direction.DESC)Pageable pageable) {
         AjaxResults ajaxResults = new AjaxResults();
-        ajaxResults.put("reservations", reservationService.getReservationList(pageable));
+        Page<Reservation> reservations = reservationService.getReservationList(pageable);
+        for(Reservation reservation : reservations) {
+            reservation.getCourse().setReservations(null);
+            reservation.getCourse().setTeachers(null);
+        }
+        ajaxResults.put("reservations", reservations);
         return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/reservation/add", method = RequestMethod.POST)
-    @RequiresPermissions("reservation:add")
+//    @RequiresPermissions("reservation:add")
     public Object webManageReservationAdd(@RequestBody Reservation reservation) {
         AjaxResults ajaxResults = new AjaxResults();
         if (null != reservation.getId()) {
@@ -48,7 +54,7 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/web/manage/reservation/update", method = RequestMethod.PUT)
-    @RequiresPermissions("reservation:update")
+//    @RequiresPermissions("reservation:update")
     public Object webManageReservationUpdate(@RequestBody Reservation reservation) {
         AjaxResults ajaxResults = new AjaxResults();
         if (null == reservation.getId()) {
@@ -61,7 +67,7 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/web/manage/reservation/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("reservation:delete")
+//    @RequiresPermissions("reservation:delete")
     public Object webManageReservationDelete(String id) {
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
@@ -71,7 +77,7 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/web/manage/reservation/detail", method = RequestMethod.GET)
-    @RequiresPermissions("reservation:detail")
+//    @RequiresPermissions("reservation:detail")
     public Object webManageReservationDetail(Long id) {
         AjaxResults ajaxResults = new AjaxResults();
         ajaxResults.put("reservation", reservationService.getReservation(id));
