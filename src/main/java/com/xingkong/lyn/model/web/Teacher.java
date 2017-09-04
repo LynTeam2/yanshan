@@ -28,6 +28,8 @@ public class Teacher implements Serializable{
 
     private String label;
 
+    private Byte homeFlag;
+
     @JoinTable(name = "web_teacher_image", joinColumns = {@JoinColumn(name = "teacher_id")}, inverseJoinColumns = {@JoinColumn(name = "image_id")})
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Image> images;

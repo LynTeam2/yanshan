@@ -322,6 +322,7 @@ create table if not exists web_teacher (
   teacher_type tinyint(4) comment'教师类型',
   introduction text comment'简介',
   label varchar(64) comment'标签',
+  home_flag  tinyint(4) comment'是否展示在首页',
   create_time timestamp comment'创建时间',
   PRIMARY KEY (id)
 )engine=InnoDB DEFAULT CHARSET = utf8 comment'网站教师表';

@@ -38,6 +38,10 @@ public class CourseController {
                                               Pageable pageable) {
         AjaxResults ajaxResults = new AjaxResults();
         Page<Course> courses = courseService.getCourseList(pageable);
+        for(Course course : courses) {
+            course.setTeachers(null);
+            course.setReservations(null);
+        }
         ajaxResults.put("courses", courses);
         return ajaxResults;
     }
