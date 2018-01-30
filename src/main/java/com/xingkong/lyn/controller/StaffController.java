@@ -1,11 +1,10 @@
 package com.xingkong.lyn.controller;
 
-import com.xingkong.lyn.comment.AjaxResults;
+import com.xingkong.lyn.common.AjaxResults;
 import com.xingkong.lyn.model.web.Staff;
 import com.xingkong.lyn.service.IStaff;
 import com.xingkong.lyn.util.OtherUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

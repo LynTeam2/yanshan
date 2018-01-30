@@ -15,8 +15,8 @@ server:
   use-forward-headers: true
 spring:
     datasource:
-        name: zhimeng
-        url: jdbc:mysql://119.23.56.10:3306/zhimeng?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        name: anjian
+        url: jdbc:mysql://127.0.0.1:3306/anjian?useUnicode=true&characterEncoding=utf-8&useSSL=false
         username: root
         password: 1qazCDE#5tgb
         # 使用druid数据源

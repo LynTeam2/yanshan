@@ -1,16 +1,12 @@
 package com.xingkong.lyn.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.xingkong.lyn.annotation.AdminLog;
-import com.xingkong.lyn.comment.AjaxResults;
+import com.xingkong.lyn.common.AjaxResults;
 import com.xingkong.lyn.model.web.Category;
 import com.xingkong.lyn.model.web.Product;
 import com.xingkong.lyn.service.ICategory;
 import com.xingkong.lyn.service.IProduct;
 import com.xingkong.lyn.util.OtherUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

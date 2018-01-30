@@ -7,7 +7,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
 // tag::build[]
         classpath('se.transmode.gradle:gradle-docker:1.2')
 // end::build[]
@@ -89,6 +89,7 @@ dependencies {
     compile 'org.crazycake:shiro-redis:2.4.2.1-RELEASE'
 //    compile 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.5.4'
     compile 'com.alibaba:fastjson:1.2.15'
+//    compile 'org.springframework.boot:spring-boot-starter-jersey'
 
     mybatisGenerator 'org.mybatis.generator:mybatis-generator-core:1.3.5'
     mybatisGenerator 'mysql:mysql-connector-java:5.1.40'

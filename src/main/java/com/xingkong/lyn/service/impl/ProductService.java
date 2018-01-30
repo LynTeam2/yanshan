@@ -4,8 +4,6 @@ import com.xingkong.lyn.model.web.Category;
 import com.xingkong.lyn.model.web.Image;
 import com.xingkong.lyn.model.web.Product;
 import com.xingkong.lyn.repository.web.CategoryRepository;
-import com.xingkong.lyn.repository.web.HtmlRepository;
-import com.xingkong.lyn.repository.web.ImageRepository;
 import com.xingkong.lyn.repository.web.ProductRepository;
 import com.xingkong.lyn.service.IProduct;
 import org.springframework.data.domain.Page;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,10 +22,6 @@ import java.util.List;
 public class ProductService implements IProduct{
     @Resource
     private ProductRepository productDao;
-    @Resource
-    private ImageRepository imageDao;
-    @Resource
-    private HtmlRepository htmlDao;
     @Resource
     private CategoryRepository catagoryDao;
 
@@ -75,10 +68,6 @@ public class ProductService implements IProduct{
         return true;
     }
 
-    @Override
-    public Image addImage(Image image) {
-        return imageDao.save(image);
-    }
 
     @Override
     public Page<Product> getIndexProducts(Byte homeFlag, Byte recommendFlag, Pageable pageable) {

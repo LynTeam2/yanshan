@@ -1,12 +1,11 @@
 package com.xingkong.lyn.controller;
 
-import com.xingkong.lyn.comment.AjaxResults;
+import com.xingkong.lyn.common.AjaxResults;
 import com.xingkong.lyn.model.web.Course;
 import com.xingkong.lyn.model.web.Teacher;
 import com.xingkong.lyn.service.ITeacher;
 import com.xingkong.lyn.util.OtherUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
