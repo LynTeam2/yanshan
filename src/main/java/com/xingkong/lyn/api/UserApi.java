@@ -2,6 +2,7 @@ package com.xingkong.lyn.api;
 
 import com.xingkong.lyn.service.anjian.IUser;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -14,6 +15,4 @@ import javax.annotation.Resource;
 public class UserApi {
     @Resource
     private IUser userService;
-
-    
 }

@@ -1,5 +1,7 @@
 package com.xingkong.lyn.entity.anjian;
 
+import com.alibaba.druid.sql.ast.statement.SQLColumnDefinition;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
@@ -20,7 +22,15 @@ public class Exam implements Serializable {
 
     private String examName;
 
-    private Byte examType;
+    private String examType;
+
+    private int standard;
+
+    private String introduction;
+
+    private int examDuration;
+
+    private String role;
 
     @Temporal(TemporalType.DATE)
     @JSONField(format = "yyyy-MM-dd")

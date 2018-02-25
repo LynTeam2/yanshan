@@ -24,7 +24,6 @@ public abstract class BaseImage {
 
     private String path;
 
-    @Column(name = "name")
     private String imgName;
 
     private Date createTime;

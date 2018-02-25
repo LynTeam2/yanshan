@@ -1,10 +1,7 @@
 package com.xingkong.lyn.api;
 
 import com.xingkong.lyn.entity.anjian.*;
-import com.xingkong.lyn.service.anjian.IBanner;
-import com.xingkong.lyn.service.anjian.ICourse;
-import com.xingkong.lyn.service.anjian.IExam;
-import com.xingkong.lyn.service.anjian.IQuestion;
+import com.xingkong.lyn.service.anjian.*;
 import com.xingkong.lyn.util.CompressUtil;
 import com.xingkong.lyn.util.OtherUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +19,9 @@ public class UpgradeApi {
     private IBanner bannerService;
 
     @Resource
+    private ICategory categoryService;
+
+    @Resource
     private ICourse courseService;
 
     @Resource
@@ -37,20 +37,24 @@ public class UpgradeApi {
          */
         List<Course> courses = courseService.findAll();
 
-        OtherUtil.writeJsonToFile("courses", courseService.findId("危险化学品"),
-                "upgrade/course", "危险化学品.json");
-        OtherUtil.writeJsonToFile("courses", courseService.findId("建筑施工"),
-                "upgrade/course", "建筑施工.json");
-        OtherUtil.writeJsonToFile("courses", courseService.findId("人员密集场所"),
-                "upgrade/course", "人员密集场所.json");
-        OtherUtil.writeJsonToFile("courses", courseService.findId("交通运输"),
-                "upgrade/course", "交通运输.json");
-        OtherUtil.writeJsonToFile("courses", courseService.findId("工业企业"),
-                "upgrade/course", "工业企业.json");
-        OtherUtil.writeJsonToFile("courses", courseService.findId("消防"),
-                "upgrade/course", "消防.json");
-        OtherUtil.writeJsonToFile("courses", courseService.findId("特种设备"),
-                "upgrade/course", "特种设备.json");
+        OtherUtil.writeJsonToFile("categories", categoryService.getSubCategory(1l),
+                "upgrade/course", "category.json");
+        OtherUtil.writeJsonToFile("courses", courseService.findList("危险化学品"),
+                "upgrade/course", "weixianhuaxuepin.json");
+        OtherUtil.writeJsonToFile("courses", courseService.findList("建筑施工"),
+                "upgrade/course", "jianzhushigong.json");
+        OtherUtil.writeJsonToFile("courses", courseService.findList("人员密集场所"),
+                "upgrade/course", "renyuanmijichangsuo.json");
+        OtherUtil.writeJsonToFile("courses", courseService.findList("交通运输"),
+                "upgrade/course", "jiaotongyunshu.json");
+        OtherUtil.writeJsonToFile("courses", courseService.findList("工业企业"),
+                "upgrade/course", "gongyeqiye.json");
+        OtherUtil.writeJsonToFile("courses", courseService.findList("消防"),
+                "upgrade/course", "xiaofang.json");
+        OtherUtil.writeJsonToFile("courses", courseService.findList("特种设备"),
+                "upgrade/course", "tezhongshebei.json");
+        OtherUtil.writeJsonToFile("courses", courseService.findLatestCourseList(),
+                "upgrade/course", "latest.json");
 
         for (Course course : courses) {
             OtherUtil.writeJsonToFile("course", course, "upgrade/course", course.getId() + ".json");

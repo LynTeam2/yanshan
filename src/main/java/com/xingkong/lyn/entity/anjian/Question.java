@@ -23,6 +23,11 @@ public abstract class Question {
 
     private String answer;
 
+    private String questionType;
+
+    @Transient
+    private String uid;
+
     @Temporal(TemporalType.TIMESTAMP)
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;

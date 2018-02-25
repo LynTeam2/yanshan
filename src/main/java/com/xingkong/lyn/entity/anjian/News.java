@@ -8,7 +8,6 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by lyn on 2017/6/13.
@@ -25,6 +24,8 @@ public class News implements Serializable{
 
     private String title;
 
+    private String introduction;
+
     private String content;
 
     @Temporal(TemporalType.DATE)
@@ -34,11 +35,11 @@ public class News implements Serializable{
 
     private Date createTime;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "aj_news_html", joinColumns = {@JoinColumn(name = "news_id")},inverseJoinColumns = {@JoinColumn(name = "html_id")})
-    private List<Html> htmls;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "aj_news_image", joinColumns = {@JoinColumn(name = "news_id")},inverseJoinColumns = {@JoinColumn(name = "image_id")})
-    private List<Image> images;
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "aj_news_html", joinColumns = {@JoinColumn(name = "news_id")},inverseJoinColumns = {@JoinColumn(name = "html_id")})
+//    private List<Html> htmls;
+//
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "aj_news_image", joinColumns = {@JoinColumn(name = "news_id")},inverseJoinColumns = {@JoinColumn(name = "image_id")})
+//    private List<Image> images;
 }

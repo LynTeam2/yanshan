@@ -1,9 +1,9 @@
-package com.xingkong.lyn.service.impl;
+package com.xingkong.lyn.service.anjian.impl;
 
-import com.xingkong.lyn.model.web.Category;
-import com.xingkong.lyn.repository.web.CategoryRepository;
+import com.xingkong.lyn.entity.anjian.Category;
+import com.xingkong.lyn.repository.anjian.CategoryRepository;
 import com.xingkong.lyn.repository.web.ProductRepository;
-import com.xingkong.lyn.service.ICategory;
+import com.xingkong.lyn.service.anjian.ICategory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,8 +19,6 @@ import java.util.List;
 public class CategoryService implements ICategory {
     @Resource
     private CategoryRepository categoryDao;
-    @Resource
-    private ProductRepository productDao;
 
     @Override
     public List<Category> getCategoryList() {

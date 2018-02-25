@@ -15,4 +15,5 @@ public interface ICourse {
     List<Course> findList(String ajType);
     List<Long> findId(String ajType);
     List<Course> findAll();
+    List<Course> findLatestCourseList();
 }

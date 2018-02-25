@@ -15,4 +15,5 @@ public interface INews {
     boolean updateNews(News news);
     boolean deleteNews(List<Long> ids);
     Page<News> getNewsList(Pageable pageable);
+    List<News> findNewsList();
 }

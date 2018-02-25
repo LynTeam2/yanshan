@@ -3,6 +3,7 @@ package com.xingkong.lyn.entity.anjian;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -14,11 +15,15 @@ import java.io.Serializable;
 public class MultipleChoice extends Question implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String ChoiceA;
+    @Column(name = "choice_a")
+    private String choiceA;
 
-    private String ChoiceB;
+    @Column(name = "choice_b")
+    private String choiceB;
 
-    private String ChoiceC;
+    @Column(name = "choice_c")
+    private String choiceC;
 
-    private String ChoiceD;
+    @Column(name = "choice_d")
+    private String choiceD;
 }

@@ -1,6 +1,6 @@
-package com.xingkong.lyn.repository.web;
+package com.xingkong.lyn.repository.anjian;
 
-import com.xingkong.lyn.model.web.Category;
+import com.xingkong.lyn.entity.anjian.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

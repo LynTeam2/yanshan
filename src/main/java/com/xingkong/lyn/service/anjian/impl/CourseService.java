@@ -64,4 +64,9 @@ public class CourseService implements ICourse {
     public List<Course> findAll() {
         return courseDao.findAll();
     }
+
+    @Override
+    public List<Course> findLatestCourseList() {
+        return courseDao.findAllByHomePage(true);
+    }
 }

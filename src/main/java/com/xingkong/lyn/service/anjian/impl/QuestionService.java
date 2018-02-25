@@ -133,7 +133,11 @@ public class QuestionService implements IQuestion {
 
     @Override
     public List<TrueFalse> findNewtf() {
-        return trueFalseDao.findAll();
+        List<TrueFalse> list = trueFalseDao.findAll();
+        list.forEach(item -> {
+            item.setUid(item.getQuestionType() + item.getId());
+        });
+        return list;
     }
 
     @Override
@@ -143,11 +147,19 @@ public class QuestionService implements IQuestion {
 
     @Override
     public List<SimpleChoice> findNewsc() {
-        return simpleChoiceDao.findAll();
+        List<SimpleChoice> list = simpleChoiceDao.findAll();
+        list.forEach(item -> {
+            item.setUid(item.getQuestionType() + item.getId());
+        });
+        return list;
     }
 
     @Override
     public List<MultipleChoice> findNewmc() {
-        return multipleChoiceDao.findAll();
+        List<MultipleChoice> list = multipleChoiceDao.findAll();
+        list.forEach(item -> {
+            item.setUid(item.getQuestionType() + item.getId());
+        });
+        return list;
     }
 }

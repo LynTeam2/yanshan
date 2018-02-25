@@ -1,6 +1,5 @@
 package com.xingkong.lyn.entity.anjian;
 
-import com.xingkong.lyn.model.web.BaseImage;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

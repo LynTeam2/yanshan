@@ -99,12 +99,12 @@ public class ExamUtil {
         List<Map<String, Object>> exam = new LinkedList<>();
         for (Map<String, Object> map : list) {
             // 试题的三种类别
-            String aj = (String)map.get("ajType");
+            String aj = (String) map.get("ajType");
             String di = map.get("difficulty").toString();
             String qu = map.get("questionType").toString();
 
             // 当三种条件为空的时候，不再取题
-            if (ajType.isEmpty() || difficulty.isEmpty() || questionType.isEmpty()){
+            if (ajType.isEmpty() || difficulty.isEmpty() || questionType.isEmpty()) {
                 break;
             }
 
@@ -139,7 +139,7 @@ public class ExamUtil {
 
     public static List<Map<String, Object>> random(List<Map<String, Object>> list) {
         int count = list.size();
-        List<Map<String, Object>> resultList= new LinkedList<>();
+        List<Map<String, Object>> resultList = new LinkedList<>();
         Random rand = new Random();
         for (int i = 0; i < count; i++) {
             int num = rand.nextInt(count - i);

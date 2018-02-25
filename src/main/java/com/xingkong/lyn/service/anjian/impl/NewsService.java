@@ -42,4 +42,9 @@ public class NewsService implements INews {
     public Page<News> getNewsList(Pageable pageable) {
         return newsDao.findAll(pageable);
     }
+
+    @Override
+    public List<News> findNewsList() {
+        return newsDao.findAll();
+    }
 }

@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "an_question_tf")
+@Table(name = "aj_question_tf")
 @EqualsAndHashCode(callSuper = false)
 public class TrueFalse extends Question implements Serializable {
     private static final long serialVersionUID = 1L;

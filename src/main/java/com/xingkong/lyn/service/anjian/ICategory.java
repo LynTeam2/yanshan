@@ -1,6 +1,6 @@
-package com.xingkong.lyn.service;
+package com.xingkong.lyn.service.anjian;
 
-import com.xingkong.lyn.model.web.Category;
+import com.xingkong.lyn.entity.anjian.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
