@@ -1,10 +1,8 @@
 package com.xingkong.lyn.service.anjian.impl;
 
-import com.sun.xml.internal.xsom.XSWildcard;
 import com.xingkong.lyn.entity.anjian.News;
 import com.xingkong.lyn.repository.anjian.NewsRepository;
 import com.xingkong.lyn.service.anjian.INews;
-import com.xingkong.lyn.util.OtherUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,7 +41,7 @@ public class NewsService implements INews {
 
     @Override
     public Page<News> getNewsList(Pageable pageable, String query) {
-        return StringUtils.isBlank(query)?newsDao.findAll(pageable):newsDao.findByTitleLike(OtherUtil.handleQuery(query), pageable);
+        return StringUtils.isBlank(query)?newsDao.findAll(pageable):newsDao.findByTitleLike("%" + query + "%", pageable);
     }
 
     @Override

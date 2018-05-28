@@ -3,7 +3,6 @@ package com.xingkong.lyn.service.anjian.impl;
 import com.xingkong.lyn.entity.anjian.*;
 import com.xingkong.lyn.repository.anjian.ExamRepository;
 import com.xingkong.lyn.service.anjian.IExam;
-import com.xingkong.lyn.util.OtherUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +18,7 @@ public class ExamService implements IExam {
 
     @Override
     public Page<Exam> findList(Pageable pageable, String query) {
-        return StringUtils.isBlank(query)?examDao.findAll(pageable):examDao.findByExamNameLike(OtherUtil.handleQuery(query), pageable);
+        return StringUtils.isBlank(query)?examDao.findAll(pageable):examDao.findByExamNameLike("%" + query + "%", pageable);
     }
 
     @Override

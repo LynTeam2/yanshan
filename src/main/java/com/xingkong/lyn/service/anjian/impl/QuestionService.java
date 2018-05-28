@@ -6,7 +6,6 @@ import com.xingkong.lyn.repository.anjian.MultipleChoiceRepository;
 import com.xingkong.lyn.repository.anjian.SimpleChoiceRepository;
 import com.xingkong.lyn.repository.anjian.TrueFalseRepository;
 import com.xingkong.lyn.service.anjian.IQuestion;
-import com.xingkong.lyn.util.OtherUtil;
 import com.xingkong.lyn.util.PinyinUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
@@ -51,7 +50,7 @@ public class QuestionService implements IQuestion {
 
     @Override
     public Page<TrueFalse> findtfList(Pageable pageable, String query) {
-        return StringUtils.isBlank(query)?trueFalseDao.findAll(pageable):trueFalseDao.findByUidLike(OtherUtil.handleQuery(query), pageable);
+        return StringUtils.isBlank(query)?trueFalseDao.findAll(pageable):trueFalseDao.findByUidLike("%" + query + "%", pageable);
     }
 
     @Override
@@ -61,12 +60,12 @@ public class QuestionService implements IQuestion {
 
     @Override
     public Page<SimpleChoice> findscList(Pageable pageable, String query) {
-        return StringUtils.isBlank(query)?simpleChoiceDao.findAll(pageable):simpleChoiceDao.findByUidLike(OtherUtil.handleQuery(query), pageable);
+        return StringUtils.isBlank(query)?simpleChoiceDao.findAll(pageable):simpleChoiceDao.findByUidLike("%" + query + "%", pageable);
     }
 
     @Override
     public Page<MultipleChoice> findmcList(Pageable pageable, String query) {
-        return StringUtils.isBlank(query)?multipleChoiceDao.findAll(pageable):multipleChoiceDao.findByUidLike(OtherUtil.handleQuery(query), pageable);
+        return StringUtils.isBlank(query)?multipleChoiceDao.findAll(pageable):multipleChoiceDao.findByUidLike("%" + query + "%", pageable);
     }
 
     @Override
