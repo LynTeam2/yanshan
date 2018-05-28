@@ -3,6 +3,7 @@ package com.xingkong.lyn.service.anjian.impl;
 import com.xingkong.lyn.entity.anjian.Course;
 import com.xingkong.lyn.repository.anjian.CourseRepository;
 import com.xingkong.lyn.service.anjian.ICourse;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,8 @@ public class CourseService implements ICourse {
     }
 
     @Override
-    public Page<Course> findList(Pageable pageable) {
-        return courseDao.findAll(pageable);
+    public Page<Course> findList(Pageable pageable, String query) {
+        return StringUtils.isBlank(query)?courseDao.findAll(pageable):courseDao.findByCourseNameLike(query, pageable);
     }
 
     @Override
@@ -68,5 +69,10 @@ public class CourseService implements ICourse {
     @Override
     public List<Course> findLatestCourseList() {
         return courseDao.findAllByHomePage(true);
+    }
+
+    @Override
+    public List<Course> findByCourseName(String courseName) {
+        return StringUtils.isBlank(courseName)?courseDao.findAll():courseDao.findAllByCourseNameLike(courseName);
     }
 }

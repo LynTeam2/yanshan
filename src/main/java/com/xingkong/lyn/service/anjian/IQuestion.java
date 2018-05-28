@@ -13,10 +13,10 @@ public interface IQuestion {
     List<BlankFilling> findNewbf(Date updateTime);
     List<SimpleChoice> findNewsc(Date updateTime);
     List<MultipleChoice> findNewmc(Date updateTime);
-    Page<TrueFalse> findtfList(Pageable pageable);
+    Page<TrueFalse> findtfList(Pageable pageable, String query);
     Page<BlankFilling> findbfList(Pageable pageable);
-    Page<SimpleChoice> findscList(Pageable pageable);
-    Page<MultipleChoice> findmcList(Pageable pageable);
+    Page<SimpleChoice> findscList(Pageable pageable, String query);
+    Page<MultipleChoice> findmcList(Pageable pageable, String query);
     boolean addQuestion(Question question);
     boolean updateQuestion(Question question);
     boolean deleteList(String questionType, List<Long> ids);

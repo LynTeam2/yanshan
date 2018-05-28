@@ -6,6 +6,8 @@ import com.xingkong.lyn.repository.anjian.MultipleChoiceRepository;
 import com.xingkong.lyn.repository.anjian.SimpleChoiceRepository;
 import com.xingkong.lyn.repository.anjian.TrueFalseRepository;
 import com.xingkong.lyn.service.anjian.IQuestion;
+import com.xingkong.lyn.util.PinyinUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -47,8 +49,8 @@ public class QuestionService implements IQuestion {
     }
 
     @Override
-    public Page<TrueFalse> findtfList(Pageable pageable) {
-        return trueFalseDao.findAll(pageable);
+    public Page<TrueFalse> findtfList(Pageable pageable, String query) {
+        return StringUtils.isBlank(query)?trueFalseDao.findAll(pageable):trueFalseDao.findByUidLike(query, pageable);
     }
 
     @Override
@@ -57,25 +59,31 @@ public class QuestionService implements IQuestion {
     }
 
     @Override
-    public Page<SimpleChoice> findscList(Pageable pageable) {
-        return simpleChoiceDao.findAll(pageable);
+    public Page<SimpleChoice> findscList(Pageable pageable, String query) {
+        return StringUtils.isBlank(query)?simpleChoiceDao.findAll(pageable):simpleChoiceDao.findByUidLike(query, pageable);
     }
 
     @Override
-    public Page<MultipleChoice> findmcList(Pageable pageable) {
-        return multipleChoiceDao.findAll(pageable);
+    public Page<MultipleChoice> findmcList(Pageable pageable, String query) {
+        return StringUtils.isBlank(query)?multipleChoiceDao.findAll(pageable):multipleChoiceDao.findByUidLike(query, pageable);
     }
 
     @Override
     public boolean addQuestion(Question question) {
         if (question instanceof TrueFalse) {
-            trueFalseDao.saveAndFlush((TrueFalse) question);
+            TrueFalse entity = trueFalseDao.saveAndFlush((TrueFalse) question);
+            entity.setUid(PinyinUtil.converterToFirstSpell(entity.getAjType()) + entity.getQuestionType() + entity.getId());
+            trueFalseDao.saveAndFlush(entity);
         } else if (question instanceof BlankFilling) {
             blankFillingDao.saveAndFlush((BlankFilling) question);
         } else if (question instanceof SimpleChoice) {
-            simpleChoiceDao.saveAndFlush((SimpleChoice) question);
+            SimpleChoice entity = simpleChoiceDao.saveAndFlush((SimpleChoice) question);
+            entity.setUid(PinyinUtil.converterToFirstSpell(entity.getAjType()) + entity.getQuestionType() + entity.getId());
+            simpleChoiceDao.saveAndFlush(entity);
         } else if (question instanceof MultipleChoice) {
-            multipleChoiceDao.saveAndFlush((MultipleChoice) question);
+            MultipleChoice entity = multipleChoiceDao.saveAndFlush((MultipleChoice) question);;
+            entity.setUid(PinyinUtil.converterToFirstSpell(entity.getAjType()) + entity.getQuestionType() + entity.getId());
+            multipleChoiceDao.saveAndFlush(entity);
         }
         return true;
     }
@@ -134,9 +142,9 @@ public class QuestionService implements IQuestion {
     @Override
     public List<TrueFalse> findNewtf() {
         List<TrueFalse> list = trueFalseDao.findAll();
-        list.forEach(item -> {
-            item.setUid(item.getQuestionType() + item.getId());
-        });
+//        list.forEach(item -> {
+//            item.setUid(item.getQuestionType() + item.getId());
+//        });
         return list;
     }
 
@@ -148,18 +156,18 @@ public class QuestionService implements IQuestion {
     @Override
     public List<SimpleChoice> findNewsc() {
         List<SimpleChoice> list = simpleChoiceDao.findAll();
-        list.forEach(item -> {
-            item.setUid(item.getQuestionType() + item.getId());
-        });
+//        list.forEach(item -> {
+//            item.setUid(item.getQuestionType() + item.getId());
+//        });
         return list;
     }
 
     @Override
     public List<MultipleChoice> findNewmc() {
         List<MultipleChoice> list = multipleChoiceDao.findAll();
-        list.forEach(item -> {
-            item.setUid(item.getQuestionType() + item.getId());
-        });
+//        list.forEach(item -> {
+//            item.setUid(item.getQuestionType() + item.getId());
+//        });
         return list;
     }
 }

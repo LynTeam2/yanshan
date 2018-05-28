@@ -12,4 +12,5 @@ public interface IUser {
     boolean addUser(User user);
     boolean deleteList(List<Long> ids);
     boolean updateUser(User user);
+    User findByName(String username);
 }

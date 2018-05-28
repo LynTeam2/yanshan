@@ -30,9 +30,18 @@ public class CourseController {
     @RequestMapping(value = "/web/manage/course/list", method = RequestMethod.GET)
 //    @RequiresPermissions("course:view")
     public Object webManageCourseList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
-                                              Pageable pageable) {
+                                              Pageable pageable, String query) {
         AjaxResults ajaxResults = new AjaxResults();
-        Page<Course> courses = courseService.findList(pageable);
+        Page<Course> courses = courseService.findList(pageable, query);
+        ajaxResults.put("courses", courses);
+        return ajaxResults;
+    }
+
+    @RequestMapping(value = "/web/manage/course/all", method = RequestMethod.GET)
+//    @RequiresPermissions("course:view")
+    public Object webManageCourseList() {
+        AjaxResults ajaxResults = new AjaxResults();
+        List<Course> courses = courseService.findAll();
         ajaxResults.put("courses", courses);
         return ajaxResults;
     }

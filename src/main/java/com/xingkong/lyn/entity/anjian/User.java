@@ -19,9 +19,13 @@ public class User implements Serializable {
 
     private String realName;
 
-    private String password;
+    private String icon;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "aj_unit_user", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "unit_id")})
     private Unit unit;
+
+    private int beanCount;
+
+    private String nickname;
 }

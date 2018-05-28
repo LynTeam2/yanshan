@@ -20,7 +20,7 @@ public class SysLogService implements ISysLog{
     @Override
     public boolean addSysLog(SysLog sysLog) {
         sysLogDao.saveAndFlush(sysLog);
-        return false;
+        return true;
     }
 
     @Override

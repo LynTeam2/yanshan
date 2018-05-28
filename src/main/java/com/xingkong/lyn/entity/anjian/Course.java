@@ -30,6 +30,10 @@ public class Course implements Serializable {
 
     private String iconName;
 
+    private String video;
+
+    private String videoName;
+
     private String introduction;
 
     private boolean homePage;

@@ -26,17 +26,17 @@ public class ExamController {
     private IExam examService;
 
     @RequestMapping(value = "/web/manage/exam/list", method = RequestMethod.GET)
-    @RequiresPermissions("exam:view")
+//    @RequiresPermissions("exam:view")
     public Object webManageExamList(@PageableDefault(value = 15, sort = {"id"},
-            direction = Sort.Direction.DESC)Pageable pageable) {
+            direction = Sort.Direction.DESC)Pageable pageable, String query) {
         AjaxResults ajaxResults = new AjaxResults();
-        Page<Exam> exams = examService.findList(pageable);
+        Page<Exam> exams = examService.findList(pageable, query);
         ajaxResults.put("exams", exams);
-        return exams;
+        return ajaxResults;
     }
 
     @RequestMapping(value = "/web/manage/exam/add", method = RequestMethod.POST)
-    @RequiresPermissions("exam:add")
+//    @RequiresPermissions("exam:add")
     public Object webManageExamAdd(@RequestBody Exam exam) {
         AjaxResults ajaxResults = new AjaxResults();
         if (null != exam.getId()) {
@@ -51,7 +51,7 @@ public class ExamController {
     }
 
     @RequestMapping(value = "/web/manage/exam/update", method = RequestMethod.PUT)
-    @RequiresPermissions("exam:update")
+//    @RequiresPermissions("exam:update")
     public Object webManageExamUpdate(@RequestBody Exam exam) {
         AjaxResults ajaxResults = new AjaxResults();
         if (null == exam.getId()) {
@@ -65,7 +65,7 @@ public class ExamController {
     }
 
     @RequestMapping(value = "/web/manage/exam/detail", method = RequestMethod.GET)
-    @RequiresPermissions("exam:detail")
+//    @RequiresPermissions("exam:detail")
     public Object webManageExamDetail(Long id) {
         AjaxResults ajaxResults = new AjaxResults();
         Exam exam = examService.findById(id);
@@ -74,7 +74,7 @@ public class ExamController {
     }
 
     @RequestMapping(value = "/web/manage/exam/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("exam:delete")
+//    @RequiresPermissions("exam:delete")
     public Object webManageExamDelete(String id) {
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);

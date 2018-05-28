@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ICourse {
     Course findById(long id);
-    Page<Course> findList(Pageable pageable);
+    Page<Course> findList(Pageable pageable, String query);
     boolean addCourse(Course course);
     boolean deleteList(List<Long> ids);
     boolean updateCourse(Course course);
@@ -16,4 +16,5 @@ public interface ICourse {
     List<Long> findId(String ajType);
     List<Course> findAll();
     List<Course> findLatestCourseList();
+    List<Course> findByCourseName(String courseName);
 }

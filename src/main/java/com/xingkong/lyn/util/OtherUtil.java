@@ -1,7 +1,9 @@
 package com.xingkong.lyn.util;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import groovy.json.internal.IO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +48,8 @@ public class OtherUtil {
         FileWriter fileWriter = new FileWriter(file);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(entryName, object);
-        fileWriter.write(jsonObject.toString());
+
+        fileWriter.write(JSON.toJSONString(jsonObject, SerializerFeature.DisableCircularReferenceDetect));
         fileWriter.close();
     }
 }

@@ -29,7 +29,9 @@ public class FileUploadController {
     public Object uploadFile(@RequestParam("file")MultipartFile file, HttpServletRequest request, HttpServletResponse response){
         AjaxResults ajaxResults = new AjaxResults();
         File parent = new File(filePath+File.separator+parentPath);
-        parent.mkdir();
+        if (!parent.exists()) {
+            parent.mkdir();
+        }
         Date date = new Date();
         Long time = date.getTime();
         String fileName = time.toString()+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
@@ -40,7 +42,8 @@ public class FileUploadController {
                 out.write(file.getBytes());
                 out.flush();
                 out.close();
-                ajaxResults.put("path", parentPath+File.separator+fileName);
+                ajaxResults.put("name", fileName);
+                ajaxResults.put("path", "http://39.104.118.75/resource"+File.separator+parentPath+File.separator+fileName);
 //                response.setContentType("image/png");
 //                OutputStream os = response.getOutputStream();
 //                os.write(file.getBytes());

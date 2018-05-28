@@ -33,9 +33,10 @@ public class NewsController {
     @RequestMapping(value = "/web/manage/news/list", method = RequestMethod.GET)
 //    @RequiresPermissions("news:view")
     public Object webManageNewsList(@PageableDefault(value = 15, sort = { "newsTime" }, direction = Sort.Direction.DESC)
-                                        Pageable pageable){
+                                        Pageable pageable, String query){
         AjaxResults ajaxResults = new AjaxResults();
-        Page<News> news = newsService.getNewsList(pageable);
+        Page<News> news = newsService.getNewsList(pageable, query);
+        news.getContent().stream().forEach((news1) -> news1.setContent(new String(news1.getContentByte())));
         ajaxResults.put("newsList", news);
         return ajaxResults;
     }
@@ -59,6 +60,9 @@ public class NewsController {
             ajaxResults.setMsg("参数错误");
         }else{
             news.setCreateTime(new Date());
+            if (StringUtils.isNotBlank(news.getContent())) {
+                news.setContentByte(news.getContent().getBytes());
+            }
             newsService.addNews(news);
         }
         return ajaxResults;
@@ -74,6 +78,9 @@ public class NewsController {
             ajaxResults.setMsg("参数错误");
         }else{
             news.setCreateTime(new Date());
+            if (StringUtils.isNotBlank(news.getContent())) {
+                news.setContentByte(news.getContent().getBytes());
+            }
             newsService.addNews(news);
         }
         return ajaxResults;

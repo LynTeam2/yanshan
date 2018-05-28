@@ -42,4 +42,9 @@ public class UserService implements IUser {
         userDao.saveAndFlush(user);
         return true;
     }
+
+    @Override
+    public User findByName(String username) {
+        return userDao.findByUserName(username);
+    }
 }

@@ -24,6 +24,7 @@ public class Exam implements Serializable {
 
     private String examType;
 
+    @Transient
     private int standard;
 
     private String introduction;
@@ -40,21 +41,30 @@ public class Exam implements Serializable {
     @JSONField(format = "yyyy-MM-dd")
     private Date endDate;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "aj_exam_tf", joinColumns = {@JoinColumn(name = "exam_id")}, inverseJoinColumns = {@JoinColumn(name = "question_id")})
+    @Transient
     List<TrueFalse> tfList;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "aj_exam_bf", joinColumns = {@JoinColumn(name = "exam_id")}, inverseJoinColumns = {@JoinColumn(name = "question_id")})
+    @Transient
     List<BlankFilling> bfList;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "aj_exam_sc", joinColumns = {@JoinColumn(name = "exam_id")}, inverseJoinColumns = {@JoinColumn(name = "question_id")})
+    @Transient
     List<SimpleChoice> scList;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "aj_exam_mc", joinColumns = {@JoinColumn(name = "exam_id")}, inverseJoinColumns = {@JoinColumn(name = "question_id")})
+    @Transient
     List<MultipleChoice> mcList;
+
+    @Transient
+    int examTfCount = 0;
+
+    @Transient
+    int examScCount = 0;
+
+    @Transient
+    int examMcCount = 0;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "aj_exam_course", joinColumns = {@JoinColumn(name = "exam_id")}, inverseJoinColumns = {@JoinColumn(name = "course_id")})
+    List<Course> courseList;
 
     @Temporal(TemporalType.DATE)
     @JSONField(format = "yyyy-MM-dd")

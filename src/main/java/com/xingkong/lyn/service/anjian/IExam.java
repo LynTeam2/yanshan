@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface IExam {
-    Page<Exam> findList(Pageable pageable);
+    Page<Exam> findList(Pageable pageable, String query);
     Exam findById(long id);
     boolean addExam(Exam exam);
     boolean deleteList(List<Long> ids);

@@ -26,13 +26,22 @@ public class News implements Serializable{
 
     private String introduction;
 
+    @Transient
     private String content;
+
+    @Column(columnDefinition = "blob", name = "content")
+    private byte[] contentByte;
+
+    private String imageName;
+
+    private String imagePath;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "news_time")
     @JSONField(format = "yyyy-MM-dd")
     private Date newsTime;
 
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
 //    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

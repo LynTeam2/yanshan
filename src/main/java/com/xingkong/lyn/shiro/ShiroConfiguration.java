@@ -71,7 +71,7 @@ public class ShiroConfiguration {
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<>();
 
         //配置退出过滤器，其中具体的退出代码Shiro已经实现
-        filterChainDefinitionMap.put("/logout","logout");
+//        filterChainDefinitionMap.put("/logout","logout");
 
         //配置记住我或认证通过可以访问的地址
         filterChainDefinitionMap.put("/index", "user");

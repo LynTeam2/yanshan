@@ -1,9 +1,10 @@
 package com.xingkong.lyn.api;
 
+import com.xingkong.lyn.common.AjaxResults;
 import com.xingkong.lyn.entity.anjian.*;
 import com.xingkong.lyn.service.anjian.*;
-import com.xingkong.lyn.util.CompressUtil;
 import com.xingkong.lyn.util.OtherUtil;
+import com.xingkong.lyn.util.SevenZipCompressUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UpgradeApi {
@@ -30,8 +34,12 @@ public class UpgradeApi {
     @Resource
     private IExam examService;
 
-    @RequestMapping(value = "/api/upgrade", method = RequestMethod.GET, produces="application/zip")
-    public void upgrade(HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "/api/sevenZip", method = RequestMethod.PUT)
+    public Object sevenZip()throws IOException{
+        String filePath = "upgrade.7z";
+        File file = new File(filePath);
+        file.delete();
+        AjaxResults ajaxResults = new AjaxResults();
         /**
          * 课程数据
          */
@@ -77,9 +85,34 @@ public class UpgradeApi {
          */
         OtherUtil.writeJsonToFile("banners", bannerService.findAll(), "upgrade/banner", "banner.json");
 
-        CompressUtil.compress("upgrade", "upgrade.zip");
+        /**
+         * 法律法规类别
+         */
+        List<Map<String, Object>> lawTypes = new ArrayList<>();
+        String[] nameArr = new String[]{"法律法规", "规范性文件", "标准规范", "文件解读"};
+        String[] iconArr = new String[]{"http://39.104.118.75/resource/lawType/flfg.png",
+                "http://39.104.118.75/resource/lawType/gfxwj.png",
+                "http://39.104.118.75/resource/lawType/bzgf.png",
+                "http://39.104.118.75/resource/lawType/wjjd.png"};
+        for (int i = 0; i < 4; i++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", nameArr[i]);
+            map.put("icon", iconArr[i]);
+            map.put("id", i);
+            lawTypes.add(map);
+        }
+        OtherUtil.writeJsonToFile("lawType", lawTypes, "upgrade/law", "lawType.json");
 
-        String filePath = "upgrade.zip";
+//        CompressUtil.compress("upgrade", "upgrade.zip");
+        File sevenZipFile = new File("upgrade");
+        SevenZipCompressUtil.compress("upgrade.7z", sevenZipFile);
+
+        return ajaxResults;
+    }
+
+    @RequestMapping(value = "/api/upgrade", method = RequestMethod.GET, produces="application/zip")
+    public void upgrade(HttpServletResponse response) throws IOException {
+        String filePath = "upgrade.7z";
         File file = new File(filePath);
         response.setCharacterEncoding("UTF-8");
         response.setHeader("Content-Disposition",
@@ -99,7 +132,6 @@ public class UpgradeApi {
         }
         myout.flush();
         buff.close();
-        file.delete();
     }
 
 }

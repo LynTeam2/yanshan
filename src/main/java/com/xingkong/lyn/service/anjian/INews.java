@@ -14,6 +14,6 @@ public interface INews {
     boolean addNews(News news);
     boolean updateNews(News news);
     boolean deleteNews(List<Long> ids);
-    Page<News> getNewsList(Pageable pageable);
+    Page<News> getNewsList(Pageable pageable, String query);
     List<News> findNewsList();
 }

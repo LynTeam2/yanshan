@@ -4,11 +4,14 @@ import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @MappedSuperclass
-public abstract class Question {
+public abstract class Question implements Serializable{
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue
     private Long id;
@@ -25,7 +28,6 @@ public abstract class Question {
 
     private String questionType;
 
-    @Transient
     private String uid;
 
     @Temporal(TemporalType.TIMESTAMP)
