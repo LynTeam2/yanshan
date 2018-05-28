@@ -3,6 +3,7 @@ package com.xingkong.lyn.service.anjian.impl;
 import com.xingkong.lyn.entity.anjian.Law;
 import com.xingkong.lyn.repository.anjian.LawRepository;
 import com.xingkong.lyn.service.anjian.ILaw;
+import com.xingkong.lyn.util.OtherUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +27,7 @@ public class LawService implements ILaw{
 
     @Override
     public Page<Law> findListByQuery(Pageable pageable, String query) {
-        return StringUtils.isBlank(query)?lawDao.findAll(pageable):lawDao.findByLawNameLike(query, pageable);
+        return StringUtils.isBlank(query)?lawDao.findAll(pageable):lawDao.findByLawNameLike(OtherUtil.handleQuery(query), pageable);
     }
 
     @Override

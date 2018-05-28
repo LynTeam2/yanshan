@@ -52,4 +52,8 @@ public class OtherUtil {
         fileWriter.write(JSON.toJSONString(jsonObject, SerializerFeature.DisableCircularReferenceDetect));
         fileWriter.close();
     }
+
+    public static String handleQuery(String query) {
+        return "%" + query + "%";
+    }
 }

@@ -31,7 +31,7 @@ public class LawController {
     public Object webManageLawList(@PageableDefault(value = 15, sort = { "id" }, direction = Sort.Direction.DESC)
                                                Pageable pageable, String query) {
         AjaxResults ajaxResults = new AjaxResults();
-        Page<Law> laws = lawService.findList(pageable, query);
+        Page<Law> laws = lawService.findListByQuery(pageable, query);
         ajaxResults.put("laws", laws);
         return ajaxResults;
     }
