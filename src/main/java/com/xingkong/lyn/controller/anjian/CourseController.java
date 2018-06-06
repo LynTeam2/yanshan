@@ -1,5 +1,7 @@
 package com.xingkong.lyn.controller.anjian;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.xingkong.lyn.common.AjaxResults;
 import com.xingkong.lyn.entity.anjian.Course;
 import com.xingkong.lyn.service.anjian.ICourse;
@@ -33,7 +35,7 @@ public class CourseController {
                                               Pageable pageable, String query) {
         AjaxResults ajaxResults = new AjaxResults();
         Page<Course> courses = courseService.findList(pageable, query);
-        ajaxResults.put("courses", courses);
+        ajaxResults.put("courses", JSON.parse(JSON.toJSONString(courses, SerializerFeature.DisableCircularReferenceDetect)));
         return ajaxResults;
     }
 

@@ -1,5 +1,7 @@
 package com.xingkong.lyn.controller.anjian;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.xingkong.lyn.common.AjaxResults;
 import com.xingkong.lyn.entity.anjian.Exam;
 import com.xingkong.lyn.service.anjian.IExam;
@@ -31,7 +33,7 @@ public class ExamController {
             direction = Sort.Direction.DESC)Pageable pageable, String query) {
         AjaxResults ajaxResults = new AjaxResults();
         Page<Exam> exams = examService.findList(pageable, query);
-        ajaxResults.put("exams", exams);
+        ajaxResults.put("exams", JSON.parse(JSON.toJSONString(exams, SerializerFeature.DisableCircularReferenceDetect)));
         return ajaxResults;
     }
 
