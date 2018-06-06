@@ -1,7 +1,7 @@
 package com.xingkong.lyn.shiro.filter;
 
 import com.alibaba.fastjson.JSON;
-import com.xingkong.lyn.comment.AjaxResults;
+import com.xingkong.lyn.common.AjaxResults;
 import com.xingkong.lyn.model.UserInfo;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;

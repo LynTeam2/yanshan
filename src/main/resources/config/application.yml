@@ -15,8 +15,8 @@ server:
   use-forward-headers: true
 spring:
     datasource:
-        name: base
-        url: jdbc:mysql://127.0.0.1:3306/base?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        name: anjian
+        url: jdbc:mysql://39.104.118.75:3306/anjian?useUnicode=true&characterEncoding=utf-8&useSSL=false
         username: root
         password: 1qazCDE#5tgb
         # 使用druid数据源
@@ -78,6 +78,15 @@ spring:
         ddl-auto: update
         naming:
           strategy: org.hibernate.cfg.DefaultNamingStrategy
+    http:
+      multipart:
+        max-file-size: 100mb
+        max-request-size: 100mb
+#      properties:
+#        hibernate:
+#          generate_statistics: true
+#spring.jpa.properties.hibernate.enable_lazy_load_no_trans: true
+
 #mybatis:
 #    mapperLocations: classpath:mybatis_mapper/*.xml
 #    typeAliasesPackage: classpath:model

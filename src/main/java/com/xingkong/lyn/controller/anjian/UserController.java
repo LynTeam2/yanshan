@@ -1,4 +1,4 @@
-package com.xingkong.lyn.controller;
+package com.xingkong.lyn.controller.anjian;
 
 import com.xingkong.lyn.model.UserInfo;
 import com.xingkong.lyn.service.IUserInfo;
