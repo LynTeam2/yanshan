@@ -45,6 +45,7 @@ public class QuestionController {
             case "mc" :
                 ajaxResults.put("questions",questionService.findmcList(pageable, query));
                 break;
+            default: break;
         }
         return ajaxResults;
     }
@@ -66,6 +67,7 @@ public class QuestionController {
             case "mc" :
                 ajaxResults.put("questions",questionService.findNewmc());
                 break;
+            default: break;
         }
         return ajaxResults;
     }
@@ -87,6 +89,7 @@ public class QuestionController {
             case "mc" :
                 ajaxResults.put("question", questionService.findmc(id));
                 break;
+            default: break;
         }
         return ajaxResults;
     }

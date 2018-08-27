@@ -61,4 +61,6 @@ public class Course implements Serializable {
     @Temporal(TemporalType.DATE)
     @JSONField(format = "yyyy-MM-dd")
     private Date updateTime;
+
+    private String role = "app1";
 }

@@ -16,7 +16,7 @@ server:
 spring:
     datasource:
         name: anjian
-        url: jdbc:mysql://39.104.118.75:3306/anjian?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        url: jdbc:mysql://39.105.27.225:3306/anjian?useUnicode=true&characterEncoding=utf-8&useSSL=false
         username: root
         password: 1qazCDE#5tgb
         # 使用druid数据源
@@ -73,7 +73,7 @@ spring:
         database: 0
     jpa:
       database: mysql
-      show-sql: true
+      show-sql: false
       hibernate:
         ddl-auto: update
         naming:

@@ -1,6 +1,7 @@
 package com.xingkong.lyn.service;
 
 import com.xingkong.lyn.model.UserInfo;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 

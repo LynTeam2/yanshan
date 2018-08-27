@@ -39,11 +39,15 @@ public class OtherUtil {
     public static void writeJsonToFile(String entryName, Object object, String filePath, String fileName) throws IOException {
         File dir = new File(filePath);
         if (!dir.exists()) {
-            dir.mkdirs();
+            if (!dir.mkdirs()) {
+                return;
+            }
         }
         File file = new File(filePath + File.separator + fileName);
         if (!file.exists()) {
-            file.createNewFile();
+            if (!file.createNewFile()) {
+                return;
+            }
         }
         FileWriter fileWriter = new FileWriter(file);
         JSONObject jsonObject = new JSONObject();

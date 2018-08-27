@@ -1,11 +1,9 @@
 package com.xingkong.lyn.api;
 
-import com.sun.org.apache.bcel.internal.generic.LADD;
 import com.xingkong.lyn.annotation.AdminLog;
 import com.xingkong.lyn.common.AjaxResults;
 import com.xingkong.lyn.entity.anjian.Law;
 import com.xingkong.lyn.service.anjian.ILaw;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
@@ -25,7 +26,22 @@ public class User implements Serializable {
     @JoinTable(name = "aj_unit_user", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "unit_id")})
     private Unit unit;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "aj_user_course", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "course_id")})
+    private List<CourseProcess> courseProcessList;
+
     private int beanCount;
 
     private String nickname;
+
+    private String telephone;
+
+    @Transient
+    private String role;
+
+    @Transient
+    private String roleName;
+
+    @Transient
+    private String unitId;
 }

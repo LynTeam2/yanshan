@@ -26,16 +26,25 @@ public class UnitController {
     private IUnit unitService;
 
     @RequestMapping(value = "/web/manage/unit/list", method = RequestMethod.GET)
-    @RequiresPermissions("unit:view")
-    public Object webManageUnitList(@PageableDefault(value = 15, sort = {"id"}, direction = Sort.Direction.DESC)Pageable pageable) {
+//    @RequiresPermissions("unit:view")
+    public Object webManageUnitList(@PageableDefault(value = 15, sort = {"id"}, direction = Sort.Direction.DESC)Pageable pageable,
+                                    String query) {
         AjaxResults ajaxResults = new AjaxResults();
-        Page<Unit> units = unitService.findList(pageable);
+        Page<Unit> units = unitService.findList(pageable, query);
         ajaxResults.put("units", units);
         return ajaxResults;
     }
 
+    @RequestMapping(value = "/web/manage/unit/all", method = RequestMethod.GET)
+//    @RequiresPermissions("unit:all")
+    public Object webMangeUnitAll() {
+        AjaxResults ajaxResults = new AjaxResults();
+        ajaxResults.put("units", unitService.findAll());
+        return ajaxResults;
+    }
+
     @RequestMapping(value = "/web/manage/unit/add", method = RequestMethod.POST)
-    @RequiresPermissions("unit:add")
+//    @RequiresPermissions("unit:add")
     public Object webManageUnitAdd(@RequestBody Unit unit) {
         AjaxResults ajaxResults = new AjaxResults();
         if (null != unit.getId()) {
@@ -49,7 +58,7 @@ public class UnitController {
     }
 
     @RequestMapping(value = "/web/manage/unit/update", method = RequestMethod.PUT)
-    @RequiresPermissions("unit:update")
+//    @RequiresPermissions("unit:update")
     public Object webManageUnitUpdate(@RequestBody Unit unit) {
         AjaxResults ajaxResults = new AjaxResults();
         if (null == unit.getId()) {
@@ -62,7 +71,7 @@ public class UnitController {
     }
 
     @RequestMapping(value = "/web/manage/unit/detail", method = RequestMethod.GET)
-    @RequiresPermissions("unit:detail")
+//    @RequiresPermissions("unit:detail")
     public Object webManageUnitDetail(Long id) {
         AjaxResults ajaxResults = new AjaxResults();
         Unit unit = unitService.findById(id);
@@ -71,7 +80,7 @@ public class UnitController {
     }
 
     @RequestMapping(value = "/web/manage/unit/delete", method = RequestMethod.DELETE)
-    @RequiresPermissions("unit:delete")
+//    @RequiresPermissions("unit:delete")
     public Object webManageUnitDelete(String id) {
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);

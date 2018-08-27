@@ -11,7 +11,7 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
  */
 public class PinyinUtil {
     public static String converterToFirstSpell(String chines) {
-        String pinyinName = "";
+        StringBuffer pinyinName = new StringBuffer("");
         char[] nameChar = chines.toCharArray();
         HanyuPinyinOutputFormat defaultFormat = new HanyuPinyinOutputFormat();
         defaultFormat.setCaseType(HanyuPinyinCaseType.UPPERCASE);
@@ -19,15 +19,15 @@ public class PinyinUtil {
         for (int i = 0; i < nameChar.length; i++) {
             if (nameChar[i] > 128) {
                 try {
-                    pinyinName += PinyinHelper.toHanyuPinyinStringArray(nameChar[i],
-                            defaultFormat)[0].charAt(0);
+                    pinyinName.append(PinyinHelper.toHanyuPinyinStringArray(nameChar[i],
+                            defaultFormat)[0].charAt(0));
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
 
                 }
             } else {
-                pinyinName += nameChar[i];
+                pinyinName.append(nameChar[i]);
             }
         }
-        return pinyinName;
+        return pinyinName.toString();
     }
 }

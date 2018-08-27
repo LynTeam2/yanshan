@@ -2,7 +2,6 @@ package com.xingkong.lyn.entity.anjian;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;

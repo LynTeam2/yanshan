@@ -113,8 +113,11 @@ public class QuestionService implements IQuestion {
                 break;
             case "sc" :
                 simpleChoiceDao.deleteInBatch(simpleChoiceDao.findAll(ids));
+                break;
             case "mc" :
                 multipleChoiceDao.deleteInBatch(multipleChoiceDao.findAll(ids));
+                break;
+            default: break;
         }
         return true;
     }

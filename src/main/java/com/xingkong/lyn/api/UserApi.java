@@ -39,6 +39,7 @@ public class UserApi {
             case "nickname": oldUser.setNickname(user.getNickname()); break;
             case "icon": oldUser.setIcon(user.getIcon()); break;
             case "bean": oldUser.setBeanCount(user.getBeanCount()); break;
+            default: break;
         }
         userService.updateUser(oldUser);
         return ajaxResults;

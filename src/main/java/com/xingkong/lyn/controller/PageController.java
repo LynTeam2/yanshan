@@ -34,7 +34,7 @@ public class PageController {
     @RequestMapping(value = "/web/introduction", method = RequestMethod.GET)
     public Object webIntroduction(){
         AjaxResults ajaxResults = new AjaxResults();
-        PageHtml pageHtml = pageHtmlService.getPageHtml("introduction");
+//        PageHtml pageHtml = pageHtmlService.getPageHtml("introduction");
 //        ajaxResults.put("introduction", pageHtml.getHtml());
         return ajaxResults;
     }
@@ -42,7 +42,7 @@ public class PageController {
     @RequestMapping(value = "/web/contactus", method = RequestMethod.GET)
     public Object webContactUs(){
         AjaxResults ajaxResults = new AjaxResults();
-        PageHtml pageHtml = pageHtmlService.getPageHtml("contactUs");
+//        PageHtml pageHtml = pageHtmlService.getPageHtml("contactUs");
 //        ajaxResults.put("contactUs", pageHtml.getHtml());
         return ajaxResults;
     }
@@ -50,7 +50,7 @@ public class PageController {
     @RequestMapping(value = "/web/joinUs", method = RequestMethod.GET)
     public Object webJoinUs(){
         AjaxResults ajaxResults = new AjaxResults();
-        PageHtml pageHtml = pageHtmlService.getPageHtml("introduction");
+//        PageHtml pageHtml = pageHtmlService.getPageHtml("introduction");
 //        ajaxResults.put("joinUs", pageHtml.getHtml());
         return ajaxResults;
     }

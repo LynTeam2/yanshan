@@ -39,6 +39,7 @@ public class UpgradeApi {
         String filePath = "upgrade.7z";
         File file = new File(filePath);
         file.delete();
+
         AjaxResults ajaxResults = new AjaxResults();
         /**
          * 课程数据
@@ -90,10 +91,10 @@ public class UpgradeApi {
          */
         List<Map<String, Object>> lawTypes = new ArrayList<>();
         String[] nameArr = new String[]{"法律法规", "规范性文件", "标准规范", "文件解读"};
-        String[] iconArr = new String[]{"http://39.104.118.75/resource/lawType/flfg.png",
-                "http://39.104.118.75/resource/lawType/gfxwj.png",
-                "http://39.104.118.75/resource/lawType/bzgf.png",
-                "http://39.104.118.75/resource/lawType/wjjd.png"};
+        String[] iconArr = new String[]{"http://39.105.27.225/resource/lawType/flfg.png",
+                "http://39.105.27.225/resource/lawType/gfxwj.png",
+                "http://39.105.27.225/resource/lawType/bzgf.png",
+                "http://39.105.27.225/resource/lawType/wjjd.png"};
         for (int i = 0; i < 4; i++) {
             Map<String, Object> map = new HashMap<>();
             map.put("name", nameArr[i]);

@@ -30,7 +30,10 @@ public class FileUploadController {
         AjaxResults ajaxResults = new AjaxResults();
         File parent = new File(filePath+File.separator+parentPath);
         if (!parent.exists()) {
-            parent.mkdir();
+            if (!parent.mkdir()) {
+                ajaxResults.setCode(0);
+                ajaxResults.setMsg("上传文件目录创建失败");
+            }
         }
         Date date = new Date();
         Long time = date.getTime();
@@ -43,7 +46,7 @@ public class FileUploadController {
                 out.flush();
                 out.close();
                 ajaxResults.put("name", fileName);
-                ajaxResults.put("path", "http://39.104.118.75/resource"+File.separator+parentPath+File.separator+fileName);
+                ajaxResults.put("path", "http://39.105.27.225/resource"+File.separator+parentPath+File.separator+fileName);
 //                response.setContentType("image/png");
 //                OutputStream os = response.getOutputStream();
 //                os.write(file.getBytes());

@@ -1,5 +1,6 @@
 package com.xingkong.lyn.entity.anjian;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,7 +22,13 @@ public class Unit implements Serializable {
 
     private String headerName;
 
-    private String contact;
+    private String telephone;
+
+    private String email;
+
+    private String fax;
+
+    private String address;
 
     private String provinceCode;
 
@@ -39,5 +46,7 @@ public class Unit implements Serializable {
     @JoinTable(name = "aj_unit_user", joinColumns = {@JoinColumn(name = "unit_id")}, inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private List<User> userList;
 
+    @Temporal(TemporalType.DATE)
+    @JSONField(format = "yyyy-MM-dd")
     private Date createTime;
 }

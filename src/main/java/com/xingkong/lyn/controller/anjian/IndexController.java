@@ -3,8 +3,11 @@ package com.xingkong.lyn.controller.anjian;
 
 import com.xingkong.lyn.common.AjaxResults;
 import com.xingkong.lyn.entity.anjian.User;
+import com.xingkong.lyn.model.UserInfo;
 import com.xingkong.lyn.model.manage.LoginVo;
+import com.xingkong.lyn.service.IUserInfo;
 import com.xingkong.lyn.service.anjian.IUser;
+import com.xingkong.lyn.service.impl.UserInfoService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.slf4j.Logger;
@@ -32,13 +35,15 @@ public class IndexController {
     private Logger logger = LoggerFactory.getLogger(IndexController.class);
     @Resource
     private IUser userService;
+    @Resource
+    private IUserInfo userInfoService;
     //todo
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Object login(@RequestBody LoginVo loginVo){
         AjaxResults ajaxResults = new AjaxResults();
         String username = loginVo.getUsername();
         String password = loginVo.getPassword();
-        String vcode = loginVo.getVcode();
+//        String vcode = loginVo.getVcode();
         Boolean rememberMe = loginVo.getRememberMe();
 //        if(StringUtils.isBlank(vcode)){
 //            ajaxResults.setCode(1);
@@ -58,7 +63,9 @@ public class IndexController {
         try{
             UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
             SecurityUtils.getSubject().login(token);
+            UserInfo userInfo = userInfoService.findByUsername(username);
             User user = userService.findByName(username);
+            user.setRoleName(userInfo.getRoles().get(0).getRole());
             ajaxResults.put("user", user);
         } catch (Exception e){
             ajaxResults.setCode(0);

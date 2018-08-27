@@ -31,7 +31,7 @@ public class Exam implements Serializable {
 
     private int examDuration;
 
-    private String role;
+    private String role = "app1";
 
     @Temporal(TemporalType.DATE)
     @JSONField(format = "yyyy-MM-dd")

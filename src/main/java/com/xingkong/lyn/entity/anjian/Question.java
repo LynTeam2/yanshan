@@ -16,12 +16,14 @@ public abstract class Question implements Serializable{
     @GeneratedValue
     private Long id;
 
+    @Column(columnDefinition = "TEXT")
     private String question;
 
     private String difficulty;
 
     private String ajType;
 
+    @Column(columnDefinition = "TEXT")
     private String analysis;
 
     private String answer;
