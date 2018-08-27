@@ -68,6 +68,7 @@ public class UserService implements IUser {
     }
 
     @Override
+    @Transactional
     public boolean updateUser(User user) {
         user.setUnit(unitDao.findOne(Long.parseLong(user.getUnitId())));
         userDao.saveAndFlush(user);
@@ -84,6 +85,15 @@ public class UserService implements IUser {
     @Override
     public List<User> findByIds(List<Long> ids) {
         return userDao.findAll(ids);
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteUser(Long id) {
+        User user = userDao.findOne(id);
+        userInfoDao.delete(userInfoDao.findByUsername(user.getUserName()));
+        userDao.delete(id);
+        return true;
     }
 
     private UserInfo convertToUserInfo(User user) {
