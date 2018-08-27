@@ -81,6 +81,11 @@ public class UserService implements IUser {
         return userDao.findByUserName(username);
     }
 
+    @Override
+    public List<User> findByIds(List<Long> ids) {
+        return userDao.findAll(ids);
+    }
+
     private UserInfo convertToUserInfo(User user) {
 //        Subject currentUser = SecurityUtils.getSubject();
 //        UserInfo loginUser = (UserInfo)currentUser.getPrincipal();

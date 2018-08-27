@@ -13,4 +13,5 @@ public interface IUser {
     boolean deleteList(List<Long> ids);
     boolean updateUser(User user);
     User findByName(String username);
+    List<User> findByIds(List<Long> ids);
 }
