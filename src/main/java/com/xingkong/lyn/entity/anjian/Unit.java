@@ -49,4 +49,10 @@ public class Unit implements Serializable {
     @Temporal(TemporalType.DATE)
     @JSONField(format = "yyyy-MM-dd")
     private Date createTime;
+
+    @Override
+    public String toString() {
+        return "Unit [id=" + id + ", unitName=" + unitName + ", headerName=" + headerName + ", telephone=" + telephone
+                + ", email=" + email + ", fax=" + fax + "]";
+    }
 }

@@ -3,10 +3,7 @@ package com.xingkong.lyn.entity.anjian;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,6 +24,7 @@ public class Review implements Serializable {
 
     private String operate;
 
+    @Column(columnDefinition = "TEXT")
     private String reviewContent;
 
     private Long operatorId;

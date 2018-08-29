@@ -9,6 +9,7 @@ import com.xingkong.lyn.model.UserInfo;
 import com.xingkong.lyn.service.anjian.IReview;
 import com.xingkong.lyn.service.anjian.IUnit;
 import com.xingkong.lyn.service.anjian.IUser;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.data.domain.Page;
@@ -56,21 +57,25 @@ public class ReviewController {
             if (review.getOperatorId() == user.getId()) {
                 ajaxResults.setCode(0);
                 ajaxResults.setMsg("只允许审核其他超级管理员的操作");
+            } else if (!StringUtils.equals(userInfo.getRoles().get(0).getRole(), "admin")) {
+                ajaxResults.setCode(0);
+                ajaxResults.setMsg("用户权限不足");
             } else {
                 review.setReviewerId(user.getId());
                 review.setReviewerName(user.getRealName());
                 review.setReviewTime(new Date());
-                switch (review.getModule()) {
-                    case ReviewConstant.MODULE_USER:
-                        handleUser(review);
-                        break;
-                    case ReviewConstant.MODULE_UNIT:
-                        handleUnit(review);
-                        break;
-                    default:
-                        break;
+                if (review.getReviewResult() == 1) {
+                    switch (review.getModule()) {
+                        case ReviewConstant.MODULE_USER:
+                            handleUser(review);
+                            break;
+                        case ReviewConstant.MODULE_UNIT:
+                            handleUnit(review);
+                            break;
+                        default:
+                            break;
+                    }
                 }
-                String content = review.getReviewContent();
                 reviewService.updateReview(review);
             }
         }

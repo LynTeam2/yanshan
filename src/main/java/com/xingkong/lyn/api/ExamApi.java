@@ -46,8 +46,13 @@ public class ExamApi {
         Subject currentUser = SecurityUtils.getSubject();
         UserInfo userInfo = (UserInfo)currentUser.getPrincipal();
         User user = userService.findByName(userInfo.getUsername());
+        if (null != examHistory.getId()) {
+            ajaxResults.setCode(0);
+            ajaxResults.setMsg("数据异常，不允许提交!");
+        }
         examHistory.setUserId(user.getId());
         examHistory.setUnitId(user.getUnit().getId());
+        examHistoryService.addExamHistory(examHistory);
         return ajaxResults;
     }
 

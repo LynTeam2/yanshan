@@ -53,7 +53,11 @@ public class UserController {
             ajaxResults.setMsg("参数错误");
         }
         if (null == userService.findByName(user.getUserName())) {
-            if (commitReview(user, ReviewConstant.OPERATE_ADD)) {
+            Subject currentUser = SecurityUtils.getSubject();
+            UserInfo userInfo = (UserInfo)currentUser.getPrincipal();
+            System.out.println(userInfo);
+            userInfo = userInfoService.findByUsername(userInfo.getUsername());
+            if (commitReview(user, ReviewConstant.OPERATE_ADD, userInfo)) {
                 ajaxResults.setCode(0);
                 ajaxResults.setMsg("操作已提交，等待审核");
             } else {
@@ -87,7 +91,10 @@ public class UserController {
         AjaxResults ajaxResults = new AjaxResults();
         Long[] arr = StringUtils.isBlank(id)? null: OtherUtil.parseStringtoLong(id);
         List<Long> ids = Arrays.asList(arr);
-        if (commitReviews(ids, ReviewConstant.OPERATE_DELETE)) {
+        Subject currentUser = SecurityUtils.getSubject();
+        UserInfo userInfo = (UserInfo)currentUser.getPrincipal();
+        userInfo = userInfoService.findByUsername(userInfo.getUsername());
+        if (commitReviews(ids, ReviewConstant.OPERATE_DELETE, userInfo)) {
             ajaxResults.setCode(0);
             ajaxResults.setMsg("操作已提交，等待审核");
         } else {
@@ -104,7 +111,10 @@ public class UserController {
             ajaxResults.setCode(0);
             ajaxResults.setMsg("参数错误");
         }
-        if (commitReview(user, ReviewConstant.OPERATE_MODIFY)) {
+        Subject currentUser = SecurityUtils.getSubject();
+        UserInfo userInfo = (UserInfo)currentUser.getPrincipal();
+        userInfo = userInfoService.findByUsername(userInfo.getUsername());
+        if (commitReview(user, ReviewConstant.OPERATE_MODIFY, userInfo)) {
             ajaxResults.setCode(0);
             ajaxResults.setMsg("操作已提交，等待审核");
         } else {
@@ -119,9 +129,7 @@ public class UserController {
         return userInfoService.findById(id);
     }
 
-    private boolean commitReview(User user, String operate) {
-        Subject currentUser = SecurityUtils.getSubject();
-        UserInfo userInfo = (UserInfo)currentUser.getPrincipal();
+    private boolean commitReview(User user, String operate, UserInfo userInfo) {
         if (StringUtils.equals(userInfo.getRoles().get(0).getRole(), "admin")) {
             User loginUser = userService.findByName(userInfo.getUsername());
             Review review = new Review();
@@ -137,9 +145,7 @@ public class UserController {
         return false;
     }
 
-    private boolean commitReviews(List<Long> ids, String operate) {
-        Subject currentUser = SecurityUtils.getSubject();
-        UserInfo userInfo = (UserInfo)currentUser.getPrincipal();
+    private boolean commitReviews(List<Long> ids, String operate, UserInfo userInfo) {
         if (StringUtils.equals(userInfo.getRoles().get(0).getRole(), "admin")) {
             User loginUser = userService.findByName(userInfo.getUsername());
             List<User> users = userService.findByIds(ids);

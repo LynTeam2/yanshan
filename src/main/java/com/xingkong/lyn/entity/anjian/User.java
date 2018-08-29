@@ -44,4 +44,10 @@ public class User implements Serializable {
 
     @Transient
     private String unitId;
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", userName=" + userName + ", realName=" + realName + ", nickName=" + nickname
+                + ", telephone=" + telephone + ", beanCount=" + beanCount + "]";
+    }
 }

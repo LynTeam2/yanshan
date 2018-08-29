@@ -22,6 +22,8 @@ public class ExamDetail implements Serializable {
     @GeneratedValue
     private Long id;
 
+    private String uid;
+
     private Long questionId;
 
     private String questionType;

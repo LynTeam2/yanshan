@@ -26,6 +26,8 @@ public class ExamHistory implements Serializable {
 
     private Long examId;
 
+    private String examName;
+
     private int makeupFlag;
 
     private Date startTime;

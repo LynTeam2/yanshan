@@ -34,10 +34,6 @@ public class UserInfo implements Serializable{
     @JoinTable(name = "SysUserRole", joinColumns = { @JoinColumn(name = "userId") }, inverseJoinColumns ={@JoinColumn(name = "roleId") })
     private List<SysRole> roles;// 一个用户具有多个角色
 
-    @ManyToMany(fetch=FetchType.LAZY)//实际调用查询才进行加载数据;
-    @JoinTable(name = "SysUserAddress", joinColumns = { @JoinColumn(name = "userId") }, inverseJoinColumns ={@JoinColumn(name = "addressId") })
-    private List<Address> addresses;// 一个用户具有多个地址
-
     /**
      * 密码盐.
      * @return
