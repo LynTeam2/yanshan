@@ -1,5 +1,6 @@
 package com.xingkong.lyn.entity.anjian;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -34,5 +35,6 @@ public class ExamDetail implements Serializable {
 
     private int result;
 
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 }

@@ -1,31 +1,25 @@
-package com.xingkong.lyn.entity.anjian;
+package com.xingkong.lyn.model.anjian;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.xingkong.lyn.entity.anjian.ExamDetail;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by lyn on 2018/8/26.
+ * Created by lyn on 2018/8/31.
  */
 @Data
-@Table(name = "aj_exam_history")
-@Entity
-public class ExamHistory implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class ExamHistoryVo implements Serializable{
+    private static final long serialVersionId = 1L;
 
-    @Id
-    @GeneratedValue
-    private Long id;
+    private Long examId;
 
     private Long userId;
 
     private Long unitId;
-
-    private Long examId;
 
     private String examName;
 
@@ -42,7 +36,5 @@ public class ExamHistory implements Serializable {
 
     private int examScore;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinTable(name = "aj_exam_history_detail", joinColumns = {@JoinColumn(name = "history_id")}, inverseJoinColumns = {@JoinColumn(name = "detail_id")})
     private List<ExamDetail> examDetailList;
 }
