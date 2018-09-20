@@ -42,7 +42,7 @@ public class Unit implements Serializable {
 
     private String county;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "aj_unit_user", joinColumns = {@JoinColumn(name = "unit_id")}, inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private List<User> userList;
 

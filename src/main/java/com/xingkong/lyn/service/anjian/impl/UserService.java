@@ -115,8 +115,11 @@ public class UserService implements IUser {
             userInfo = EncodeUtil.encode(userInfo);
         }
         List<SysRole> roles = new ArrayList<>();
-        roles.add(sysRoleDao.findOne(Long.parseLong(user.getRole())));
-        userInfo.setRoles(roles);
+        if (null != user.getRole()) {
+            roles.add(sysRoleDao.findOne(Long.parseLong(user.getRole())));
+            userInfo.setRoles(roles);
+        }
+
         return userInfo;
     }
 }

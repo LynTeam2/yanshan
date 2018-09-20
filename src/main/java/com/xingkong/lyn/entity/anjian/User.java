@@ -22,7 +22,7 @@ public class User implements Serializable {
 
     private String icon;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name = "aj_unit_user", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "unit_id")})
     private Unit unit;
 
