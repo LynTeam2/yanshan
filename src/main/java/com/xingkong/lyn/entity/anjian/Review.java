@@ -27,6 +27,8 @@ public class Review implements Serializable {
     @Column(columnDefinition = "TEXT")
     private String reviewContent;
 
+    private String targetName;
+
     private Long operatorId;
 
     private String operatorName;

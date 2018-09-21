@@ -139,6 +139,7 @@ public class UserController {
             review.setOperatorId(loginUser.getId());
             review.setOperatorName(loginUser.getRealName());
             review.setReviewContent(JSON.toJSONString(user));
+            review.setTargetName(user.getUserName());
             reviewService.addReview(review);
             return true;
         }
@@ -157,6 +158,7 @@ public class UserController {
                 review.setOperatorId(loginUser.getId());
                 review.setOperatorName(loginUser.getRealName());
                 review.setReviewContent(JSON.toJSONString(user));
+                review.setTargetName(user.getUserName());
                 reviewService.addReview(review);
             });
             return true;
