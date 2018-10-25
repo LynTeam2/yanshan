@@ -13,4 +13,5 @@ public interface ExamHistoryRepository extends JpaRepository<ExamHistory, Long> 
     List<ExamHistory> findByUnitId(Long unitId);
     List<ExamHistory> findByExamId(Long examId);
     Long countByUserIdAndExamId(Long userId, Long examId);
+    List<ExamHistory> findByUnitIdAndExamId(Long unitId, Long examId);
 }

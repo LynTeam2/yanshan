@@ -1,6 +1,7 @@
 package com.xingkong.lyn.util;
 
 import com.xingkong.lyn.model.UserInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 
@@ -21,6 +22,14 @@ public class EncodeUtil {
         userInfo.setPassword(encodePassword);
         userInfo.setSalt(salt2);
         return userInfo;
+    }
+
+    public static boolean equal(UserInfo userInfo, String uncodePassword) {
+        String username = userInfo.getUsername();
+        String encodePassword = userInfo.getPassword();
+        String salt2 = userInfo.getCredentialsSalt();
+        String hex = new SimpleHash("md5", uncodePassword, username + salt2, 2).toHex();
+        return StringUtils.equals(hex, encodePassword);
     }
 
     public static void main (String[] args) {

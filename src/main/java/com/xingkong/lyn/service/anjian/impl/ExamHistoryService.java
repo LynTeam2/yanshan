@@ -42,4 +42,9 @@ public class ExamHistoryService implements IExamHistory {
     public Long getExamCount(Long userId, Long examId) {
         return examHistoryDao.countByUserIdAndExamId(userId, examId);
     }
+
+    @Override
+    public List<ExamHistory> findListByUnitAndExam(Long unitId, Long examId) {
+        return examHistoryDao.findByUnitIdAndExamId(unitId, examId);
+    }
 }

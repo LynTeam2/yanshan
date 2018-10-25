@@ -1,6 +1,6 @@
 package com.xingkong.lyn.common;
 
-import org.h2.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -24,7 +24,7 @@ public class SimpleCORSFilter  implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpServletRequest req = (HttpServletRequest)request;
-        if (StringUtils.startsWithIgnoreCase(req.getRequestURI(), "/api/")) {
+        if (StringUtils.startsWithIgnoreCase(req.getRequestURI(), "/api/") && !StringUtils.contains(req.getRequestURI(), "sevenZip")) {
             resp.setHeader("Access-Control-Allow-Origin", "*");
         } else {
             resp.setHeader("Access-Control-Allow-Origin", "http://39.105.27.225:9080");

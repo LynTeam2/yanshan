@@ -3,6 +3,7 @@ package com.xingkong.lyn.api;
 import com.xingkong.lyn.common.AjaxResults;
 import com.xingkong.lyn.entity.anjian.User;
 import com.xingkong.lyn.model.UserInfo;
+import com.xingkong.lyn.model.anjian.PasswordVo;
 import com.xingkong.lyn.service.IUserInfo;
 import com.xingkong.lyn.service.anjian.IUser;
 import com.xingkong.lyn.util.EncodeUtil;
@@ -43,7 +44,7 @@ public class UserApi {
         switch (type) {
             case "nickname": oldUser.setNickname(user.getNickname()); break;
             case "icon": oldUser.setIcon(user.getIcon()); break;
-            case "bean": oldUser.setBeanCount(user.getBeanCount()); break;
+            case "bean": oldUser.setBeanCount(oldUser.getBeanCount() + user.getBeanCount()); break;
             default: break;
         }
         userService.updateUser(oldUser);
@@ -51,13 +52,14 @@ public class UserApi {
     }
 
     @RequestMapping(value = "/password", method = RequestMethod.PUT)
-    public Object password(@RequestBody String password) {
+    public Object password(@RequestBody PasswordVo passwordVo) {
         AjaxResults ajaxResults = new AjaxResults();
+        String newPassword = passwordVo.getNewPassword();
         Subject currentUser = SecurityUtils.getSubject();
         UserInfo userInfo = (UserInfo)currentUser.getPrincipal();
         userInfo = userInfoService.findById(userInfo.getId());
-        if (StringUtils.isNotEmpty(password) && password.length() > 5) {
-            userInfo.setPassword(password);
+        if (StringUtils.isNotEmpty(newPassword) && newPassword.length() > 5) {
+            userInfo.setPassword(newPassword);
             EncodeUtil.encode(userInfo);
             userInfoService.updateUser(userInfo);
         } else {

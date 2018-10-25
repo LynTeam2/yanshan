@@ -13,4 +13,5 @@ public interface IExamHistory {
     List<ExamHistory> findListByExam(Long examId);
     boolean addExamHistory(ExamHistory examHistory);
     Long getExamCount(Long userId, Long examId);
+    List<ExamHistory> findListByUnitAndExam(Long unitId, Long examId);
 }

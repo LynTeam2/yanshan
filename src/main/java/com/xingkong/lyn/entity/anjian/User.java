@@ -30,7 +30,7 @@ public class User implements Serializable {
     @JoinTable(name = "aj_user_course", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "course_id")})
     private List<CourseProcess> courseProcessList;
 
-    private int beanCount;
+    private int beanCount = 0;
 
     private String nickname;
 

@@ -8,6 +8,7 @@ import com.xingkong.lyn.entity.anjian.User;
 import com.xingkong.lyn.model.UserInfo;
 import com.xingkong.lyn.model.anjian.DurationVo;
 import com.xingkong.lyn.model.anjian.ExamHistoryVo;
+import com.xingkong.lyn.service.anjian.IExam;
 import com.xingkong.lyn.service.anjian.IExamHistory;
 import com.xingkong.lyn.service.anjian.IUser;
 import org.apache.shiro.SecurityUtils;
@@ -29,6 +30,8 @@ public class ExamApi {
     private IExamHistory examHistoryService;
     @Resource
     private IUser userService;
+    @Resource
+    private IExam examService;
 
     @RequestMapping(method = RequestMethod.GET)
 //    @RequiresPermissions("news:view")
@@ -79,7 +82,21 @@ public class ExamApi {
         Subject currentUser = SecurityUtils.getSubject();
         UserInfo userInfo = (UserInfo)currentUser.getPrincipal();
         User user = userService.findByName(userInfo.getUsername());
+        Exam exam = examService.findById(id);
+        if (null == exam) {
+            ajaxResults.setCode(0);
+            ajaxResults.setMsg("考试不存在");
+        }
         ajaxResults.put("examCount", examHistoryService.getExamCount(user.getId(), id));
+
+        Date now = new Date();
+        Date start = exam.getStartDate();
+        Date end = exam.getEndDate();
+        boolean flag = false;
+        if (now.after(start) && now.before(end)) {
+            flag = true;
+        }
+        ajaxResults.put("isValid", flag);
         return ajaxResults;
     }
 }

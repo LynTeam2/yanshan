@@ -8,9 +8,11 @@ import com.xingkong.lyn.common.constant.ReviewConstant;
 import com.xingkong.lyn.entity.anjian.Review;
 import com.xingkong.lyn.entity.anjian.User;
 import com.xingkong.lyn.model.UserInfo;
+import com.xingkong.lyn.model.anjian.PasswordVo;
 import com.xingkong.lyn.service.IUserInfo;
 import com.xingkong.lyn.service.anjian.IReview;
 import com.xingkong.lyn.service.anjian.IUser;
+import com.xingkong.lyn.service.anjian.impl.UserService;
 import com.xingkong.lyn.util.EncodeUtil;
 import com.xingkong.lyn.util.OtherUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -23,6 +25,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -144,6 +147,50 @@ public class UserController {
             return true;
         }
         return false;
+    }
+
+    @RequestMapping(value = "/web/manage/user/password", method = RequestMethod.PUT)
+    public Object password(@RequestBody PasswordVo passwordVo) {
+        AjaxResults ajaxResults = new AjaxResults();
+        String oldPassword = passwordVo.getOldPassword();
+        String newPassword = passwordVo.getNewPassword();
+        Subject currentUser = SecurityUtils.getSubject();
+        UserInfo userInfo = (UserInfo)currentUser.getPrincipal();
+        userInfo = userInfoService.findById(userInfo.getId());
+        if (StringUtils.isNotEmpty(newPassword) && newPassword.length() > 5) {
+            if (EncodeUtil.equal(userInfo, oldPassword)) {
+                ajaxResults.setCode(0);
+                ajaxResults.setMsg("旧密码不匹配，不允许修改");
+            } else {
+                userInfo.setPassword(newPassword);
+                EncodeUtil.encode(userInfo);
+                userInfoService.updateUser(userInfo);
+            }
+        } else {
+            ajaxResults.setCode(0);
+            ajaxResults.setMsg("密码不符合要求，不允许修改");
+        }
+        return ajaxResults;
+    }
+
+    @RequestMapping(value = "/web/manage/user/reset", method = RequestMethod.GET)
+    public Object reset(String userName) {
+        AjaxResults ajaxResults = new AjaxResults();
+        if (null == userName) {
+            ajaxResults.setCode(0);
+            ajaxResults.setMsg("参数异常!");
+        } else {
+            UserInfo userInfo = userInfoService.findByUsername(userName);
+            if (null == userInfo) {
+                ajaxResults.setCode(0);
+                ajaxResults.setMsg("用户不存在");
+            } else {
+                userInfo.setPassword("123456");
+                EncodeUtil.encode(userInfo);
+                userInfoService.updateUser(userInfo);
+            }
+        }
+        return ajaxResults;
     }
 
     private boolean commitReviews(List<Long> ids, String operate, UserInfo userInfo) {
