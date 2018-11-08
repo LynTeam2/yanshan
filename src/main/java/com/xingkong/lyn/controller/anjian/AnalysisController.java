@@ -150,7 +150,13 @@ public class AnalysisController {
         List<Integer> scoreList = new LinkedList<>();
         examHistoryList.forEach(examHistory -> {
             User user = userService.findById(examHistory.getUserId());
-            map.put(user.getRealName(), examHistory.getExamScore());
+            if (map.keySet().contains(user.getRealName())) {
+                if ((Integer)map.get(user.getRealName()) < examHistory.getExamScore()) {
+                    map.put(user.getRealName(), examHistory.getExamScore());
+                }
+            } else {
+                map.put(user.getRealName(), examHistory.getExamScore());
+            }
         });
         for (String key : map.keySet()) {
             userList.add(key);

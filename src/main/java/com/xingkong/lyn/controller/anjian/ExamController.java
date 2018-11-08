@@ -37,6 +37,15 @@ public class ExamController {
         return ajaxResults;
     }
 
+    @RequestMapping(value = "/web/manage/exam/all", method = RequestMethod.GET)
+//    @RequiresPermissions("exam:view")
+    public Object webManageExamAll() {
+        AjaxResults ajaxResults = new AjaxResults();
+        List<Exam> exams = examService.findAll();
+        ajaxResults.put("exams", JSON.parse(JSON.toJSONString(exams, SerializerFeature.DisableCircularReferenceDetect)));
+        return ajaxResults;
+    }
+
     @RequestMapping(value = "/web/manage/exam/add", method = RequestMethod.POST)
 //    @RequiresPermissions("exam:add")
     public Object webManageExamAdd(@RequestBody Exam exam) {
