@@ -91,10 +91,10 @@ public class UpgradeApi {
          */
         List<Map<String, Object>> lawTypes = new ArrayList<>();
         String[] nameArr = new String[]{"法律法规", "规范性文件", "标准规范", "文件解读"};
-        String[] iconArr = new String[]{"http://39.105.27.225/resource/lawType/flfg.png",
-                "http://39.105.27.225/resource/lawType/gfxwj.png",
-                "http://39.105.27.225/resource/lawType/bzgf.png",
-                "http://39.105.27.225/resource/lawType/wjjd.png"};
+        String[] iconArr = new String[]{"http://api.anjian.hanyuhuake.com/resource/lawType/flfg.png",
+                "http://api.anjian.hanyuhuake.com/resource/lawType/gfxwj.png",
+                "http://api.anjian.hanyuhuake.com/resource/lawType/bzgf.png",
+                "http://api.anjian.hanyuhuake.com/resource/lawType/wjjd.png"};
         for (int i = 0; i < 4; i++) {
             Map<String, Object> map = new HashMap<>();
             map.put("name", nameArr[i]);

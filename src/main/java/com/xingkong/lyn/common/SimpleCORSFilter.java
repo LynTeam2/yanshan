@@ -27,7 +27,7 @@ public class SimpleCORSFilter  implements Filter {
         if (StringUtils.startsWithIgnoreCase(req.getRequestURI(), "/api/") && !StringUtils.contains(req.getRequestURI(), "sevenZip")) {
             resp.setHeader("Access-Control-Allow-Origin", "*");
         } else {
-            resp.setHeader("Access-Control-Allow-Origin", "http://39.105.27.225:9080");
+            resp.setHeader("Access-Control-Allow-Origin", "http://admin.anjian.hanyuhuake.com");
         }
         Cookie[] cookies = req.getCookies();
         resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");

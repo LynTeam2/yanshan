@@ -46,7 +46,7 @@ public class FileUploadController {
                 out.flush();
                 out.close();
                 ajaxResults.put("name", fileName);
-                ajaxResults.put("path", "http://39.105.27.225/resource"+File.separator+parentPath+File.separator+fileName);
+                ajaxResults.put("path", "http://api.anjian.hanyuhuake.com/resource"+File.separator+parentPath+File.separator+fileName);
 //                response.setContentType("image/png");
 //                OutputStream os = response.getOutputStream();
 //                os.write(file.getBytes());
