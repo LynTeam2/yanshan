@@ -65,6 +65,7 @@ public class MyShiroRealm extends AuthorizingRealm{
         if(Integer.parseInt(opsForValue.get(SHIRO_LOGIN_COUNT + username)) > SHIRO_LOCK_COUNT){
             opsForValue.set(SHIRO_IS_LOCK+username, "LOCK");
             stringRedisTemplate.expire(SHIRO_IS_LOCK+username, 1, TimeUnit.HOURS);
+            stringRedisTemplate.expire(SHIRO_LOGIN_COUNT + username, 1, TimeUnit.HOURS);
         }
         if("LOCK".equals(opsForValue.get(SHIRO_IS_LOCK+username))){
             throw new DisabledAccountException("由于密码输入错误次数大于3次，帐号已经禁止登录！");

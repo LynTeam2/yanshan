@@ -79,7 +79,7 @@ public class UserController {
                                    Pageable pageable, String query){
         AjaxResults ajaxResults = new AjaxResults();
         Page<User> users = userService.findList(pageable, query);
-        users.forEach(user -> {
+        users.getContent().forEach(user -> {
             user.setUnitId(null == user.getUnit() ? null : Long.toString(user.getUnit().getId()));
             user.setUnit(null);
             user.setRole(Long.toString(userInfoService.findByUsername(user.getUserName()).getRoles().get(0).getId()));
